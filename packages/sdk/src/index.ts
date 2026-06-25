@@ -1,7 +1,7 @@
 // pay2-cash — TypeScript SDK for the pay2 Cash agentic-payments MCP.
 // Zero dependencies; uses global fetch (Node 18+, browsers, Workers).
 //
-//   import { Pay2Cash } from "pay2-cash";
+//   import { Pay2Cash } from "@pay2cash/sdk";
 //   const p2c = new Pay2Cash();
 //   const user = await p2c.onboardUser({ vpa: "alice@okhdfcbank" });
 //

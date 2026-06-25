@@ -1,5 +1,5 @@
 {
-  "name": "pay2-cash",
+  "name": "@pay2cash/sdk",
   "version": "0.2.0",
   "description": "TypeScript SDK for the pay2 Cash agentic-payments MCP (UPI + card).",
   "type": "module",

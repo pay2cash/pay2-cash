@@ -1,4 +1,4 @@
-# pay2-cash
+# @pay2cash/sdk
 
 TypeScript SDK for the **pay2 Cash** agentic-payments MCP. Let an AI agent pay on a
 user's behalf over **UPI (₹)** or a **virtual card (€)**, within a limit the user
@@ -9,13 +9,13 @@ Zero dependencies. Works in Node 18+, browsers, and Cloudflare Workers.
 ## Install
 
 ```bash
-npm install pay2-cash
+npm install @pay2cash/sdk
 ```
 
 ## Usage
 
 ```ts
-import { Pay2Cash, toPaise } from "pay2-cash";
+import { Pay2Cash, toPaise } from "@pay2cash/sdk";
 
 const p2c = new Pay2Cash(); // defaults to https://mcp.pay2.cash
 
