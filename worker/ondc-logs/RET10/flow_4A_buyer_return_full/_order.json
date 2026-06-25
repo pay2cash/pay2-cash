@@ -1,0 +1,12 @@
+{
+  "txn": "90dc09f4-6756-452c-bb59-d3f800d4311e",
+  "orderId": "P2C1782420482358",
+  "bpp": {
+    "bpp_id": "pramaan.ondc.org/beta/preprod/mock/seller",
+    "bpp_uri": "https://pramaan.ondc.org/beta/preprod/mock/seller"
+  },
+  "provId": "pramaan_provider_1",
+  "itemId": "id_13owvn_0_0",
+  "loc": "SSL1",
+  "fid": "630afa37-a4fd-40cd-81b9-8a8f65f15be1"
+}

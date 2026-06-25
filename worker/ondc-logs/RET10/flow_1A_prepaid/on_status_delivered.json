@@ -5,9 +5,9 @@
     "city": "std:0124",
     "core_version": "1.2.5",
     "action": "on_status",
-    "transaction_id": "6799f3fa-4e89-43a8-8aa2-057cce7ee626",
-    "message_id": "c016e092-caf5-49c1-9250-d0195c476bce",
-    "timestamp": "2026-06-25T13:02:28.093Z",
+    "transaction_id": "c9bdbea8-7a69-4d4d-b8bf-487f2b20ca6a",
+    "message_id": "1cb72848-222e-4519-b2d6-53d062246ab5",
+    "timestamp": "2026-06-25T15:58:50.952Z",
     "bap_id": "ondc.pay2.cash",
     "bap_uri": "https://ondc.pay2.cash/ondc",
     "bpp_id": "pramaan.ondc.org/beta/preprod/mock/seller",
@@ -15,7 +15,7 @@
   },
   "message": {
     "order": {
-      "id": "P2C1782392313098",
+      "id": "P2C1782402901254",
       "state": "Completed",
       "provider": {
         "id": "pramaan_provider_1",
@@ -31,7 +31,7 @@
           "quantity": {
             "count": 1
           },
-          "fulfillment_id": "b40d6b18-aeab-43e8-ae33-eab79aa403f3"
+          "fulfillment_id": "1f1d816c-979e-4525-856c-0d6eb4bee156"
         }
       ],
       "billing": {
@@ -48,12 +48,12 @@
         "tax_number": "29ABCDE1234F1Z5",
         "email": "buyer@pay2.cash",
         "phone": "9876543210",
-        "created_at": "2026-06-25T12:58:30.635Z",
-        "updated_at": "2026-06-25T12:58:30.635Z"
+        "created_at": "2026-06-25T15:54:59.396Z",
+        "updated_at": "2026-06-25T15:54:59.396Z"
       },
       "fulfillments": [
         {
-          "id": "b40d6b18-aeab-43e8-ae33-eab79aa403f3",
+          "id": "1f1d816c-979e-4525-856c-0d6eb4bee156",
           "@ondc/org/provider_name": "Pramaan Store 1",
           "@ondc/org/category": "Standard Delivery",
           "@ondc/org/TAT": "PT10M",
@@ -83,10 +83,10 @@
             },
             "time": {
               "range": {
-                "start": "2026-06-25T12:58:33.302Z",
+                "start": "2026-06-25T15:55:01.540Z",
                 "end": "2026-06-25T23:00:00.000Z"
               },
-              "timestamp": "2026-06-25T13:00:28.739Z"
+              "timestamp": "2026-06-25T15:57:10.585Z"
             },
             "contact": {
               "phone": "9876543210",
@@ -118,7 +118,7 @@
                 "start": "2026-06-26T09:30:00.000Z",
                 "end": "2026-06-26T19:00:00.000Z"
               },
-              "timestamp": "2026-06-25T13:00:49.139Z"
+              "timestamp": "2026-06-25T15:57:50.854Z"
             }
           },
           "tags": [
@@ -144,7 +144,7 @@
                 },
                 {
                   "code": "url",
-                  "value": "https://ondc.sequelstring.com/track/b40d6b18-aeab-43e8-ae33-eab79aa403f3"
+                  "value": "https://ondc.sequelstring.com/track/1f1d816c-979e-4525-856c-0d6eb4bee156"
                 }
               ]
             }
@@ -176,7 +176,7 @@
             }
           },
           {
-            "@ondc/org/item_id": "b40d6b18-aeab-43e8-ae33-eab79aa403f3",
+            "@ondc/org/item_id": "1f1d816c-979e-4525-856c-0d6eb4bee156",
             "title": "Delivery charges",
             "@ondc/org/title_type": "delivery",
             "price": {
@@ -185,7 +185,7 @@
             }
           },
           {
-            "@ondc/org/item_id": "b40d6b18-aeab-43e8-ae33-eab79aa403f3",
+            "@ondc/org/item_id": "1f1d816c-979e-4525-856c-0d6eb4bee156",
             "title": "Tax",
             "@ondc/org/title_type": "tax",
             "price": {
@@ -232,7 +232,7 @@
         "params": {
           "amount": "110.00",
           "currency": "INR",
-          "transaction_id": "p2cpay_1782392313098"
+          "transaction_id": "p2cpay_1782402901254"
         },
         "status": "PAID",
         "collected_by": "BAP",
@@ -240,7 +240,7 @@
         "@ondc/org/settlement_window": "P1D",
         "@ondc/org/withholding_amount": "0.00",
         "time": {
-          "timestamp": "2026-06-25T13:02:28.093Z"
+          "timestamp": "2026-06-25T15:58:50.952Z"
         }
       },
       "tags": [
@@ -282,8 +282,8 @@
           ]
         }
       ],
-      "created_at": "2026-06-25T12:58:33.098Z",
-      "updated_at": "2026-06-25T13:00:49.139Z",
+      "created_at": "2026-06-25T15:55:01.254Z",
+      "updated_at": "2026-06-25T15:57:50.854Z",
       "documents": [
         {
           "label": "Invoice",

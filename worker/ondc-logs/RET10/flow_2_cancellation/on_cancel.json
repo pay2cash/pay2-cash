@@ -5,9 +5,9 @@
     "city": "std:0124",
     "core_version": "1.2.5",
     "action": "on_cancel",
-    "transaction_id": "86c3f130-087f-467f-8a7a-e2e484a53151",
-    "message_id": "3e93be1c-6f0f-47d4-843c-e76e28b8979c",
-    "timestamp": "2026-06-25T13:36:06.352Z",
+    "transaction_id": "de5d62f5-1e3d-4570-8702-18a7f425c3a1",
+    "message_id": "897483fe-9d4b-4e5c-a61f-8118fbbcd936",
+    "timestamp": "2026-06-25T16:17:36.338Z",
     "bap_id": "ondc.pay2.cash",
     "bap_uri": "https://ondc.pay2.cash/ondc",
     "bpp_id": "pramaan.ondc.org/beta/preprod/mock/seller",
@@ -16,7 +16,7 @@
   },
   "message": {
     "order": {
-      "id": "P2C1782394556894",
+      "id": "P2C1782404247034",
       "state": "Cancelled",
       "provider": {
         "id": "pramaan_provider_1",
@@ -32,14 +32,14 @@
           "quantity": {
             "count": 0
           },
-          "fulfillment_id": "0708326a-6837-4970-b84a-6bbf55c63166"
+          "fulfillment_id": "63164ab5-109d-43e4-af83-f26768257ec9"
         },
         {
           "quantity": {
             "count": 1
           },
           "id": "id_13owvn_0_0",
-          "fulfillment_id": "11077e15-3069-4cf4-8abe-bea6688afe2d"
+          "fulfillment_id": "8d81ffbf-1910-4416-9a47-0027c96b3904"
         }
       ],
       "billing": {
@@ -56,8 +56,8 @@
         "tax_number": "29ABCDE1234F1Z5",
         "email": "buyer@pay2.cash",
         "phone": "9876543210",
-        "created_at": "2026-06-25T13:35:54.713Z",
-        "updated_at": "2026-06-25T13:35:54.713Z"
+        "created_at": "2026-06-25T16:17:24.617Z",
+        "updated_at": "2026-06-25T16:17:24.617Z"
       },
       "payment": {
         "type": "ON-ORDER",
@@ -82,7 +82,7 @@
         "params": {
           "amount": "110.00",
           "currency": "INR",
-          "transaction_id": "p2cpay_1782394556894"
+          "transaction_id": "p2cpay_1782404247034"
         },
         "status": "PAID",
         "collected_by": "BAP",
@@ -90,12 +90,12 @@
         "@ondc/org/settlement_window": "P1D",
         "@ondc/org/withholding_amount": "0.00",
         "time": {
-          "timestamp": "2026-06-25T13:35:59.195Z"
+          "timestamp": "2026-06-25T16:17:29.334Z"
         }
       },
       "fulfillments": [
         {
-          "id": "0708326a-6837-4970-b84a-6bbf55c63166",
+          "id": "63164ab5-109d-43e4-af83-f26768257ec9",
           "@ondc/org/provider_name": "Pramaan Store 1",
           "@ondc/org/category": "Standard Delivery",
           "@ondc/org/TAT": "PT10M",
@@ -125,7 +125,7 @@
             },
             "time": {
               "range": {
-                "start": "2026-06-25T13:35:57.089Z",
+                "start": "2026-06-25T16:17:27.316Z",
                 "end": "2026-06-25T23:00:00.000Z"
               }
             },
@@ -167,7 +167,7 @@
               "list": [
                 {
                   "code": "reason_id",
-                  "value": "053"
+                  "value": "010"
                 },
                 {
                   "code": "initiated_by",
@@ -184,14 +184,14 @@
                 },
                 {
                   "code": "updated_at",
-                  "value": "2026-06-25T13:35:57.089Z"
+                  "value": "2026-06-25T16:17:27.316Z"
                 }
               ]
             }
           ]
         },
         {
-          "id": "11077e15-3069-4cf4-8abe-bea6688afe2d",
+          "id": "8d81ffbf-1910-4416-9a47-0027c96b3904",
           "type": "Cancel",
           "state": {
             "descriptor": {
@@ -229,7 +229,7 @@
                 },
                 {
                   "code": "id",
-                  "value": "0708326a-6837-4970-b84a-6bbf55c63166"
+                  "value": "63164ab5-109d-43e4-af83-f26768257ec9"
                 },
                 {
                   "code": "currency",
@@ -250,7 +250,7 @@
                 },
                 {
                   "code": "id",
-                  "value": "0708326a-6837-4970-b84a-6bbf55c63166"
+                  "value": "63164ab5-109d-43e4-af83-f26768257ec9"
                 },
                 {
                   "code": "currency",
@@ -268,7 +268,7 @@
       "cancellation": {
         "cancelled_by": "ondc.pay2.cash",
         "reason": {
-          "id": "053"
+          "id": "010"
         }
       },
       "quote": {
@@ -296,7 +296,7 @@
             }
           },
           {
-            "@ondc/org/item_id": "0708326a-6837-4970-b84a-6bbf55c63166",
+            "@ondc/org/item_id": "63164ab5-109d-43e4-af83-f26768257ec9",
             "title": "Delivery charges",
             "@ondc/org/title_type": "delivery",
             "price": {
@@ -305,7 +305,7 @@
             }
           },
           {
-            "@ondc/org/item_id": "0708326a-6837-4970-b84a-6bbf55c63166",
+            "@ondc/org/item_id": "63164ab5-109d-43e4-af83-f26768257ec9",
             "title": "Tax",
             "@ondc/org/title_type": "tax",
             "price": {
@@ -329,8 +329,8 @@
         ],
         "ttl": "PT1H"
       },
-      "created_at": "2026-06-25T13:35:56.895Z",
-      "updated_at": "2026-06-25T13:36:06.284Z"
+      "created_at": "2026-06-25T16:17:27.034Z",
+      "updated_at": "2026-06-25T16:17:36.224Z"
     }
   }
 }

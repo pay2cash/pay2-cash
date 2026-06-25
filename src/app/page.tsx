@@ -437,6 +437,7 @@ function IntegrationsSection() {
           <IntegrationCardActive />
           <IntegrationCardCiCi />
           <IntegrationCardFlights />
+          <IntegrationCardONDC />
           <IntegrationCardComingSoon
             name="Uber Eats"
             description="Order food delivery from the Uber Eats marketplace"
@@ -639,6 +640,63 @@ function IntegrationCardFlights() {
         </div>
       </div>
     </Link>
+  );
+}
+
+function IntegrationCardONDC() {
+  return (
+    <div className="relative group">
+      <div className="rounded-2xl border border-white/[6%] bg-gradient-to-br from-white/[2%] via-white/[1%] to-transparent p-6 backdrop-blur-sm transition-all duration-500 hover:border-white/[10%] hover:bg-white/[3%] h-full">
+        <div className="flex items-start justify-between mb-4">
+          <div className="flex items-center gap-3">
+            <div className="size-10 rounded-xl bg-white/[4%] flex items-center justify-center ring-1 ring-white/[6%]">
+              <svg className="size-5 text-white/70" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <circle cx="12" cy="5" r="2.5" />
+                <circle cx="5" cy="18" r="2.5" />
+                <circle cx="19" cy="18" r="2.5" />
+                <path d="M12 7.5v3.5M10.2 12.8l-3.4 3M13.8 12.8l3.4 3" />
+              </svg>
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="text-white font-semibold text-lg">ONDC Network</span>
+                <span className="px-2 py-0.5 rounded-full bg-white/[6%] text-[10px] text-white/70 font-medium uppercase tracking-[0.06em]">
+                  Pre-Prod
+                </span>
+              </div>
+              <p className="text-xs text-white/30">Open network for digital commerce</p>
+            </div>
+          </div>
+          <div className="size-2 rounded-full bg-white/30 animate-pulse" />
+        </div>
+
+        <p className="text-sm text-white/50 leading-relaxed mb-5">
+          One open-protocol connection lets your agent shop the entire ONDC network —
+          groceries, food, retail and more from thousands of sellers across India — and
+          pay over UPI. No per-merchant deals: a single Beckn integration reaches the
+          whole network, with cancellations, returns and grievances handled end-to-end.
+        </p>
+
+        <div className="flex flex-wrap gap-2 mb-5">
+          {["Grocery", "Open Network", "UPI"].map((tag) => (
+            <span
+              key={tag}
+              className="px-2.5 py-1 rounded-lg bg-white/[3%] ring-1 ring-white/[4%] text-[11px] text-white/40 font-medium"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+
+        <div className="flex items-center gap-2 text-xs text-white/30">
+          <svg className="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
+            <polyline points="22 4 12 14.01 9 11.01" />
+          </svg>
+          Live buyer app on ONDC pre-prod
+        </div>
+      </div>
+    </div>
   );
 }
 

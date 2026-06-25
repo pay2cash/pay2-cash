@@ -1,0 +1,262 @@
+{
+  "context": {
+    "domain": "ONDC:RET10",
+    "country": "IND",
+    "city": "std:0124",
+    "core_version": "1.2.5",
+    "action": "on_select",
+    "transaction_id": "90dc09f4-6756-452c-bb59-d3f800d4311e",
+    "message_id": "38c8c1de-0855-4084-ba3b-30806ae08fa1",
+    "timestamp": "2026-06-25T20:47:59.127Z",
+    "bap_id": "ondc.pay2.cash",
+    "bap_uri": "https://ondc.pay2.cash/ondc",
+    "bpp_id": "pramaan.ondc.org/beta/preprod/mock/seller",
+    "bpp_uri": "https://pramaan.ondc.org/beta/preprod/mock/seller"
+  },
+  "message": {
+    "order": {
+      "fulfillments": [
+        {
+          "id": "630afa37-a4fd-40cd-81b9-8a8f65f15be1",
+          "type": "Delivery",
+          "@ondc/org/provider_name": "Pramaan Store 1",
+          "tracking": true,
+          "@ondc/org/category": "Standard Delivery",
+          "@ondc/org/TAT": "PT10M",
+          "state": {
+            "descriptor": {
+              "code": "Serviceable"
+            }
+          },
+          "end": {
+            "time": {
+              "range": {
+                "start": "2026-06-25T21:47:59.117Z",
+                "end": "2026-06-25T22:47:59.118Z"
+              }
+            }
+          }
+        },
+        {
+          "id": "a14d7fa0-af39-4376-86a0-ad8bc9d6e996",
+          "type": "Delivery",
+          "@ondc/org/provider_name": "Pramaan Store 1",
+          "tracking": true,
+          "@ondc/org/category": "Standard Delivery",
+          "@ondc/org/TAT": "PT24H",
+          "state": {
+            "descriptor": {
+              "code": "Serviceable"
+            }
+          },
+          "end": {
+            "time": {
+              "range": {
+                "start": "2026-06-25T22:47:59.118Z",
+                "end": "2026-06-25T23:47:59.119Z"
+              }
+            }
+          }
+        },
+        {
+          "id": "de931fa4-6219-43b5-8850-0ffc2d2e96a8",
+          "type": "Self-Pickup",
+          "@ondc/org/provider_name": "Pramaan Store 1",
+          "tracking": false,
+          "@ondc/org/category": "Takeaway",
+          "@ondc/org/TAT": "PT24H",
+          "state": {
+            "descriptor": {
+              "code": "Serviceable"
+            }
+          }
+        },
+        {
+          "id": "59d0b251-b82b-477a-abf2-37c445532bbd",
+          "type": "Buyer-Delivery",
+          "@ondc/org/provider_name": "Pramaan Store 1",
+          "tracking": false,
+          "@ondc/org/category": "Standard Delivery",
+          "@ondc/org/TAT": "PT15M",
+          "state": {
+            "descriptor": {
+              "code": "Serviceable"
+            }
+          },
+          "tags": [
+            {
+              "code": "order_details",
+              "list": [
+                {
+                  "code": "weight_unit",
+                  "value": "kilogram"
+                },
+                {
+                  "code": "weight_value",
+                  "value": "3.0"
+                },
+                {
+                  "code": "dim_unit",
+                  "value": "centimeter"
+                },
+                {
+                  "code": "length",
+                  "value": "1.0"
+                },
+                {
+                  "code": "breadth",
+                  "value": "1.0"
+                },
+                {
+                  "code": "height",
+                  "value": "1.0"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "items": [
+        {
+          "id": "id_13owvn_0_0",
+          "quantity": {
+            "count": 1
+          },
+          "fulfillment_id": "630afa37-a4fd-40cd-81b9-8a8f65f15be1"
+        }
+      ],
+      "quote": {
+        "price": {
+          "currency": "INR",
+          "value": "162.00"
+        },
+        "breakup": [
+          {
+            "@ondc/org/item_id": "id_13owvn_0_0",
+            "title": "Plain Atta",
+            "@ondc/org/item_quantity": {
+              "count": 1
+            },
+            "@ondc/org/title_type": "item",
+            "price": {
+              "currency": "INR",
+              "value": "65.00"
+            },
+            "item": {
+              "quantity": {
+                "available": {
+                  "count": "99"
+                },
+                "maximum": {
+                  "count": "99"
+                }
+              },
+              "price": {
+                "currency": "INR",
+                "value": "65.00"
+              }
+            }
+          },
+          {
+            "@ondc/org/item_id": "630afa37-a4fd-40cd-81b9-8a8f65f15be1",
+            "title": "Delivery charges",
+            "@ondc/org/title_type": "delivery",
+            "price": {
+              "currency": "INR",
+              "value": "40"
+            }
+          },
+          {
+            "@ondc/org/item_id": "630afa37-a4fd-40cd-81b9-8a8f65f15be1",
+            "title": "Tax",
+            "@ondc/org/title_type": "tax",
+            "price": {
+              "currency": "INR",
+              "value": "5"
+            },
+            "item": {
+              "tags": [
+                {
+                  "code": "quote",
+                  "list": [
+                    {
+                      "code": "type",
+                      "value": "fulfillment"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "@ondc/org/item_id": "de931fa4-6219-43b5-8850-0ffc2d2e96a8",
+            "title": "Delivery charges",
+            "@ondc/org/title_type": "delivery",
+            "price": {
+              "currency": "INR",
+              "value": "0"
+            }
+          },
+          {
+            "@ondc/org/item_id": "de931fa4-6219-43b5-8850-0ffc2d2e96a8",
+            "title": "Packing charges",
+            "@ondc/org/title_type": "packing",
+            "price": {
+              "currency": "INR",
+              "value": "25"
+            }
+          },
+          {
+            "@ondc/org/item_id": "de931fa4-6219-43b5-8850-0ffc2d2e96a8",
+            "title": "Tax",
+            "@ondc/org/title_type": "tax",
+            "price": {
+              "currency": "INR",
+              "value": "2"
+            },
+            "item": {
+              "tags": [
+                {
+                  "code": "quote",
+                  "list": [
+                    {
+                      "code": "type",
+                      "value": "fulfillment"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "@ondc/org/item_id": "59d0b251-b82b-477a-abf2-37c445532bbd",
+            "title": "Delivery charges",
+            "@ondc/org/title_type": "delivery",
+            "price": {
+              "currency": "INR",
+              "value": "0"
+            }
+          },
+          {
+            "@ondc/org/item_id": "59d0b251-b82b-477a-abf2-37c445532bbd",
+            "title": "Packing charges",
+            "@ondc/org/title_type": "packing",
+            "price": {
+              "currency": "INR",
+              "value": "25"
+            }
+          }
+        ],
+        "ttl": "PT6H"
+      },
+      "provider": {
+        "id": "pramaan_provider_1",
+        "locations": [
+          {
+            "id": "SSL1"
+          }
+        ]
+      }
+    }
+  }
+}

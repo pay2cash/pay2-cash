@@ -1,0 +1,37 @@
+{
+  "context": {
+    "domain": "ONDC:RET10",
+    "country": "IND",
+    "city": "std:0124",
+    "core_version": "1.2.5",
+    "action": "search",
+    "transaction_id": "5d9e57e7-2538-4951-9af2-0163ffea21d0",
+    "message_id": "c2b64825-997b-4c95-a64a-5883dcea7c00",
+    "timestamp": "2026-06-25T20:39:56.402Z",
+    "bap_id": "ondc.pay2.cash",
+    "bap_uri": "https://ondc.pay2.cash/ondc",
+    "ttl": "PT30S"
+  },
+  "message": {
+    "intent": {
+      "fulfillment": {
+        "type": "Delivery"
+      },
+      "payment": {
+        "@ondc/org/buyer_app_finder_fee_type": "percent",
+        "@ondc/org/buyer_app_finder_fee_amount": "3"
+      },
+      "tags": [
+        {
+          "code": "catalog_full",
+          "list": [
+            {
+              "code": "payload_type",
+              "value": "inline"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -5,9 +5,9 @@
     "city": "std:0124",
     "core_version": "1.2.5",
     "action": "on_search",
-    "transaction_id": "78a40494-4f2f-44a9-85ee-9cf680524c09",
-    "message_id": "cd5a1927-929c-4ff1-b495-d0e32366c00a",
-    "timestamp": "2026-06-25T12:09:23.305Z",
+    "transaction_id": "c1142bfa-47c7-4e01-aa03-accd62a99440",
+    "message_id": "10eceaf7-9ab3-4188-a940-5d4bf1ce94df",
+    "timestamp": "2026-06-25T16:46:12.598Z",
     "bap_id": "ondc.pay2.cash",
     "bap_uri": "https://ondc.pay2.cash/ondc",
     "bpp_id": "pramaan.ondc.org/beta/preprod/mock/seller",
@@ -256,7 +256,7 @@
               "price": {
                 "currency": "INR",
                 "value": "65.00",
-                "maximum_value": "65.00"
+                "maximum_value": "0"
               },
               "category_id": "Atta, Flours and Sooji",
               "location_id": "SSL1",
@@ -343,7 +343,7 @@
               "price": {
                 "currency": "INR",
                 "value": "130.00",
-                "maximum_value": "130.00"
+                "maximum_value": "0"
               },
               "category_id": "Atta, Flours and Sooji",
               "location_id": "SSL1",
@@ -430,7 +430,7 @@
               "price": {
                 "currency": "INR",
                 "value": "325.00",
-                "maximum_value": "325.00"
+                "maximum_value": "0"
               },
               "category_id": "Atta, Flours and Sooji",
               "location_id": "SSL1",
@@ -516,7 +516,7 @@
               "price": {
                 "currency": "INR",
                 "value": "149.00",
-                "maximum_value": "155.00"
+                "maximum_value": "0"
               },
               "category_id": "Dals and Pulses",
               "location_id": "SSL1",
@@ -783,7 +783,7 @@
               "price": {
                 "currency": "INR",
                 "value": "65.00",
-                "maximum_value": "65.00"
+                "maximum_value": "0"
               },
               "category_id": "Atta, Flours and Sooji",
               "location_id": "SSL2",
@@ -870,7 +870,7 @@
               "price": {
                 "currency": "INR",
                 "value": "130.00",
-                "maximum_value": "130.00"
+                "maximum_value": "0"
               },
               "category_id": "Atta, Flours and Sooji",
               "location_id": "SSL2",
@@ -957,7 +957,7 @@
               "price": {
                 "currency": "INR",
                 "value": "325.00",
-                "maximum_value": "325.00"
+                "maximum_value": "0"
               },
               "category_id": "Atta, Flours and Sooji",
               "location_id": "SSL2",
@@ -1043,7 +1043,7 @@
               "price": {
                 "currency": "INR",
                 "value": "149.00",
-                "maximum_value": "155.00"
+                "maximum_value": "0"
               },
               "category_id": "Dals and Pulses",
               "location_id": "SSL2",

@@ -5,15 +5,16 @@
     "city": "std:0124",
     "core_version": "1.2.5",
     "action": "on_rating",
-    "transaction_id": "6799f3fa-4e89-43a8-8aa2-057cce7ee626",
-    "message_id": "81fb93c6-66eb-4423-b46e-e535fdfa1f7c",
-    "timestamp": "2026-06-25T13:02:36.309Z",
+    "transaction_id": "c9bdbea8-7a69-4d4d-b8bf-487f2b20ca6a",
+    "message_id": "17178380-1c47-49b2-b590-4bed180041cb",
+    "timestamp": "2026-06-25T15:59:00.206Z",
     "bap_id": "ondc.pay2.cash",
     "bap_uri": "https://ondc.pay2.cash/ondc",
     "bpp_id": "pramaan.ondc.org/beta/preprod/mock/seller",
     "bpp_uri": "https://pramaan.ondc.org/beta/preprod/mock/seller"
   },
   "message": {
+    "order_id": "P2C1782402901254",
     "feedback_form": {
       "form": {
         "url": "https://www.sellerapp.com/rating-capture",

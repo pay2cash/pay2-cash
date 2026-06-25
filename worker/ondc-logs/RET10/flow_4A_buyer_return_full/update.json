@@ -1,0 +1,60 @@
+{
+  "context": {
+    "domain": "ONDC:RET10",
+    "country": "IND",
+    "city": "std:0124",
+    "core_version": "1.2.5",
+    "action": "update",
+    "transaction_id": "90dc09f4-6756-452c-bb59-d3f800d4311e",
+    "message_id": "633590eb-4062-44e5-be0a-3830d8344974",
+    "timestamp": "2026-06-25T20:50:18.005Z",
+    "bap_id": "ondc.pay2.cash",
+    "bap_uri": "https://ondc.pay2.cash/ondc",
+    "bpp_id": "pramaan.ondc.org/beta/preprod/mock/seller",
+    "bpp_uri": "https://pramaan.ondc.org/beta/preprod/mock/seller",
+    "ttl": "PT30S"
+  },
+  "message": {
+    "update_target": "item",
+    "order": {
+      "id": "P2C1782420482358",
+      "fulfillments": [
+        {
+          "id": "return_P2C1782420482358",
+          "type": "Return",
+          "tags": [
+            {
+              "code": "return_request",
+              "list": [
+                {
+                  "code": "id",
+                  "value": "return_P2C1782420482358"
+                },
+                {
+                  "code": "item_id",
+                  "value": "id_13owvn_0_0"
+                },
+                {
+                  "code": "item_quantity",
+                  "value": "1"
+                },
+                {
+                  "code": "reason_id",
+                  "value": "002"
+                },
+                {
+                  "code": "replace",
+                  "value": "no"
+                },
+                {
+                  "code": "images",
+                  "value": "https://ondc.pay2.cash/returns/P2C1782420482358.jpg"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

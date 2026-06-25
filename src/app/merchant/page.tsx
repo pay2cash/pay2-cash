@@ -12,6 +12,7 @@ import {
 import Link from "next/link";
 import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
+import { OnboardingForm } from "@/components/onboarding-form";
 
 export default function Page() {
   return (
@@ -256,8 +257,10 @@ function WhoWeOnboard() {
 
 function CTA() {
   return (
-    <section id="apply" className="relative py-24 sm:py-32 px-4">
+    <section id="apply" className="relative py-24 sm:py-32 px-4 overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-white/[3%] via-transparent to-transparent pointer-events-none" />
+      {/* subtle grid background, fades out toward the edges */}
+      <div className="absolute inset-0 opacity-[0.18] pointer-events-none [background-image:linear-gradient(to_right,rgba(255,255,255,0.07)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.07)_1px,transparent_1px)] [background-size:46px_46px] [mask-image:radial-gradient(ellipse_at_center,black,transparent_72%)]" />
       <div className="relative max-w-3xl mx-auto text-center">
         <h2 className="text-[clamp(2rem,4.5vw,3.25rem)] font-semibold leading-[1.1] tracking-[-0.02em] text-white">
           Be where the agents buy.
@@ -267,17 +270,12 @@ function CTA() {
           and there&apos;s no new payments licence to chase.
         </p>
 
-        <div className="mt-10 flex justify-center">
-          <Link href="#">
-            <Button className="h-12 px-8 rounded-full bg-white text-black hover:bg-white/90 font-medium gap-2">
-              Apply to onboard
-              <ArrowRight className="size-4" />
-            </Button>
-          </Link>
+        <div className="mt-12">
+          <OnboardingForm />
         </div>
 
         <p className="mt-6 text-sm text-white/30 font-medium">
-          Sell through any AI. Get paid via UPI (₹) or card (€).
+          Sell through any AI. Get paid in INR (₹) or EUR (€).
         </p>
       </div>
     </section>
