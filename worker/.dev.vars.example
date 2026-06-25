@@ -1,0 +1,4 @@
+# Copy to .dev.vars (gitignored) for local `wrangler dev`.
+PAYU_MERCHANT_KEY=your_test_merchant_key
+PAYU_SALT=your_test_salt
+PAYU_BASE_URL=https://test.payu.in

@@ -1,0 +1,15 @@
+{
+  // Static-assets Worker that serves the Next.js static export (./out).
+  // Deploy with: npx wrangler deploy -c wrangler.site.jsonc
+  "name": "pay2-cash-site",
+  "compatibility_date": "2026-06-01",
+  "workers_dev": true,
+  "assets": {
+    "directory": "./out",
+    "not_found_handling": "404-page"
+  },
+  "routes": [
+    { "pattern": "pay2.cash", "custom_domain": true },
+    { "pattern": "www.pay2.cash", "custom_domain": true }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "name": "pay2-cash",
+  "version": "0.2.0",
+  "description": "TypeScript SDK for the pay2 Cash agentic-payments MCP (UPI + card).",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist", "README.md"],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "upi",
+    "payments",
+    "agentic-commerce",
+    "mcp",
+    "ai-agent",
+    "stripe-issuing",
+    "pay2cash"
+  ],
+  "homepage": "https://pay2.cash",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2"
+  }
+}

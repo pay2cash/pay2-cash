@@ -1,0 +1,21 @@
+{
+  "name": "pay2-cash-worker",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-06-01",
+  "workers_dev": true,
+  "routes": [{ "pattern": "mcp.pay2.cash", "custom_domain": true }],
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "pay2cash",
+      "database_id": "b9daa33f-92a3-46fc-8872-3234bb23493a",
+      "migrations_dir": "drizzle"
+    }
+  ],
+  "vars": {
+    "PAYU_BASE_URL": "https://test.payu.in",
+    "STRIPE_ISSUING_CURRENCY": "eur"
+  }
+  // Secrets (not here): set with `npx wrangler secret put PAYU_MERCHANT_KEY` / `PAYU_SALT`.
+  // For local dev, put them in .dev.vars (see .dev.vars.example).
+}

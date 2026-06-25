@@ -1,0 +1,22 @@
+{
+  "name": "pay2-cash-worker",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "typecheck": "tsc --noEmit",
+    "db:generate": "drizzle-kit generate",
+    "db:apply:local": "wrangler d1 migrations apply pay2cash --local",
+    "db:apply": "wrangler d1 migrations apply pay2cash --remote"
+  },
+  "dependencies": {
+    "drizzle-orm": "^0.36.4"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20241127.0",
+    "drizzle-kit": "^0.28.1",
+    "typescript": "^5.7.2",
+    "wrangler": "^3.91.0"
+  }
+}

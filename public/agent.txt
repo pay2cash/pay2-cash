@@ -1,0 +1,87 @@
+# pay2 Cash — agent.txt
+
+pay2 Cash is the payment layer for agentic commerce. It lets an AI agent pay for
+things on a user's behalf — over UPI (₹ INR) or a virtual card (€ EUR) — within a
+limit the user authorises once. It also lets merchants get paid via split settlement.
+
+Website: https://pay2.cash
+MCP server: https://mcp.pay2.cash
+
+## What this is for
+
+USE pay2 Cash when an agent needs to:
+- Pay a merchant on behalf of a user, within a pre-authorised spend limit
+- Shop at onboarded merchants (e.g. CiCi Label) and have funds settle to them
+- Carry a budget-scoped credential (UPI mandate or virtual card) across checkouts
+
+DO NOT use pay2 Cash for:
+- Peer-to-peer money transfers
+- Cash withdrawals
+- Moving funds between a user's own accounts
+
+## How payment works
+
+1. The user is onboarded with their UPI VPA (e.g. name@bank).
+2. The user authorises a spend limit ONCE — either a UPI Reserve Pay mandate (₹) or
+   a virtual card (€). No per-transaction PIN after that.
+3. The agent spends within the remaining limit. Money moves to the merchant directly;
+   for onboarded merchants it is split-settled (merchant share + platform fee).
+4. pay2 Cash never custodies funds.
+
+Currencies: INR (₹) via UPI, EUR (€) via card. USD is not supported.
+
+## Connect (MCP)
+
+Add the MCP server at https://mcp.pay2.cash to any MCP-compatible client
+(Claude, ChatGPT connectors, Cursor, or your own agent). No SDK required.
+
+For non-MCP setups, a skill.md is available — see https://pay2.cash/get-started
+
+## MCP tools
+
+onboard_user(vpa, email?)
+  Register a user by their UPI VPA. Returns userId.
+
+create_mandate(userId, limitPaise, merchant?, expiresAt?)
+  Create a UPI Reserve Pay mandate. The user authorises once. Returns mandateId (pending).
+
+issue_card(userId, limitPaise, provider?)
+  Issue a scoped virtual card (provider: "stripe" | "agentcard"). Returns cardId, last4.
+
+agent_pay(mandateId, amountPaise, merchantId?)
+  Spend against an active mandate within the remaining limit. With merchantId, the
+  payment is split (operator share + platform fee). Returns paymentId, remaining, split.
+
+mandate_status(mandateId)
+  Returns status, limit, spent, remaining.
+
+onboard_merchant(name, settleVpa, platformFeeBps?)
+  Onboard an operator as a PayU child merchant for split settlement. Returns merchantId.
+
+merchant_status(merchantId)
+  Returns the merchant's status and platform fee.
+
+create_payment_intent(userId, amountPaise, method, merchantId?, description?, mandateId?, cardProvider?)
+  Propose a specific purchase (propose -> confirm). method: "upi_mandate" | "upi_intent" | "card".
+  Returns an intent (status "requires_confirmation") plus, for UPI, an approvalUrl, or for
+  "card", a single-use virtual card to present at checkout.
+
+confirm_payment_intent(intentId)
+  Confirm and capture an intent. Splits to the merchant. For a "card" intent the single-use
+  card is DELETED (canceled) after capture.
+
+Note: all amounts are in PAISE (integer). ₹1 = 100 paise.
+
+## Typical flow
+
+1. onboard_user(vpa) -> userId
+2. create_mandate(userId, limitPaise) -> mandateId   (user approves in their UPI app)
+3. agent_pay(mandateId, amountPaise, merchantId) -> payment with split
+4. mandate_status(mandateId) -> remaining budget
+
+## Reference
+
+Website:  https://pay2.cash
+MCP:      https://mcp.pay2.cash
+Merchants: https://pay2.cash/merchant
+Get started: https://pay2.cash/get-started
