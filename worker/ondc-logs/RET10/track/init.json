@@ -1,0 +1,83 @@
+{
+  "context": {
+    "domain": "ONDC:RET10",
+    "country": "IND",
+    "city": "std:0124",
+    "core_version": "1.2.5",
+    "action": "init",
+    "transaction_id": "f04a7a2a-3827-4123-89f3-00923a6d9454",
+    "message_id": "fe209b09-70f5-47bf-a3a9-8ee1998775ba",
+    "timestamp": "2026-06-25T11:35:45.699Z",
+    "bap_id": "ondc.pay2.cash",
+    "bap_uri": "https://ondc.pay2.cash/ondc",
+    "bpp_id": "pramaan.ondc.org/beta/preprod/mock/seller",
+    "bpp_uri": "https://pramaan.ondc.org/beta/preprod/mock/seller",
+    "ttl": "PT30S"
+  },
+  "message": {
+    "order": {
+      "provider": {
+        "id": "pramaan_provider_1",
+        "locations": [
+          {
+            "id": "SSL1"
+          }
+        ]
+      },
+      "items": [
+        {
+          "id": "id_13owvn_0_0",
+          "location_id": "SSL1",
+          "quantity": {
+            "count": 1
+          },
+          "fulfillment_id": "8463bbe1-3a02-4b17-8909-94a98ce7e246"
+        }
+      ],
+      "billing": {
+        "name": "Nidhi Sharma",
+        "address": {
+          "name": "Nidhi Sharma",
+          "building": "221 B",
+          "locality": "Baker Street",
+          "city": "Gurgaon",
+          "state": "Haryana",
+          "country": "India",
+          "area_code": "122007"
+        },
+        "tax_number": "29ABCDE1234F1Z5",
+        "email": "buyer@pay2.cash",
+        "phone": "9876543210",
+        "created_at": "2026-06-25T11:35:45.699Z",
+        "updated_at": "2026-06-25T11:35:45.699Z"
+      },
+      "fulfillments": [
+        {
+          "id": "8463bbe1-3a02-4b17-8909-94a98ce7e246",
+          "type": "Delivery",
+          "end": {
+            "location": {
+              "gps": "28.4554726,77.0219019",
+              "address": {
+                "name": "Nidhi Sharma",
+                "building": "221 B",
+                "locality": "Baker Street",
+                "city": "Gurgaon",
+                "state": "Haryana",
+                "country": "India",
+                "area_code": "122007"
+              }
+            },
+            "contact": {
+              "phone": "9876543210",
+              "email": "buyer@pay2.cash"
+            }
+          }
+        }
+      ],
+      "payment": {
+        "type": "ON-ORDER"
+      }
+    }
+  }
+}

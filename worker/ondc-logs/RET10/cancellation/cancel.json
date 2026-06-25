@@ -1,0 +1,40 @@
+{
+  "context": {
+    "domain": "ONDC:RET10",
+    "country": "IND",
+    "city": "std:0124",
+    "core_version": "1.2.5",
+    "action": "cancel",
+    "transaction_id": "4210fb76-e8e7-4b7c-9588-948e9bc875b0",
+    "message_id": "0a06bfb0-874e-4e00-accc-2452fa87f265",
+    "timestamp": "2026-06-25T11:35:38.472Z",
+    "bap_id": "ondc.pay2.cash",
+    "bap_uri": "https://ondc.pay2.cash/ondc",
+    "bpp_id": "pramaan.ondc.org/beta/preprod/mock/seller",
+    "bpp_uri": "https://pramaan.ondc.org/beta/preprod/mock/seller",
+    "ttl": "PT30S"
+  },
+  "message": {
+    "order_id": "P2C1782387336588",
+    "cancellation_reason_id": "006",
+    "descriptor": {
+      "name": "fulfillment",
+      "short_desc": "8e5e2a5f-1c85-44f3-b755-7d3d860f873c",
+      "tags": [
+        {
+          "code": "params",
+          "list": [
+            {
+              "code": "force",
+              "value": "no"
+            },
+            {
+              "code": "ttl_response",
+              "value": "PT1H"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

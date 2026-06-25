@@ -1,0 +1,30 @@
+{
+  "context": {
+    "domain": "ONDC:RET10",
+    "country": "IND",
+    "city": "std:0124",
+    "core_version": "1.2.5",
+    "action": "on_track",
+    "transaction_id": "6799f3fa-4e89-43a8-8aa2-057cce7ee626",
+    "message_id": "6e6aff15-eba4-4105-8aac-4cc73acac180",
+    "timestamp": "2026-06-25T13:02:34.574Z",
+    "bap_id": "ondc.pay2.cash",
+    "bap_uri": "https://ondc.pay2.cash/ondc",
+    "bpp_id": "pramaan.ondc.org/beta/preprod/mock/seller",
+    "bpp_uri": "https://pramaan.ondc.org/beta/preprod/mock/seller"
+  },
+  "message": {
+    "tracking": {
+      "id": "b40d6b18-aeab-43e8-ae33-eab79aa403f3",
+      "url": "http://sequelstring-lsp-ondc.com/track",
+      "location": {
+        "gps": "12.974002,77.613458",
+        "time": {
+          "timestamp": "2026-06-25T13:02:34.574Z"
+        },
+        "updated_at": "2026-06-25T13:02:34.574Z"
+      },
+      "status": "active"
+    }
+  }
+}

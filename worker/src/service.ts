@@ -3,9 +3,10 @@
 // CardIssuer for virtual-card credentials.
 import { eq } from "drizzle-orm";
 import type { DB } from "./db";
-import { users, mandates, cards, merchants, payments, paymentIntents } from "./db/schema";
+import { users, mandates, cards, merchants, payments, paymentIntents, flightBookings } from "./db/schema";
 import type { PayuClient } from "./payu";
 import type { CardIssuer } from "./cards";
+import type { DuffelClient } from "./duffel";
 import type {
   OnboardUserInput,
   OnboardUserResult,
@@ -26,6 +27,10 @@ import type {
   CreatePaymentIntentResult,
   ConfirmPaymentIntentInput,
   ConfirmPaymentIntentResult,
+  SearchFlightsInput,
+  SearchFlightsResult,
+  BookFlightInput,
+  BookFlightResult,
 } from "./contract";
 
 // Shared: compute the split for a payment to an active merchant.
@@ -412,6 +417,153 @@ export async function confirmPaymentIntent(
     status: ok ? "captured" : "failed",
     paymentId,
     split,
+    cardDeleted,
+  };
+}
+
+// ============================ FLIGHTS (EU use case) ============================
+
+export async function searchFlights(
+  db: DB,
+  duffel: DuffelClient,
+  input: SearchFlightsInput,
+): Promise<SearchFlightsResult> {
+  const user = await db.select().from(users).where(eq(users.id, input.userId)).get();
+  if (!user) throw new Error(`user not found: ${input.userId}`);
+
+  const result = await duffel.search({
+    origin: input.origin,
+    destination: input.destination,
+    departureDate: input.departureDate,
+    returnDate: input.returnDate,
+    cabinClass: input.cabinClass,
+    adults: input.adults,
+    maxResults: input.maxResults,
+  });
+
+  let offers = result.offers;
+  if (input.maxPriceMinor != null) {
+    offers = offers.filter((o) => o.amountMinor <= input.maxPriceMinor!);
+  }
+
+  return {
+    offerRequestId: result.offerRequestId,
+    currency: offers[0]?.currency,
+    offers,
+  };
+}
+
+// Book a flight: re-price the offer, enforce the budget ceiling, issue a single-use
+// € card as the spend credential, place the Duffel order, then cancel the card.
+export async function bookFlight(
+  db: DB,
+  duffel: DuffelClient,
+  issuer: CardIssuer,
+  input: BookFlightInput,
+): Promise<BookFlightResult> {
+  const user = await db.select().from(users).where(eq(users.id, input.userId)).get();
+  if (!user) throw new Error(`user not found: ${input.userId}`);
+  if (!input.passengers?.length) throw new Error("at least one passenger is required");
+
+  // 1. Re-fetch the offer for a fresh price + the passenger ids needed to book.
+  const { offer, passengerIds } = await duffel.getOffer(input.offerId);
+  if (passengerIds.length !== input.passengers.length) {
+    throw new Error(
+      `offer expects ${passengerIds.length} passenger(s), got ${input.passengers.length}`,
+    );
+  }
+  // 2. Hard budget ceiling — never book above what the user authorised.
+  if (input.maxPriceMinor != null && offer.amountMinor > input.maxPriceMinor) {
+    throw new Error(
+      `fare ${offer.amount} ${offer.currency} exceeds budget (${input.maxPriceMinor} minor)`,
+    );
+  }
+
+  const bookingId = crypto.randomUUID();
+
+  // 3. Issue a single-use Stripe Issuing card scoped to exactly the fare.
+  const issued = await issuer.issueCard({
+    provider: "stripe",
+    userVpa: user.vpa,
+    limitPaise: offer.amountMinor,
+  });
+  const cardId = crypto.randomUUID();
+  await db.insert(cards).values({
+    id: cardId,
+    userId: user.id,
+    provider: "stripe",
+    cardToken: issued.cardToken,
+    status: "active",
+    limitPaise: offer.amountMinor,
+    spentPaise: 0,
+    createdAt: Date.now(),
+  });
+
+  // 4. Place the Duffel order. If it fails, cancel the card and record the failure.
+  let order;
+  try {
+    order = await duffel.createOrder({
+      offerId: input.offerId,
+      amount: offer.amount,
+      currency: offer.currency,
+      passengers: input.passengers.map((p, i) => ({ ...p, id: passengerIds[i] })),
+    });
+  } catch (e) {
+    const cardDeleted = await issuer
+      .cancelCard({ provider: "stripe", cardToken: issued.cardToken })
+      .catch(() => false);
+    await db.update(cards).set({ status: "closed" }).where(eq(cards.id, cardId));
+    await db.insert(flightBookings).values({
+      id: bookingId,
+      userId: user.id,
+      cardId,
+      offerId: input.offerId,
+      orderId: null,
+      bookingReference: null,
+      amountMinor: offer.amountMinor,
+      currency: offer.currency,
+      status: "failed",
+      createdAt: Date.now(),
+    });
+    return {
+      bookingId,
+      status: "failed",
+      cardLast4: issued.last4,
+      cardDeleted,
+      error: e instanceof Error ? e.message : "booking failed",
+    };
+  }
+
+  // 5. Single-use: cancel the card now that the order is placed, and record spend.
+  const cardDeleted = await issuer
+    .cancelCard({ provider: "stripe", cardToken: issued.cardToken })
+    .catch(() => false);
+  await db
+    .update(cards)
+    .set({ status: "closed", spentPaise: order.amountMinor })
+    .where(eq(cards.id, cardId));
+
+  await db.insert(flightBookings).values({
+    id: bookingId,
+    userId: user.id,
+    cardId,
+    offerId: input.offerId,
+    orderId: order.orderId,
+    bookingReference: order.bookingReference,
+    amountMinor: order.amountMinor,
+    currency: order.currency,
+    status: "confirmed",
+    createdAt: Date.now(),
+  });
+
+  return {
+    bookingId,
+    status: "confirmed",
+    orderId: order.orderId,
+    bookingReference: order.bookingReference,
+    amountMinor: order.amountMinor,
+    currency: order.currency,
+    cardLast4: issued.last4,
     cardDeleted,
   };
 }

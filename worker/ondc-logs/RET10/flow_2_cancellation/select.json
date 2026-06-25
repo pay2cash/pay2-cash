@@ -1,0 +1,53 @@
+{
+  "context": {
+    "domain": "ONDC:RET10",
+    "country": "IND",
+    "city": "std:0124",
+    "core_version": "1.2.5",
+    "action": "select",
+    "transaction_id": "86c3f130-087f-467f-8a7a-e2e484a53151",
+    "message_id": "a78e53ba-2a17-4e46-9c2f-3b016d2d3f00",
+    "timestamp": "2026-06-25T13:35:51.914Z",
+    "bap_id": "ondc.pay2.cash",
+    "bap_uri": "https://ondc.pay2.cash/ondc",
+    "bpp_id": "pramaan.ondc.org/beta/preprod/mock/seller",
+    "bpp_uri": "https://pramaan.ondc.org/beta/preprod/mock/seller",
+    "ttl": "PT30S"
+  },
+  "message": {
+    "order": {
+      "provider": {
+        "id": "pramaan_provider_1",
+        "locations": [
+          {
+            "id": "SSL1"
+          }
+        ]
+      },
+      "items": [
+        {
+          "id": "id_13owvn_0_0",
+          "location_id": "SSL1",
+          "quantity": {
+            "count": 1
+          }
+        }
+      ],
+      "fulfillments": [
+        {
+          "end": {
+            "location": {
+              "gps": "28.4554726,77.0219019",
+              "address": {
+                "area_code": "122007"
+              }
+            }
+          }
+        }
+      ],
+      "payment": {
+        "type": "ON-ORDER"
+      }
+    }
+  }
+}

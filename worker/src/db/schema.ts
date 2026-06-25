@@ -8,6 +8,7 @@ import type {
   CardStatus,
   PaymentMethod,
   IntentStatus,
+  FlightBookingStatus,
 } from "../contract";
 
 export const users = sqliteTable("users", {
@@ -72,6 +73,34 @@ export const paymentIntents = sqliteTable("payment_intents", {
   status: text("status").$type<IntentStatus>().notNull(),
   payuRef: text("payu_ref"),
   approvalUrl: text("approval_url"),
+  createdAt: integer("created_at").notNull(),
+});
+
+// Flight bookings (EU use case) — a Duffel order paid with a single-use € card.
+export const flightBookings = sqliteTable("flight_bookings", {
+  id: text("id").primaryKey(),
+  userId: text("user_id")
+    .notNull()
+    .references(() => users.id),
+  cardId: text("card_id").references(() => cards.id), // the single-use card issued for it
+  offerId: text("offer_id").notNull(), // Duffel offer id
+  orderId: text("order_id"), // Duffel order id once booked
+  bookingReference: text("booking_reference"), // airline PNR
+  amountMinor: integer("amount_minor").notNull(),
+  currency: text("currency").notNull(),
+  status: text("status").$type<FlightBookingStatus>().notNull(),
+  createdAt: integer("created_at").notNull(),
+});
+
+// ONDC Beckn callbacks (on_search/on_select/.../on_status) captured from the BPP
+// during Pramaan flows — assembled into the verification logs submitted for prod.
+export const ondcLogs = sqliteTable("ondc_logs", {
+  id: text("id").primaryKey(),
+  action: text("action").notNull(),
+  transactionId: text("transaction_id"),
+  messageId: text("message_id"),
+  bppId: text("bpp_id"),
+  payload: text("payload").notNull(),
   createdAt: integer("created_at").notNull(),
 });
 

@@ -1,0 +1,45 @@
+{
+  "context": {
+    "domain": "nic2004:60232",
+    "country": "IND",
+    "city": "std:0124",
+    "action": "on_issue",
+    "core_version": "1.0.0",
+    "bap_id": "ondc.pay2.cash",
+    "bap_uri": "https://ondc.pay2.cash/ondc",
+    "bpp_id": "pramaan.ondc.org/beta/preprod/mock/seller",
+    "bpp_uri": "https://pramaan.ondc.org/beta/preprod/mock/seller",
+    "transaction_id": "8b20da80-a3cb-4592-a30e-c8511a56e093",
+    "message_id": "b57365af-69f2-4e8c-be70-d6a991ea2a25",
+    "timestamp": "2026-06-25T11:38:58.843Z",
+    "ttl": "PT30S"
+  },
+  "message": {
+    "issue": {
+      "id": "60034502-227f-4d48-8b8c-b3590e2dc314",
+      "issue_actions": {
+        "respondent_actions": [
+          {
+            "respondent_action": "PROCESSING",
+            "short_desc": "Complaint is being processed",
+            "updated_at": "2026-06-25T11:38:58.739Z",
+            "updated_by": {
+              "org": {
+                "name": "pramaan.ondc.org/beta/preprod/mock/seller::nic2004:60232"
+              },
+              "contact": {
+                "phone": "9350657100",
+                "email": "bigtuna@theoffice.com"
+              },
+              "person": {
+                "name": "Jim Halpert"
+              }
+            },
+            "cascaded_level": 1
+          }
+        ]
+      },
+      "updated_at": "2026-06-25T11:38:58.843Z"
+    }
+  }
+}

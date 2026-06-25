@@ -1,0 +1,40 @@
+{
+  "context": {
+    "domain": "ONDC:RET10",
+    "country": "IND",
+    "city": "std:0124",
+    "core_version": "1.2.5",
+    "action": "update",
+    "transaction_id": "3b231ed2-1eec-4085-9e5f-ad95ba6e5803",
+    "message_id": "c53b84a0-b167-4e23-b8b3-228d87820f14",
+    "timestamp": "2026-06-25T11:38:12.599Z",
+    "bap_id": "ondc.pay2.cash",
+    "bap_uri": "https://ondc.pay2.cash/ondc",
+    "bpp_id": "pramaan.ondc.org/beta/preprod/mock/seller",
+    "bpp_uri": "https://pramaan.ondc.org/beta/preprod/mock/seller",
+    "ttl": "PT30S"
+  },
+  "message": {
+    "update_target": "payment",
+    "order": {
+      "id": "P2C1782387488629",
+      "fulfillments": [
+        {
+          "id": "ee4fd61c-bd8c-4365-b12d-9599015241f7",
+          "type": "Cancel"
+        }
+      ],
+      "payment": {
+        "@ondc/org/settlement_details": [
+          {
+            "settlement_counterparty": "buyer",
+            "settlement_phase": "refund",
+            "settlement_type": "upi",
+            "settlement_amount": "110.00",
+            "settlement_timestamp": "2026-06-25T11:38:12.599Z"
+          }
+        ]
+      }
+    }
+  }
+}

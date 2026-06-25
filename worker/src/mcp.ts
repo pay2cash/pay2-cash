@@ -3,6 +3,7 @@
 import type { DB } from "./db";
 import type { PayuClient } from "./payu";
 import type { CardIssuer } from "./cards";
+import type { DuffelClient } from "./duffel";
 import * as svc from "./service";
 
 const PROTOCOL_VERSION = "2025-06-18";
@@ -11,6 +12,7 @@ export interface McpCtx {
   db: DB;
   payu: PayuClient;
   cards: CardIssuer;
+  duffel: DuffelClient;
 }
 
 const TOOLS = [
@@ -131,6 +133,64 @@ const TOOLS = [
       required: ["merchantId"],
     },
   },
+  // ---- flights (EU use case) ----
+  {
+    name: "search_flights",
+    description:
+      "Search flights (Duffel). Returns priced offers (offerId, amount in minor units, currency, airline, segments). Show these to the user; book the chosen offerId with book_flight. Amounts are in the fare currency's minor units (e.g. EUR cents).",
+    inputSchema: {
+      type: "object",
+      properties: {
+        userId: { type: "string" },
+        origin: { type: "string", description: "Origin IATA code, e.g. CDG" },
+        destination: { type: "string", description: "Destination IATA code, e.g. BER" },
+        departureDate: { type: "string", description: "YYYY-MM-DD" },
+        returnDate: { type: "string", description: "Optional YYYY-MM-DD for a round trip" },
+        cabinClass: {
+          type: "string",
+          enum: ["economy", "premium_economy", "business", "first"],
+        },
+        adults: { type: "integer", description: "Adult passengers, default 1" },
+        maxPriceMinor: { type: "integer", description: "Optional budget ceiling in minor units" },
+        maxResults: { type: "integer", description: "Max offers to return, default 5" },
+      },
+      required: ["userId", "origin", "destination", "departureDate"],
+    },
+  },
+  {
+    name: "book_flight",
+    description:
+      "Book a chosen flight offer. Issues a single-use virtual card scoped to the fare, places the Duffel order, then cancels the card. Re-prices the offer and refuses to book above maxPriceMinor. Returns the airline PNR (bookingReference).",
+    inputSchema: {
+      type: "object",
+      properties: {
+        userId: { type: "string" },
+        offerId: { type: "string", description: "offerId from search_flights" },
+        maxPriceMinor: {
+          type: "integer",
+          description: "Hard ceiling in minor units; booking fails if the fresh fare exceeds it",
+        },
+        passengers: {
+          type: "array",
+          description: "One entry per passenger in the offer",
+          items: {
+            type: "object",
+            properties: {
+              givenName: { type: "string" },
+              familyName: { type: "string" },
+              bornOn: { type: "string", description: "YYYY-MM-DD" },
+              gender: { type: "string", enum: ["m", "f"] },
+              title: { type: "string", enum: ["mr", "ms", "mrs", "miss", "dr"] },
+              email: { type: "string" },
+              phoneNumber: { type: "string", description: "E.164, e.g. +491701234567" },
+            },
+            required: ["givenName", "familyName", "bornOn", "gender", "title", "email", "phoneNumber"],
+          },
+        },
+      },
+      required: ["userId", "offerId", "passengers"],
+    },
+  },
 ];
 
 async function callTool(name: string, args: any, ctx: McpCtx): Promise<unknown> {
@@ -153,6 +213,10 @@ async function callTool(name: string, args: any, ctx: McpCtx): Promise<unknown> 
       return svc.createPaymentIntent(ctx.db, ctx.payu, ctx.cards, args);
     case "confirm_payment_intent":
       return svc.confirmPaymentIntent(ctx.db, ctx.payu, ctx.cards, args);
+    case "search_flights":
+      return svc.searchFlights(ctx.db, ctx.duffel, args);
+    case "book_flight":
+      return svc.bookFlight(ctx.db, ctx.duffel, ctx.cards, args);
     default:
       throw new Error(`unknown tool: ${name}`);
   }

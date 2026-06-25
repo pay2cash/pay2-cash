@@ -1,0 +1,24 @@
+{
+  "context": {
+    "domain": "ONDC:RET10",
+    "country": "IND",
+    "city": "std:0124",
+    "core_version": "1.2.5",
+    "action": "on_rating",
+    "transaction_id": "6799f3fa-4e89-43a8-8aa2-057cce7ee626",
+    "message_id": "81fb93c6-66eb-4423-b46e-e535fdfa1f7c",
+    "timestamp": "2026-06-25T13:02:36.309Z",
+    "bap_id": "ondc.pay2.cash",
+    "bap_uri": "https://ondc.pay2.cash/ondc",
+    "bpp_id": "pramaan.ondc.org/beta/preprod/mock/seller",
+    "bpp_uri": "https://pramaan.ondc.org/beta/preprod/mock/seller"
+  },
+  "message": {
+    "feedback_form": {
+      "form": {
+        "url": "https://www.sellerapp.com/rating-capture",
+        "mime_type": "text/html"
+      }
+    }
+  }
+}

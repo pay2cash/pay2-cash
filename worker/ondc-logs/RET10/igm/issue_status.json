@@ -1,0 +1,20 @@
+{
+  "context": {
+    "domain": "nic2004:60232",
+    "country": "IND",
+    "city": "std:0124",
+    "action": "issue_status",
+    "core_version": "1.0.0",
+    "bap_id": "ondc.pay2.cash",
+    "bap_uri": "https://ondc.pay2.cash/ondc",
+    "bpp_id": "pramaan.ondc.org/beta/preprod/mock/seller",
+    "bpp_uri": "https://pramaan.ondc.org/beta/preprod/mock/seller",
+    "transaction_id": "8b20da80-a3cb-4592-a30e-c8511a56e093",
+    "message_id": "5d3f7b26-d26d-411c-9dfc-946e020a4d3b",
+    "timestamp": "2026-06-25T11:39:00.528Z",
+    "ttl": "PT30S"
+  },
+  "message": {
+    "issue_id": "60034502-227f-4d48-8b8c-b3590e2dc314"
+  }
+}

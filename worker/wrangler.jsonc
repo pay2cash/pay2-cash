@@ -3,7 +3,10 @@
   "main": "src/index.ts",
   "compatibility_date": "2026-06-01",
   "workers_dev": true,
-  "routes": [{ "pattern": "mcp.pay2.cash", "custom_domain": true }],
+  "routes": [
+    { "pattern": "mcp.pay2.cash", "custom_domain": true },
+    { "pattern": "ondc.pay2.cash", "custom_domain": true } // ONDC BAP subscriber_id
+  ],
   "d1_databases": [
     {
       "binding": "DB",
@@ -14,8 +17,15 @@
   ],
   "vars": {
     "PAYU_BASE_URL": "https://test.payu.in",
-    "STRIPE_ISSUING_CURRENCY": "eur"
+    "STRIPE_ISSUING_CURRENCY": "eur",
+    "DUFFEL_PAYMENT_TYPE": "balance", // "balance" = pay from Duffel sandbox; flip to "card" in prod
+    // ONDC Buyer App (Pre-Prod). Subscriber URL callbacks live under /ondc; site
+    // verification is served at /ondc-site-verification.html on the subscriber_id host.
+    "ONDC_SUBSCRIBER_ID": "ondc.pay2.cash",
+    "ONDC_SIGNED_REQ_ID": "IT9Ol7ybLICvZkO6DiTdqqFW1QlfZXQ2SdWu3mUxmaXUvXuST1fE4DTkZ9blUsS8mOX6FJRhbEEbdiqb67VlAw==",
+    "ONDC_ENV": "preprod"
   }
-  // Secrets (not here): set with `npx wrangler secret put PAYU_MERCHANT_KEY` / `PAYU_SALT`.
+  // Secrets (not here): set with `npx wrangler secret put PAYU_MERCHANT_KEY` / `PAYU_SALT`
+  //   / `STRIPE_SECRET_KEY` / `DUFFEL_API_KEY` / `ONDC_ENC_PRIVATE_KEY`.
   // For local dev, put them in .dev.vars (see .dev.vars.example).
 }

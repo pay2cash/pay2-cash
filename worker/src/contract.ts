@@ -155,3 +155,69 @@ export interface ConfirmPaymentIntentResult {
   split?: SplitBreakdown;
   cardDeleted?: boolean; // true when a single-use card was deleted after capture
 }
+
+// ============================ FLIGHTS (EU use case) ============================
+// search_flights -> Duffel offers; book_flight -> issue a single-use € card,
+// create the Duffel order, then cancel the card. Amounts here are in MINOR units
+// of the offer currency (e.g. EUR cents), kept separate from UPI paise.
+
+export interface SearchFlightsInput {
+  userId: string;
+  origin: string; // IATA, e.g. "CDG"
+  destination: string; // IATA, e.g. "BER"
+  departureDate: string; // YYYY-MM-DD
+  returnDate?: string; // YYYY-MM-DD for a round trip
+  cabinClass?: "economy" | "premium_economy" | "business" | "first";
+  adults?: number; // default 1
+  maxPriceMinor?: number; // optional budget filter, in minor units of the fare currency
+  maxResults?: number; // default 5
+}
+export interface FlightOfferSummary {
+  offerId: string;
+  amountMinor: number;
+  amount: string;
+  currency: string;
+  airline: string;
+  expiresAt?: string;
+  segments: Array<{
+    from: string;
+    to: string;
+    departingAt: string;
+    arrivingAt: string;
+    marketingCarrier: string;
+    flightNumber: string;
+  }>;
+}
+export interface SearchFlightsResult {
+  offerRequestId: string;
+  currency?: string;
+  offers: FlightOfferSummary[];
+}
+
+export interface FlightPassengerInput {
+  givenName: string;
+  familyName: string;
+  bornOn: string; // YYYY-MM-DD
+  gender: "m" | "f";
+  title: "mr" | "ms" | "mrs" | "miss" | "dr";
+  email: string;
+  phoneNumber: string; // E.164
+}
+export interface BookFlightInput {
+  userId: string;
+  offerId: string;
+  passengers: FlightPassengerInput[];
+  maxPriceMinor?: number; // hard ceiling; booking fails if the fresh fare exceeds it
+}
+export type FlightBookingStatus = "confirmed" | "failed";
+export interface BookFlightResult {
+  bookingId: string;
+  status: FlightBookingStatus;
+  orderId?: string;
+  bookingReference?: string; // airline PNR
+  amountMinor?: number;
+  currency?: string;
+  cardLast4?: string; // the single-use card issued for this booking
+  cardDeleted?: boolean; // card cancelled after the order was placed
+  error?: string;
+}

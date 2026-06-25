@@ -1,0 +1,20 @@
+{
+  "context": {
+    "domain": "ONDC:RET10",
+    "country": "IND",
+    "city": "std:0124",
+    "core_version": "1.2.5",
+    "action": "status",
+    "transaction_id": "6799f3fa-4e89-43a8-8aa2-057cce7ee626",
+    "message_id": "6f456194-d0b5-4223-9984-9ccdf773d877",
+    "timestamp": "2026-06-25T13:01:13.570Z",
+    "bap_id": "ondc.pay2.cash",
+    "bap_uri": "https://ondc.pay2.cash/ondc",
+    "bpp_id": "pramaan.ondc.org/beta/preprod/mock/seller",
+    "bpp_uri": "https://pramaan.ondc.org/beta/preprod/mock/seller",
+    "ttl": "PT30S"
+  },
+  "message": {
+    "order_id": "P2C1782392313098"
+  }
+}

@@ -2,3 +2,6 @@
 PAYU_MERCHANT_KEY=your_test_merchant_key
 PAYU_SALT=your_test_salt
 PAYU_BASE_URL=https://test.payu.in
+STRIPE_SECRET_KEY=sk_test_...
+DUFFEL_API_KEY=duffel_test_...
+DUFFEL_PAYMENT_TYPE=balance

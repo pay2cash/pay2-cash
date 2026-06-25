@@ -1,6 +1,7 @@
+import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { CreditCard, ArrowRight, Check, X, Smartphone, Bot } from "lucide-react";
+import { CreditCard, ArrowRight, Check, X, Smartphone, Bot, Plane } from "lucide-react";
 import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
 
@@ -435,6 +436,7 @@ function IntegrationsSection() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           <IntegrationCardActive />
           <IntegrationCardCiCi />
+          <IntegrationCardFlights />
           <IntegrationCardComingSoon
             name="Uber Eats"
             description="Order food delivery from the Uber Eats marketplace"
@@ -590,6 +592,53 @@ function IntegrationCardCiCi() {
         </div>
       </div>
     </div>
+  );
+}
+
+function IntegrationCardFlights() {
+  return (
+    <Link href="/fly" className="relative group block">
+      <div className="rounded-2xl border border-white/[6%] bg-gradient-to-br from-white/[2%] via-white/[1%] to-transparent p-6 backdrop-blur-sm transition-all duration-500 hover:border-white/[10%] hover:bg-white/[3%] h-full">
+        <div className="flex items-start justify-between mb-4">
+          <div className="flex items-center gap-3">
+            <div className="size-10 rounded-xl bg-white/[4%] flex items-center justify-center ring-1 ring-white/[6%]">
+              <Plane className="size-5 text-white/70" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="text-white font-semibold text-lg">Flights</span>
+                <span className="px-2 py-0.5 rounded-full bg-white/[6%] text-[10px] text-white/70 font-medium uppercase tracking-[0.06em]">
+                  Available
+                </span>
+              </div>
+              <p className="text-xs text-white/30">Book flights across Europe</p>
+            </div>
+          </div>
+          <div className="size-2 rounded-full bg-white/30 animate-pulse" />
+        </div>
+
+        <p className="text-sm text-white/50 leading-relaxed mb-5">
+          Tell your agent where and when. It finds a fare, pays with a single-use virtual
+          card capped at the ticket price, and the card self-destructs after booking.
+        </p>
+
+        <div className="flex flex-wrap gap-2 mb-5">
+          {["Flights", "Single-use card", "EUR"].map((tag) => (
+            <span
+              key={tag}
+              className="px-2.5 py-1 rounded-lg bg-white/[3%] ring-1 ring-white/[4%] text-[11px] text-white/40 font-medium"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+
+        <div className="flex items-center gap-2 text-xs text-white/30 group-hover:text-white/50 transition-colors">
+          See how it works
+          <ArrowRight className="size-3.5" />
+        </div>
+      </div>
+    </Link>
   );
 }
 
