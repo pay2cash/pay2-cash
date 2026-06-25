@@ -14,6 +14,40 @@ import {
 } from "lucide-react";
 import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
+import { AgentExamples, type AgentExample } from "@/components/agent-examples";
+
+const PERSONAL_EXAMPLES: AgentExample[] = [
+  {
+    tag: "Grocery · Kirana",
+    user: "Order 2kg atta, a dozen eggs and milk from a kirana near me",
+    agent: "Found a kirana 0.8km away on ONDC — ₹318 total. Pay by UPI?",
+  },
+  {
+    tag: "Flights",
+    user: "Book the cheapest flight Delhi → Goa this Friday",
+    agent: "IndiGo 6E-204, ₹4,210 incl. taxes. Approve to book?",
+  },
+  {
+    tag: "Food",
+    user: "Get me a masala dosa and a filter coffee from somewhere close",
+    agent: "Ordered from a place 1.2km away on ONDC — ₹190. Pay?",
+  },
+  {
+    tag: "Fashion",
+    user: "Find a cotton kurta under ₹1,500",
+    agent: "Spotted one from a local label on ONDC — ₹1,299. Want it?",
+  },
+  {
+    tag: "Pharmacy",
+    user: "Order paracetamol and a digital thermometer",
+    agent: "Both at a chemist nearby on ONDC — ₹245. Pay by UPI?",
+  },
+  {
+    tag: "Mobility",
+    user: "Book an auto to the railway station",
+    agent: "Auto booked via ONDC mobility — ₹85 fare. Confirm?",
+  },
+];
 
 export default function Page() {
   return (
@@ -163,49 +197,11 @@ function SeeItInAction() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 items-stretch">
-          <ChatCard />
+          <AgentExamples examples={PERSONAL_EXAMPLES} />
           <CheckoutPanel />
         </div>
       </div>
     </section>
-  );
-}
-
-function ChatCard() {
-  return (
-    <div className="rounded-2xl border border-white/[6%] bg-white/[2%] p-6 backdrop-blur-sm flex flex-col">
-      <div className="flex items-center justify-between mb-6">
-        <div className="flex items-center gap-3">
-          <div className="size-8 rounded-full bg-white/[4%] flex items-center justify-center ring-1 ring-white/[6%]">
-            <Smartphone className="size-4 text-white/60" />
-          </div>
-          <div>
-            <p className="text-xs text-white/50 font-medium">Assistant</p>
-            <p className="text-[10px] text-white/30 font-mono">online</p>
-          </div>
-        </div>
-        <div className="flex gap-1">
-          <div className="size-1.5 rounded-full bg-white/20" />
-          <div className="size-1.5 rounded-full bg-white/20" />
-          <div className="size-1.5 rounded-full bg-white/20" />
-        </div>
-      </div>
-
-      <div className="flex flex-col gap-4 flex-1 justify-end">
-        <div className="flex justify-end">
-          <div className="max-w-[85%] rounded-2xl rounded-br-md bg-white text-black px-4 py-2.5 text-sm leading-relaxed">
-            Order me some terry towels for our anniversary 🤍
-          </div>
-        </div>
-
-        <div className="flex justify-start">
-          <div className="max-w-[85%] rounded-2xl rounded-bl-md bg-white/[4%] ring-1 ring-white/[6%] text-white/80 px-4 py-2.5 text-sm leading-relaxed">
-            Found a soft cotton set on a partner store —{" "}
-            <span className="font-medium text-white">₹1,299</span>. Ready to pay?
-          </div>
-        </div>
-      </div>
-    </div>
   );
 }
 

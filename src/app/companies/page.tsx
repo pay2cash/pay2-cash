@@ -13,6 +13,35 @@ import {
   Check,
   ArrowRight,
 } from "lucide-react";
+import { AgentExamples, type AgentExample } from "@/components/agent-examples";
+
+const COMPANY_EXAMPLES: AgentExample[] = [
+  {
+    tag: "Bulk Retail",
+    user: "Order 50 terry towels for the office washrooms, keep it under ₹40,000",
+    agent: "Bulk supplier on ONDC — 50 × ₹620 = ₹31,000. Within budget. Pay now?",
+  },
+  {
+    tag: "Corporate Travel",
+    user: "Book 3 flights Bengaluru → Mumbai for the sales team next Tuesday",
+    agent: "3 × IndiGo, ₹14,730 total. Within travel policy. Approve?",
+  },
+  {
+    tag: "Office Supplies",
+    user: "Restock A4 paper and printer ink for the Pune office",
+    agent: "Found a stationer on ONDC — ₹6,480. Pay from company UPI?",
+  },
+  {
+    tag: "Catering",
+    user: "Order lunch for 20 from a restaurant near the office",
+    agent: "Nearby restaurant on ONDC — ₹4,200 for 20 thalis. Approve?",
+  },
+  {
+    tag: "Pantry",
+    user: "Restock the pantry — tea, coffee, biscuits and snacks",
+    agent: "Kirana on ONDC — ₹3,150. Pay from finance@company?",
+  },
+];
 
 const PAY_METHODS = [
   {
@@ -123,21 +152,8 @@ export default function Page() {
             </p>
 
             <div className="grid lg:grid-cols-2 gap-5 mt-12 items-start">
-              {/* Chat */}
-              <div className="rounded-2xl border border-white/[6%] bg-white/[2%] p-6 space-y-4">
-                <div className="flex justify-end">
-                  <div className="max-w-[85%] rounded-2xl rounded-br-md bg-white text-black px-4 py-3 text-sm leading-relaxed">
-                    Order 50 terry towels for the office washrooms, keep it under
-                    ₹40,000
-                  </div>
-                </div>
-                <div className="flex justify-start">
-                  <div className="max-w-[85%] rounded-2xl rounded-bl-md bg-white/[4%] ring-1 ring-white/[6%] text-white/80 px-4 py-3 text-sm leading-relaxed">
-                    Found a bulk supplier — 50 towels at ₹620 each = ₹31,000.
-                    Within budget. Pay now?
-                  </div>
-                </div>
-              </div>
+              {/* Rotating ONDC examples */}
+              <AgentExamples examples={COMPANY_EXAMPLES} />
 
               {/* Checkout */}
               <div className="rounded-2xl border border-white/[6%] bg-white/[2%] p-6">
