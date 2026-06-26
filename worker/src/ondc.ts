@@ -124,6 +124,7 @@ const CALLBACK_ACTIONS = new Set([
   "on_support",
   "on_issue",
   "on_issue_status",
+  "on_recon", // RSF 2.0 (Flow 10A): seller's reconciliation reply — capture + ACK
 ]);
 
 // Capture an on_* callback (persist for log assembly) and ACK. Path: /ondc/<action>

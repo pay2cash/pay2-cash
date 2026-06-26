@@ -1181,6 +1181,98 @@ async function trackRating(txn, orderId) {
   await leg("rating", { context: ctx("rating", txn, PRAMAAN_BPP), message: { order_id: orderId, ratings: [{ id: orderId, rating_category: "Order", value: "5" }] } }, txn);
 }
 
+// ─────────────────────────────────────────────────────────────────────────────
+// RSF 2.0 — Reconciliation & Settlement Framework (Flows 10A/10B)
+// Domain ONDC:NTS10, version 2.0.0. Flow 10A = Collector: the BAP SENDS `recon`
+// (reconciliation request) to the settlement counterparty (BPP) and expects
+// `on_recon`. The RSF context differs from the retail context: `version` (not
+// core_version) and a structured `location` object (not the std-code `city`).
+// ─────────────────────────────────────────────────────────────────────────────
+const NTS_DOMAIN = "ONDC:NTS10";
+const RSF_VERSION = "2.0.0";
+const RSF_SCENARIO = "flow_10A_rsf_recon";
+const inr = (value) => ({ currency: "INR", value });
+
+function rsfCtx(action, txn, bpp) {
+  return {
+    domain: NTS_DOMAIN,
+    location: { country: { code: "IND" }, city: { code: CITY } },
+    version: RSF_VERSION,
+    action,
+    bap_id: BAP_ID,
+    bap_uri: BAP_URI,
+    ...(bpp ? { bpp_id: bpp.bpp_id, bpp_uri: bpp.bpp_uri } : {}),
+    transaction_id: txn,
+    message_id: uuid(),
+    timestamp: now(),
+    ttl: "PT30S",
+  };
+}
+
+// Build a recon message. The LVU/Pramaan validator enforces:
+//   • order.amount.value === Σ settlements[].amount.value  (validateSettlementAmounts)
+//   • every settlement.updated_at ≤ context.timestamp
+// so we use a single settlement carrying the full order amount, stamped `t`
+// (captured before rsfCtx mints its own — later — context timestamp).
+function rsfReconBody(o, amountValue, t) {
+  return {
+    context: rsfCtx("recon", o.txn, o.bpp),
+    message: {
+      orders: [{
+        id: o.orderId,
+        amount: inr(amountValue),
+        settlements: [{
+          id: uuid(),
+          payment_id: o.orderId,
+          status: "PENDING",
+          amount: inr(amountValue),
+          commission: inr("0.00"),
+          withholding_amount: inr("0.00"),
+          tcs: inr("0.00"),
+          tds: inr("0.00"),
+          settlement_ref_no: `RSF-${o.orderId.slice(0, 8)}`,
+          updated_at: t,
+        }],
+      }],
+    },
+  };
+}
+
+// Read the placed order's total from a captured on_confirm.json (quote.price.value).
+function orderAmountFrom(scenario) {
+  try {
+    const oc = JSON.parse(readFileSync(new URL(`../ondc-logs/RET10/${scenario}/on_confirm.json`, import.meta.url), "utf8"));
+    return oc?.message?.order?.quote?.price?.value || null;
+  } catch { return null; }
+}
+
+// Flow 10A (Collector): SEND recon → expect on_recon. Reuse a placed order with
+//   node ondc-flow.mjs rsf-recon <scenario>   (e.g. flow_1A_prepaid),
+// or omit the arg to place a fresh prepaid order first.
+async function scenarioRsfRecon() {
+  console.log("=== RSF 2.0 (Flow 10A Collector): recon ===");
+  cleanScenario(RSF_SCENARIO);
+  const reuse = process.argv[3];
+  let o, amount;
+  if (reuse) {
+    const c = loadOrderCtx(reuse);
+    o = { txn: c.txn, orderId: c.orderId, bpp: c.bpp };
+    amount = orderAmountFrom(reuse) || "1000.00";
+    console.log(`  reusing order from ${reuse}: order=${o.orderId} amount=₹${amount}`);
+  } else {
+    const placed = await runOrder(uuid(), { prepaid: true });
+    if (!placed) return flush(RSF_SCENARIO);
+    o = { txn: placed.txn, orderId: placed.orderId, bpp: placed.bpp };
+    amount = legFiles["on_confirm.json"]?.message?.order?.quote?.price?.value || "1000.00";
+    saveOrderCtx(RSF_SCENARIO, placed);
+  }
+  const t = now();
+  await leg("recon", rsfReconBody(o, amount, t), o.txn, { tries: 12 });
+  flush(RSF_SCENARIO);
+  console.log(`\n  📊 RSF recon SENT  order=${o.orderId}  amount=₹${amount}  txn=${o.txn}`);
+  console.log("  → Expect the seller's on_recon (captured as on_recon.json). Step the 10A card on the console.");
+}
+
 const cmd = process.argv[2] || "flow1a";
 const scenarios = {
   flow1a: scenarioFlow1A,            // one-shot (mock only)
@@ -1220,6 +1312,7 @@ const scenarios = {
   "igm2-accept": scenarioIgm2Accept,   // IGM 2.0: RESOLUTION_ACCEPTED (after Send Resolution)
   "igm2-status": scenarioIgm2Status,   // IGM 2.0: issue_status (fills ring to 100%)
   "igm2-close": scenarioIgm2Close,     // IGM 2.0: CLOSED
+  "rsf-recon": scenarioRsfRecon,       // Flow 10A (RSF 2.0 Collector): send recon → on_recon
 };
 if (cmd === "track-rating") {
   await trackRating(process.argv[3], process.argv[4]);

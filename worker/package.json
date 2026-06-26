@@ -11,6 +11,7 @@
     "db:apply": "wrangler d1 migrations apply pay2cash --remote"
   },
   "dependencies": {
+    "blakejs": "^1.2.1",
     "drizzle-orm": "^0.36.4"
   },
   "devDependencies": {

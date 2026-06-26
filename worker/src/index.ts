@@ -8,6 +8,7 @@ import { CardIssuer } from "./cards";
 import { DuffelClient } from "./duffel";
 import { handleMcpRequest } from "./mcp";
 import { handleOndc, handleOndcCallback } from "./ondc";
+import { handleRsfRecon } from "./ondc-rsf";
 import { activateMandate } from "./service";
 
 export interface Env {
@@ -24,10 +25,12 @@ export interface Env {
   ONDC_ENC_PRIVATE_KEY: string; // secret: base64 PKCS8 X25519 private key
   ONDC_SIGNED_REQ_ID: string; // precomputed Ed25519 signature of request_id
   ONDC_ENV: string; // "preprod"
+  ONDC_UNIQUE_KEY_ID?: string; // unique_key_id registered at /subscribe (for RSF on_recon signing)
+  ONDC_SIGNING_PRIVATE_KEY?: string; // secret: base64 Ed25519 signing key (RSF on_recon)
 }
 
 export default {
-  async fetch(req: Request, env: Env): Promise<Response> {
+  async fetch(req: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     const url = new URL(req.url);
 
     if (url.pathname === "/") {
@@ -46,6 +49,14 @@ export default {
     }
 
     const db = getDb(env.DB);
+
+    // RSF 2.0 (Flow 10B): inbound recon → sync ACK + async signed on_recon.
+    const rsfRes = await handleRsfRecon(req, url, db, env.ONDC_SIGNING_PRIVATE_KEY && env.ONDC_UNIQUE_KEY_ID ? {
+      subscriberId: env.ONDC_SUBSCRIBER_ID,
+      uniqueKeyId: env.ONDC_UNIQUE_KEY_ID,
+      signingPrivateKeyB64: env.ONDC_SIGNING_PRIVATE_KEY,
+    } : null, ctx);
+    if (rsfRes) return rsfRes;
 
     // ONDC Beckn callbacks (on_search/on_select/.../on_status) → capture + ACK.
     const ondcCb = await handleOndcCallback(req, url, db);

@@ -27,5 +27,7 @@
   }
   // Secrets (not here): set with `npx wrangler secret put PAYU_MERCHANT_KEY` / `PAYU_SALT`
   //   / `STRIPE_SECRET_KEY` / `DUFFEL_API_KEY` / `ONDC_ENC_PRIVATE_KEY`.
+  // RSF 2.0 Flow 10B on_recon signing: `npx wrangler secret put ONDC_UNIQUE_KEY_ID`
+  //   and `npx wrangler secret put ONDC_SIGNING_PRIVATE_KEY`.
   // For local dev, put them in .dev.vars (see .dev.vars.example).
 }
