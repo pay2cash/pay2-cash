@@ -127,12 +127,21 @@ const CALLBACK_ACTIONS = new Set([
   "on_recon", // RSF 2.0 (Flow 10A): seller's reconciliation reply — capture + ACK
 ]);
 
-// Capture an on_* callback (persist for log assembly) and ACK. Path: /ondc/<action>
-// (also tolerates /<action>). Returns null if not a Beckn callback path.
+// Capture a Beckn callback (persist for log assembly) and ACK. Path: /ondc/<action>
+// (also tolerates root /<action> for the known set). Returns null only for non-ONDC
+// paths so /mcp, /payu/webhook, etc. are left untouched.
+//
+// We ACK *any* action posted under /ondc/ — even one we don't recognise — because a
+// Beckn subscriber must always reply with a sync ACK + context; a bare 404 "not found"
+// is unparseable to the counterparty and can wedge its UI on an "undefined" action.
+// Unrecognised actions are logged so we can see exactly what the network sends us.
 export async function handleOndcCallback(req: Request, url: URL, db: DB): Promise<Response | null> {
   if (req.method !== "POST") return null;
   const action = url.pathname.replace(/^\/ondc\//, "").replace(/^\//, "");
-  if (!CALLBACK_ACTIONS.has(action)) return null;
+  const isOndcPath = url.pathname.startsWith("/ondc/");
+  // Only catch ONDC subscriber paths (or a root-level known callback). Anything else
+  // (e.g. /mcp) returns null WITHOUT consuming the body, so its own handler can read it.
+  if (!isOndcPath && !CALLBACK_ACTIONS.has(action)) return null;
 
   let body: any;
   try {
@@ -141,10 +150,13 @@ export async function handleOndcCallback(req: Request, url: URL, db: DB): Promis
     return Response.json(nack("invalid json"), { status: 400 });
   }
 
+  const recognised = CALLBACK_ACTIONS.has(action);
+  console.log(`[ondc] callback action="${action}" ctx.action="${body?.context?.action ?? ""}" txn="${body?.context?.transaction_id ?? ""}" recognised=${recognised}`);
+
   try {
     await db.insert(ondcLogs).values({
       id: crypto.randomUUID(),
-      action,
+      action: action || body?.context?.action || "unknown",
       transactionId: body?.context?.transaction_id ?? null,
       messageId: body?.context?.message_id ?? null,
       bppId: body?.context?.bpp_id ?? null,
