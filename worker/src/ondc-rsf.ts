@@ -62,15 +62,23 @@ export function buildOnRecon(reconBody: any): any {
 const ACK = (context?: any) => Response.json(context ? { context, message: { ack: { status: "ACK" } } } : { message: { ack: { status: "ACK" } } });
 const nack = (msg: string) => Response.json({ message: { ack: { status: "NACK" } }, error: { type: "CORE-ERROR", message: msg } }, { status: 400 });
 
-// Sign + POST the on_recon callback to the collector's bap_uri.
+// Sign + POST the on_recon callback to whichever NP INITIATED the recon — the
+// counterparty, not ourselves. In Flow 10B Pramaan sends a recon where we are the
+// `bap` and Pramaan is the `bpp`, so the reply routes to bpp_uri. (Routing to
+// bap_uri — the usual Beckn on_<action> rule — would loop back to our own custom
+// domain → 522.) The context still echoes both URIs verbatim (compareContexts).
 async function sendOnRecon(onRecon: any, cfg: SigningConfig): Promise<void> {
-  const target = `${String(onRecon.context.bap_uri).replace(/\/$/, "")}/on_recon`;
+  const c = onRecon.context;
+  const counterparty = c.bap_id === cfg.subscriberId ? c.bpp_uri : c.bap_uri;
+  const target = `${String(counterparty).replace(/\/$/, "")}/on_recon`;
   const raw = JSON.stringify(onRecon);
   try {
     const header = await createAuthorizationHeader(raw, cfg);
-    await fetch(target, { method: "POST", headers: { "Content-Type": "application/json", Authorization: header }, body: raw });
-  } catch {
+    const res = await fetch(target, { method: "POST", headers: { "Content-Type": "application/json", Authorization: header }, body: raw });
+    console.log(`[rsf] on_recon → ${target} status=${res.status}`);
+  } catch (e: any) {
     // Best-effort: the sync ACK already succeeded; a failed callback is retried by the caller.
+    console.error(`[rsf] on_recon send failed: ${e?.stack || e?.message || e}`);
   }
 }
 
