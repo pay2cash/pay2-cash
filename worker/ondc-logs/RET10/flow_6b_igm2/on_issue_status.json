@@ -1,0 +1,214 @@
+{
+  "context": {
+    "domain": "ONDC:RET10",
+    "country": "IND",
+    "city": "std:0124",
+    "core_version": "1.2.5",
+    "action": "on_issue_status",
+    "transaction_id": "287e1538-2552-4e6e-bb89-7f661a5d671f",
+    "message_id": "4000dbc6-2d01-4061-9434-b7b665ea0c8b",
+    "timestamp": "2026-06-26T15:58:17.265Z",
+    "bap_id": "ondc.pay2.cash",
+    "bap_uri": "https://ondc.pay2.cash/ondc",
+    "bpp_id": "pramaan.ondc.org/beta/preprod/mock/seller",
+    "bpp_uri": "https://pramaan.ondc.org/beta/preprod/mock/seller",
+    "ttl": "PT30S"
+  },
+  "message": {
+    "issue": {
+      "id": "ed4ae1ad-09bd-470f-855b-c00183fe0a4f",
+      "status": "PROCESSING",
+      "level": "ISSUE",
+      "created_at": "2026-06-26T15:57:59.206Z",
+      "updated_at": "2026-06-26T15:58:04.987Z",
+      "expected_response_time": {
+        "duration": "PT2H"
+      },
+      "expected_resolution_time": {
+        "duration": "P1D"
+      },
+      "refs": [
+        {
+          "ref_id": "P2C1782488076190",
+          "ref_type": "ORDER"
+        },
+        {
+          "ref_id": "pramaan_provider_1",
+          "ref_type": "PROVIDER"
+        },
+        {
+          "ref_id": "ab771c1e-937c-4d78-89a2-00144c53f889",
+          "ref_type": "FULFILLMENT"
+        },
+        {
+          "ref_id": "id_13owvn_0_0",
+          "ref_type": "ITEM"
+        }
+      ],
+      "actors": [
+        {
+          "id": "consumer-1",
+          "type": "CONSUMER",
+          "info": {
+            "org": {
+              "name": "ondc.pay2.cash::ONDC:RET10"
+            },
+            "person": {
+              "name": "Nidhi Sharma"
+            },
+            "contact": {
+              "phone": "9876543210",
+              "email": "buyer@pay2.cash"
+            }
+          }
+        },
+        {
+          "id": "interfacing-np-1",
+          "type": "INTERFACING_NP",
+          "info": {
+            "org": {
+              "name": "ondc.pay2.cash::ONDC:RET10"
+            },
+            "person": {
+              "name": "pay2 Cash"
+            },
+            "contact": {
+              "phone": "9876543210",
+              "email": "buyer@pay2.cash"
+            }
+          }
+        },
+        {
+          "id": "counterparty-np-1",
+          "type": "COUNTERPARTY_NP",
+          "info": {
+            "org": {
+              "name": "pramaan.ondc.org/beta/preprod/mock/seller::ONDC:RET10"
+            },
+            "person": {
+              "name": "Seller"
+            },
+            "contact": {
+              "phone": "9350657100",
+              "email": "seller@pramaan.ondc.org"
+            }
+          }
+        },
+        {
+          "id": "id_80cq5_0",
+          "type": "COUNTERPARTY_NP",
+          "info": {
+            "org": {
+              "name": "pramaan.ondc.org/beta/preprod/mock/seller::ONDC:RET10"
+            },
+            "contact": {
+              "phone": "9350657100",
+              "email": "bigtuna@theoffice.com"
+            },
+            "person": {
+              "name": "Jim Halpert"
+            }
+          }
+        }
+      ],
+      "source_id": "consumer-1",
+      "complainant_id": "interfacing-np-1",
+      "respondent_ids": [
+        "id_80cq5_0"
+      ],
+      "descriptor": {
+        "code": "ITM02",
+        "short_desc": "Item quality issue",
+        "long_desc": "Item received not as described",
+        "additional_desc": {
+          "url": "https://ondc.pay2.cash/igm/ed4ae1ad-09bd-470f-855b-c00183fe0a4f.txt",
+          "content_type": "text/plain"
+        },
+        "images": [
+          {
+            "url": "https://ondc.pay2.cash/igm/ed4ae1ad-09bd-470f-855b-c00183fe0a4f.jpg",
+            "size_type": "sm"
+          }
+        ]
+      },
+      "last_action_id": "id_3nw62_2",
+      "actions": [
+        {
+          "id": "action-open-1",
+          "ref_id": "ed4ae1ad-09bd-470f-855b-c00183fe0a4f",
+          "descriptor": {
+            "code": "OPEN",
+            "short_desc": "Issue opened"
+          },
+          "updated_at": "2026-06-26T15:57:59.206Z",
+          "action_by": "interfacing-np-1",
+          "actor_details": {
+            "name": "pay2 Cash"
+          }
+        },
+        {
+          "id": "id_rqxk3_0",
+          "descriptor": {
+            "code": "PROCESSING",
+            "short_desc": "Complaint created"
+          },
+          "updated_at": "2026-06-26T15:57:59.904Z",
+          "action_by": "id_80cq5_0",
+          "actor_details": {
+            "name": "Jim Halpert"
+          }
+        },
+        {
+          "id": "id_3nw62_2",
+          "ref_id": "id_80fpc_0",
+          "ref_type": "RESOLUTIONS",
+          "descriptor": {
+            "code": "RESOLUTION_PROPOSED"
+          },
+          "updated_at": "2026-06-26T15:58:04.942Z",
+          "action_by": "counterparty-np-1",
+          "actor_details": {
+            "name": "Seller"
+          }
+        }
+      ],
+      "resolutions": [
+        {
+          "id": "id_80fpc_0",
+          "descriptor": {
+            "code": "PARENT",
+            "short_desc": "PROVIDING RESOLUTION OPTIONS. PLEASE SELECT ONE"
+          },
+          "updated_at": "2026-06-26T15:58:04.942Z",
+          "proposed_by": "counterparty-np-1"
+        },
+        {
+          "id": "id_t3ifo_1",
+          "ref_id": "id_80fpc_0",
+          "ref_type": "PARENT",
+          "descriptor": {
+            "code": "REPLACEMENT",
+            "short_desc": "HELLO"
+          },
+          "updated_at": "2026-06-26T15:58:04.942Z",
+          "proposed_by": "counterparty-np-1",
+          "tags": [
+            {
+              "descriptor": {
+                "code": "RESOLUTION_DETAILS"
+              },
+              "list": [
+                {
+                  "descriptor": {
+                    "code": "ITEM"
+                  },
+                  "value": "id_13owvn_0_0"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

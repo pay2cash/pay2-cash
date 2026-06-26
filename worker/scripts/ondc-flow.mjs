@@ -784,15 +784,34 @@ async function scenarioUpdate() {
   flush("update_refund");
 }
 
-// IGM is a separate domain (nic2004:60232) + version. on_issue/on_issue_status
-// return to our subscriber (handled). Mock may route IGM differently — flagged.
+// ============================================================================
+// IGM (Issue & Grievance Management) — Flows 6A–6F.
+// For RET10 v1.2.5, Pramaan validates IGM on the RETAIL context: domain ONDC:RET10,
+// core_version 1.2.5 (NOT the legacy IGM 1.0.0 domain nic2004:60232 — that fails
+// igmTest/context.js: "expected 'nic2004:60232' to equal 'ONDC:RET10'"). The issue
+// MESSAGE body is unchanged (vendored issue schema already lists ONDC:RET10 in its
+// domain enum). The buyer (BAP/INTERFACING-NP)
+// raises an `issue`; the seller (BPP) pushes `on_issue` with its resolution. Buyer can
+// poll `issue_status` (→ on_issue_status), ESCALATE (issue, GRIEVANCE), and CLOSE
+// (issue, status CLOSED, rating). on_issue/on_issue_status return to our subscriber and
+// are captured in D1 (CALLBACK_ACTIONS includes both). Like the order lifecycle, the
+// seller's resolution pushes are CONSOLE-DRIVEN, so IGM is phased: raise → status →
+// (escalate) → close, stepping the Pramaan console between phases.
+//
+//   6A  basic issue → seller resolves → buyer closes        : igm-start → igm-status → igm-close
+//   6B  issue → buyer escalates (GRIEVANCE) → resolve/close : igm-start → igm-status → igm-escalate → igm-close
+//   6C–6F  variants (category/sub_category, dispute, GRO) — same building blocks; set
+//          IGM_CATEGORY / IGM_SUBCAT env to match the card, then run the phases.
+// IGM references an order, so each run places a fresh prepaid order first (reaches
+// Accepted); pass an existing scenario name as argv[3] to reuse its placed order.
+const ORG_NAME = `${BAP_ID}::${DOMAIN}`; // org name format: <subscriber_id>::<domain>
 function igmCtx(action, txn, bpp) {
   return {
-    domain: "nic2004:60232",
+    domain: DOMAIN,            // ONDC:RET10 — Pramaan validates IGM on the retail context
     country: "IND",
     city: CITY,
     action,
-    core_version: "1.0.0",
+    core_version: CORE_VERSION, // 1.2.5
     bap_id: BAP_ID,
     bap_uri: BAP_URI,
     bpp_id: bpp.bpp_id,
@@ -803,45 +822,353 @@ function igmCtx(action, txn, bpp) {
     ttl: "PT30S",
   };
 }
-
-async function scenarioIGM() {
-  console.log("=== scenario: IGM (issue + issue_status) ===");
-  const o = await runOrder(uuid());
-  if (!o) return flush("igm");
-  const issueId = uuid();
-  const { ack: issueAck } = await leg("issue", {
+// A single complainant action entry (OPEN/ESCALATE/CLOSE) with the required updated_by org.
+function complainantAction(action, t, shortDesc) {
+  return {
+    complainant_action: action,
+    short_desc: shortDesc,
+    updated_at: t,
+    updated_by: {
+      org: { name: ORG_NAME },
+      contact: { phone: BUYER.phone, email: BUYER.email },
+      person: { name: BUYER.name },
+    },
+  };
+}
+// Build the full `issue` object (used for OPEN and ESCALATE — escalate just appends an
+// ESCALATE action and flips issue_type to GRIEVANCE). Schema: Igm/issue.mjs.
+function makeIssue(o, issueId, { escalate = false, createdAt } = {}) {
+  const t = now();
+  const category = process.env.IGM_CATEGORY || "ITEM";
+  const sub_category = process.env.IGM_SUBCAT || "ITM02";
+  // complainant_actions is a CUMULATIVE thread with cascaded_level tracking escalation
+  // depth: OPEN=1; an ESCALATE bumps to level 2 (grievance).
+  const open = complainantAction("OPEN", createdAt || t, "Complaint created");
+  open.cascaded_level = 1;
+  const actions = [open];
+  if (escalate) {
+    const esc = complainantAction("ESCALATE", t, "Unsatisfied with resolution — escalating");
+    esc.cascaded_level = 2;
+    actions.push(esc);
+  }
+  return {
     context: igmCtx("issue", o.txn, o.bpp),
     message: {
       issue: {
         id: issueId,
-        category: "ITEM",
-        sub_category: "ITM02",
+        category,
+        sub_category,
         complainant_info: { person: { name: BUYER.name }, contact: { phone: BUYER.phone, email: BUYER.email } },
         order_details: {
           id: o.orderId, state: "Accepted",
-          items: [{ id: o.item.id, quantity: 1 }],
+          items: [{ id: o.itemId || o.item?.id, quantity: 1 }],
           fulfillments: [{ id: o.fid, state: "Pending" }],
-          provider_id: o.prov.id,
+          provider_id: o.provId || o.prov?.id,
         },
-        description: { short_desc: "Item quality issue", long_desc: "Item received not as described" },
+        description: {
+          short_desc: "Item quality issue",
+          long_desc: "Item received not as described",
+          additional_desc: { url: "https://ondc.pay2.cash/igm/" + issueId + ".txt", content_type: "text/plain" },
+          images: ["https://ondc.pay2.cash/igm/" + issueId + ".jpg"],
+        },
         source: { network_participant_id: BAP_ID, type: "CONSUMER" },
         expected_response_time: { duration: "PT2H" },
         expected_resolution_time: { duration: "P1D" },
         status: "OPEN",
-        issue_type: "ISSUE",
-        issue_actions: {
-          complainant_actions: [{
-            complainant_action: "OPEN", short_desc: "Complaint created",
-            updated_at: now(), updated_by: { org: { name: `${BAP_ID}::ONDC:RET10` }, contact: { phone: BUYER.phone, email: BUYER.email }, person: { name: BUYER.name } },
-          }],
-        },
+        issue_type: escalate ? "GRIEVANCE" : "ISSUE",
+        issue_actions: { complainant_actions: actions },
+        created_at: createdAt || t,
+        updated_at: t,
       },
     },
-  }, o.txn);
-  if (issueAck) {
-    await leg("issue_status", { context: igmCtx("issue_status", o.txn, o.bpp), message: { issue_id: issueId } }, o.txn);
+  };
+}
+// Build the CLOSE `issue` (Igm/issueClose.mjs): status CLOSED, rating, CLOSE action.
+// complainant_actions must be the CUMULATIVE thread (OPEN → CLOSE) at the seller's
+// cascaded_level — Pramaan keeps "Waiting for issue_close" if the close drops the
+// original OPEN action or the cascaded_level doesn't line up with the resolution.
+function makeIssueClose(o, issueId, createdAt, { rating = "THUMBS-UP", escalated = false, escalatedAt } = {}) {
+  const t = now();
+  const level = escalated ? 2 : 1; // close at the seller's latest resolution level
+  const open = complainantAction("OPEN", createdAt || t, "Complaint created");
+  open.cascaded_level = 1;
+  const actions = [open];
+  if (escalated) {
+    const esc = complainantAction("ESCALATE", escalatedAt || t, "Unsatisfied with resolution — escalating");
+    esc.cascaded_level = 2;
+    actions.push(esc);
   }
-  flush("igm");
+  const close = complainantAction("CLOSE", t, "Issue resolved — closing");
+  close.cascaded_level = level;
+  actions.push(close);
+  return {
+    context: igmCtx("issue", o.txn, o.bpp),
+    message: {
+      issue: {
+        id: issueId,
+        status: "CLOSED",
+        rating,
+        issue_actions: { complainant_actions: actions },
+        created_at: createdAt || t,
+        updated_at: t,
+      },
+    },
+  };
+}
+// Persist the issue id + created_at so later phases (status/escalate/close) reuse them.
+function saveIgm(scenario, data) {
+  const dir = new URL(`../ondc-logs/RET10/${scenario}/`, import.meta.url);
+  mkdirSync(dir, { recursive: true });
+  writeFileSync(new URL("_igm.json", dir), JSON.stringify(data, null, 2));
+}
+function loadIgm(scenario) {
+  return JSON.parse(readFileSync(new URL(`../ondc-logs/RET10/${scenario}/_igm.json`, import.meta.url), "utf8"));
+}
+// Poll for seller IGM pushes (on_issue / on_issue_status) landing in D1 after a console step.
+async function captureIgm(action, txn, tries = 12) {
+  for (let i = 0; i < tries; i++) {
+    const rows = readAllCallbacks(action, txn);
+    if (rows.length) { const cb = rows[rows.length - 1]; record(`${action}.json`, cb); console.log(`  ✓ ${action} captured`); return cb; }
+    execSync("sleep 4");
+  }
+  console.log(`  · ${action} not captured yet (continuing)`);
+  return null;
+}
+
+const IGM_SCENARIO = "flow_6_igm";
+// PHASE 1: place order, raise the issue (OPEN), capture the seller's first on_issue.
+async function scenarioIgmStart() {
+  const reuse = process.argv[3];
+  console.log(`=== IGM START: place order + raise issue${reuse ? ` (reuse order from ${reuse})` : ""} ===`);
+  cleanScenario(IGM_SCENARIO);
+  let o;
+  if (reuse) {
+    o = loadOrderCtx(reuse);
+  } else {
+    o = await runOrder(uuid(), { prepaid: true });
+    if (!o) return flush(IGM_SCENARIO);
+  }
+  const issueId = uuid();
+  const createdAt = now();
+  saveOrderCtx(IGM_SCENARIO, reuse ? { ...o, prov: { id: o.provId }, item: { id: o.itemId } } : o);
+  saveIgm(IGM_SCENARIO, { issueId, createdAt, txn: o.txn });
+  const issue = makeIssue(o, issueId, { createdAt });
+  await leg("issue", issue, o.txn, { tries: 10 });
+  flush(IGM_SCENARIO);
+  console.log(`\n  🧾 ISSUE RAISED  issue_id=${issueId}  txn=${o.txn}`);
+  console.log("  → Step the Pramaan console to push the seller's resolution (on_issue), then run: node scripts/ondc-flow.mjs igm-status");
+}
+// PHASE 2: poll issue_status and capture on_issue + on_issue_status (seller resolution).
+async function scenarioIgmStatus() {
+  console.log("=== IGM STATUS: send issue_status + capture seller resolution ===");
+  const c = loadOrderCtx(IGM_SCENARIO);
+  const ig = loadIgm(IGM_SCENARIO);
+  const o = { ...c, bpp: c.bpp, prov: { id: c.provId }, item: { id: c.itemId } };
+  await captureIgm("on_issue", o.txn);
+  await leg("issue_status", { context: igmCtx("issue_status", o.txn, o.bpp), message: { issue_id: ig.issueId } }, o.txn, { tries: 10 });
+  await captureIgm("on_issue_status", o.txn);
+  flush(IGM_SCENARIO);
+  console.log("  → For 6B (escalation) run: igm-escalate.  Otherwise close: node scripts/ondc-flow.mjs igm-close");
+}
+// PHASE 2b (6B/grievance): escalate the issue (GRIEVANCE).
+async function scenarioIgmEscalate() {
+  console.log("=== IGM ESCALATE: raise grievance (ESCALATE) ===");
+  const c = loadOrderCtx(IGM_SCENARIO);
+  const ig = loadIgm(IGM_SCENARIO);
+  const o = { ...c, bpp: c.bpp, prov: { id: c.provId }, item: { id: c.itemId } };
+  const escalatedAt = now();
+  await leg("issue_escalate", makeIssue(o, ig.issueId, { escalate: true, createdAt: ig.createdAt }), o.txn, { sendAs: "issue", cbAs: "issue", cbFile: "on_issue_escalate", tries: 10 });
+  saveIgm(IGM_SCENARIO, { ...ig, escalated: true, escalatedAt }); // close must echo the ESCALATE in its thread
+  flush(IGM_SCENARIO);
+  console.log("  → Step the console to push the grievance resolution, then run: igm-status (or igm-close).");
+}
+// PHASE 3: close the issue (status CLOSED + rating), capture the seller's on_issue close ack.
+async function scenarioIgmClose() {
+  console.log("=== IGM CLOSE: close issue with rating ===");
+  const c = loadOrderCtx(IGM_SCENARIO);
+  const ig = loadIgm(IGM_SCENARIO);
+  const o = { ...c, bpp: c.bpp, prov: { id: c.provId }, item: { id: c.itemId } };
+  const closeBody = makeIssueClose(o, ig.issueId, ig.createdAt, { escalated: !!ig.escalated, escalatedAt: ig.escalatedAt });
+  await leg("issue_close", closeBody, o.txn, { sendAs: "issue", cbAs: "issue", cbFile: "on_issue_close", tries: 10 });
+  await captureIgm("on_issue", o.txn);
+  flush(IGM_SCENARIO);
+  console.log(`\n  ✅ IGM lifecycle complete for issue_id=${ig.issueId}`);
+}
+// Re-send the issue(open) on the EXISTING txn/issue_id (fresh message_id). IGM 2.0
+// (Flow 6b–6e) tracks issue_open only after the console Start is clicked, so the open
+// must be (re)sent AFTER start — unlike Flow 6 where igm-start's pre-sent issue sufficed.
+async function scenarioIgmReopen() {
+  console.log("=== IGM RE-OPEN: re-send issue(open) on existing txn (post-console-start) ===");
+  const c = loadOrderCtx(IGM_SCENARIO);
+  const ig = loadIgm(IGM_SCENARIO);
+  const o = { ...c, bpp: c.bpp, prov: { id: c.provId }, item: { id: c.itemId } };
+  console.log(`  txn=${o.txn} issue_id=${ig.issueId}`);
+  await leg("issue", makeIssue(o, ig.issueId, { createdAt: ig.createdAt }), o.txn, { tries: 10 });
+  flush(IGM_SCENARIO);
+  console.log("  → Console should now advance issue_open. Then click 'Request Info'.");
+}
+// One-shot (mock testing only): start → status, no console stepping (only first on_issue).
+async function scenarioIGM() {
+  await scenarioIgmStart();
+  await scenarioIgmStatus();
+}
+
+// ============================================================================
+// IGM 2.0 (Flow 6b–6e) — a DIFFERENT protocol from Flow 6 / IGM 1.0 above.
+// Schema + rules vendored from ONDC log-validation-utility (schema/Igm/2.0.0 +
+// utils/igm/igm2). Buyer action codes via descriptor.code: OPEN → INFO_PROVIDED →
+// RESOLUTION_ACCEPTED → CLOSED, each appended to issue.actions (update_target APPENDED).
+// Validator rules honoured: for OPEN updated_at===created_at & status OPEN; source_id ===
+// CONSUMER actor id; complainant_id === INTERFACING_NP actor id; last_action_id === last
+// action id; CONSUMER/INTERFACING_NP org.name = bap_id::domain, COUNTERPARTY = bpp_id::domain;
+// FLOW_1 mandatory refs ORDER/PROVIDER/FULFILLMENT/ITEM. The buyer's info/accept/close
+// ECHO the seller's latest on_issue (so resolutions[] carry through) then append our action.
+const IGM2_SCENARIO = "flow_6b_igm2";
+const IGM2_BAP_ORG = `${BAP_ID}::${DOMAIN}`;
+const A_CONSUMER = "consumer-1", A_INTERFACING = "interfacing-np-1", A_COUNTERPARTY = "counterparty-np-1";
+
+function igm2Actors(bpp) {
+  return [
+    { id: A_CONSUMER, type: "CONSUMER", info: { org: { name: IGM2_BAP_ORG }, person: { name: BUYER.name }, contact: { phone: BUYER.phone, email: BUYER.email } } },
+    { id: A_INTERFACING, type: "INTERFACING_NP", info: { org: { name: IGM2_BAP_ORG }, person: { name: "pay2 Cash" }, contact: { phone: BUYER.phone, email: BUYER.email } } },
+    { id: A_COUNTERPARTY, type: "COUNTERPARTY_NP", info: { org: { name: `${bpp.bpp_id}::${DOMAIN}` }, person: { name: "Seller" }, contact: { phone: "9350657100", email: "seller@pramaan.ondc.org" } } },
+  ];
+}
+function igm2Refs(o) {
+  return [
+    { ref_id: o.orderId, ref_type: "ORDER" },
+    { ref_id: o.provId || o.prov?.id, ref_type: "PROVIDER" },
+    { ref_id: o.fid, ref_type: "FULFILLMENT" },
+    { ref_id: o.itemId || o.item?.id, ref_type: "ITEM" },
+  ];
+}
+// Pramaan's igm2.0.0 validator requires ref_id (string) on EVERY action — ref the issue id.
+function igm2Action(id, code, shortDesc, t, refId) {
+  return { id, ref_id: refId, descriptor: { code, short_desc: shortDesc }, updated_at: t, action_by: A_INTERFACING, actor_details: { name: "pay2 Cash" } };
+}
+function igm2OpenBody(o, issueId, t) {
+  return {
+    context: ctx("issue", o.txn, o.bpp),
+    message: {
+      issue: {
+        id: issueId, status: "OPEN", level: "ISSUE",
+        created_at: t, updated_at: t, // OPEN: updated_at === created_at
+        expected_response_time: { duration: "PT2H" },
+        expected_resolution_time: { duration: "P1D" },
+        refs: igm2Refs(o),
+        actors: igm2Actors(o.bpp),
+        source_id: A_CONSUMER, complainant_id: A_INTERFACING, respondent_ids: [A_COUNTERPARTY],
+        descriptor: {
+          code: "ITM02", short_desc: "Item quality issue", long_desc: "Item received not as described",
+          additional_desc: { url: "https://ondc.pay2.cash/igm/" + issueId + ".txt", content_type: "text/plain" },
+          images: [{ url: "https://ondc.pay2.cash/igm/" + issueId + ".jpg", size_type: "sm" }],
+        },
+        last_action_id: "action-open-1",
+        actions: [igm2Action("action-open-1", "OPEN", "Issue opened", t, issueId)],
+      },
+      // Pramaan igm2.0.0 validator requires message.update_target (array) on every issue call.
+      update_target: [{ path: "issue.actions", action: "APPENDED" }],
+    },
+  };
+}
+// Latest seller on_issue's issue object (carries the full actions[] + any resolutions[]).
+function latestOnIssue2(txn) {
+  const rows = readAllCallbacks("on_issue", txn);
+  for (let i = rows.length - 1; i >= 0; i--) { const is = rows[i]?.message?.issue; if (is) return is; }
+  return null;
+}
+// Build a buyer response by ECHOING the seller's latest issue and APPENDING our action.
+function igm2RespondBody(o, base, { code, shortDesc, status }) {
+  const t = now();
+  const actId = `action-${code.toLowerCase().replace(/_/g, "-")}-${Date.now()}`;
+  // Sanitize the seller's echoed actions: the schema requires descriptor.short_desc on
+  // EVERY action, but the Pramaan mock omits it on some (e.g. RESOLUTION_PROPOSED) — backfill
+  // so our echoed payload stays schema-valid (the 6d failure: actions[5].short_desc missing).
+  const prior = (base.actions || []).map((a) => ({
+    ...a,
+    ref_id: a.ref_id || base.id, // validator requires ref_id on every action (seller omits it)
+    descriptor: { ...(a.descriptor || {}), code: a.descriptor?.code, short_desc: a.descriptor?.short_desc || a.descriptor?.code || "action" },
+    actor_details: a.actor_details || { name: "Seller" },
+  }));
+  const actions = [...prior, igm2Action(actId, code, shortDesc, t, base.id)];
+  const issue = { ...base, status: status || base.status, updated_at: t, last_action_id: actId, actions };
+  // Ensure our linkage/refs/actors survive even if the seller echoed differently.
+  issue.source_id = issue.source_id || A_CONSUMER;
+  issue.complainant_id = issue.complainant_id || A_INTERFACING;
+  if (!issue.actors) issue.actors = igm2Actors(o.bpp);
+  if (!issue.refs) issue.refs = igm2Refs(o);
+  return { context: ctx("issue", o.txn, o.bpp), message: { update_target: [{ path: "issue.actions", action: "APPENDED" }], issue } };
+}
+function loadIgm2() {
+  const c = loadOrderCtx(IGM2_SCENARIO);
+  const ig = JSON.parse(readFileSync(new URL(`../ondc-logs/RET10/${IGM2_SCENARIO}/_igm2.json`, import.meta.url), "utf8"));
+  return { o: { ...c, bpp: c.bpp, prov: { id: c.provId }, item: { id: c.itemId } }, ig };
+}
+
+// PHASE 1: place order, send issue(OPEN) in 2.0 form. Run AFTER clicking Start on the console.
+async function scenarioIgm2Open() {
+  console.log("=== IGM 2.0 OPEN: place order + issue(OPEN) ===");
+  cleanScenario(IGM2_SCENARIO);
+  const o = await runOrder(uuid(), { prepaid: true });
+  if (!o) return flush(IGM2_SCENARIO);
+  const issueId = uuid();
+  const createdAt = now();
+  saveOrderCtx(IGM2_SCENARIO, o);
+  writeFileSync(new URL(`../ondc-logs/RET10/${IGM2_SCENARIO}/_igm2.json`, import.meta.url), JSON.stringify({ issueId, createdAt, txn: o.txn }, null, 2));
+  await leg("issue", igm2OpenBody(o, issueId, createdAt), o.txn, { tries: 10 });
+  flush(IGM2_SCENARIO);
+  console.log(`\n  🧾 IGM2 ISSUE OPENED  issue_id=${issueId}  txn=${o.txn}`);
+  console.log("  → On the console, click 'Request Info'. Then run: node scripts/ondc-flow.mjs igm2-info");
+}
+// Re-send issue(OPEN) on the SAME txn/issue_id after the console Start (console tracks
+// issue_open only post-Start). Fresh timestamps keep updated_at===created_at<=context.ts.
+async function scenarioIgm2Reopen() {
+  console.log("=== IGM 2.0 RE-OPEN: re-send issue(OPEN) post-console-start ===");
+  const { o, ig } = loadIgm2();
+  const t = now();
+  console.log(`  txn=${o.txn} issue_id=${ig.issueId}`);
+  await leg("issue", igm2OpenBody(o, ig.issueId, t), o.txn, { tries: 10 });
+  flush(IGM2_SCENARIO);
+  console.log("  → Console should advance issue_open (~33%). Then click 'Request Info' and run: igm2-info");
+}
+// PHASE 2: respond to the seller's Request Info with INFO_PROVIDED (echo+append).
+async function scenarioIgm2Info() {
+  console.log("=== IGM 2.0 INFO_PROVIDED ===");
+  const { o } = loadIgm2();
+  const base = latestOnIssue2(o.txn);
+  if (!base) { console.log("  ✗ no seller on_issue captured yet — click 'Request Info' first"); return; }
+  await leg("issue_info_provided", igm2RespondBody(o, base, { code: "INFO_PROVIDED", shortDesc: "Requested information provided", status: "PROCESSING" }), o.txn, { sendAs: "issue", cbAs: "issue", cbFile: "on_issue_info", tries: 10 });
+  flush(IGM2_SCENARIO);
+  console.log("  → On the console, click 'Send Resolution'. Then run: node scripts/ondc-flow.mjs igm2-accept");
+}
+// PHASE 3: accept the seller's proposed resolution (echo carries resolutions[]).
+async function scenarioIgm2Accept() {
+  console.log("=== IGM 2.0 RESOLUTION_ACCEPTED ===");
+  const { o } = loadIgm2();
+  const base = latestOnIssue2(o.txn);
+  if (!base) { console.log("  ✗ no seller on_issue captured"); return; }
+  if (!base.resolutions?.length) console.log("  ⚠ seller on_issue has no resolutions[] yet — click 'Send Resolution' first");
+  await leg("issue_resolution_accepted", igm2RespondBody(o, base, { code: "RESOLUTION_ACCEPTED", shortDesc: "Resolution accepted", status: "RESOLVED" }), o.txn, { sendAs: "issue", cbAs: "issue", cbFile: "on_issue_accept", tries: 10 });
+  flush(IGM2_SCENARIO);
+  console.log("  → Then close: node scripts/ondc-flow.mjs igm2-close");
+}
+// PHASE 3.5: issue_status — buyer pulls status (fills the console ring to 100%) before close.
+async function scenarioIgm2Status() {
+  console.log("=== IGM 2.0 issue_status ===");
+  const { o, ig } = loadIgm2();
+  await leg("issue_status", { context: ctx("issue_status", o.txn, o.bpp), message: { issue_id: ig.issueId } }, o.txn, { sendAs: "issue_status", cbAs: "issue_status", cbFile: "on_issue_status", tries: 10 });
+  flush(IGM2_SCENARIO);
+  console.log("  → Then close: node scripts/ondc-flow.mjs igm2-close");
+}
+// PHASE 4: close the issue (CLOSED).
+async function scenarioIgm2Close() {
+  console.log("=== IGM 2.0 CLOSED ===");
+  const { o } = loadIgm2();
+  const base = latestOnIssue2(o.txn);
+  if (!base) { console.log("  ✗ no seller on_issue captured"); return; }
+  await leg("issue_closed", igm2RespondBody(o, base, { code: "CLOSED", shortDesc: "Issue closed", status: "CLOSED" }), o.txn, { sendAs: "issue", cbAs: "issue", cbFile: "on_issue_closed", tries: 10 });
+  flush(IGM2_SCENARIO);
+  console.log(`\n  ✅ IGM 2.0 lifecycle complete`);
 }
 
 const PRAMAAN_BPP = { bpp_id: "pramaan.ondc.org/beta/preprod/mock/seller", bpp_uri: "https://pramaan.ondc.org/beta/preprod/mock/seller" };
@@ -881,7 +1208,18 @@ const scenarios = {
   flow8c: scenarioFlow8C,   // Flow 8C: Incremental catalog PUSH
   flow9: scenarioFlow9,     // Flow 9: Catalog Rejection
   update: scenarioUpdate,
-  igm: scenarioIGM,
+  igm: scenarioIGM,                    // IGM one-shot (mock only): start + status
+  "igm-start": scenarioIgmStart,       // IGM 6A/6B phase 1: place order + raise issue
+  "igm-reopen": scenarioIgmReopen,     // IGM 2.0: re-send issue(open) after console Start
+  "igm-status": scenarioIgmStatus,     // IGM phase 2: issue_status + capture resolution
+  "igm-escalate": scenarioIgmEscalate, // IGM 6B: escalate to grievance
+  "igm-close": scenarioIgmClose,       // IGM phase 3: close issue + rating
+  "igm2-open": scenarioIgm2Open,       // IGM 2.0 (6b–6e): place order + issue(OPEN)
+  "igm2-reopen": scenarioIgm2Reopen,   // IGM 2.0: re-send issue(OPEN) after console Start
+  "igm2-info": scenarioIgm2Info,       // IGM 2.0: INFO_PROVIDED (after Request Info)
+  "igm2-accept": scenarioIgm2Accept,   // IGM 2.0: RESOLUTION_ACCEPTED (after Send Resolution)
+  "igm2-status": scenarioIgm2Status,   // IGM 2.0: issue_status (fills ring to 100%)
+  "igm2-close": scenarioIgm2Close,     // IGM 2.0: CLOSED
 };
 if (cmd === "track-rating") {
   await trackRating(process.argv[3], process.argv[4]);
@@ -890,5 +1228,5 @@ if (cmd === "track-rating") {
 } else if (scenarios[cmd]) {
   await scenarios[cmd]();
 } else {
-  console.log("usage: node ondc-flow.mjs [flow1a|flow1a-start|flow1a-finish|flow2|flow9|update|igm|all]");
+  console.log("usage: node ondc-flow.mjs [flow1a|flow1a-start|flow1a-finish|flow2|flow9|update|igm|igm-start|igm-status|igm-escalate|igm-close|all]");
 }

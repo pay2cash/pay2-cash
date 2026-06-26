@@ -4,20 +4,19 @@
     "country": "IND",
     "city": "std:0124",
     "core_version": "1.2.5",
-    "action": "confirm",
-    "transaction_id": "3529b2ed-6185-4412-ad84-46a619e363a4",
-    "message_id": "224ad8fd-a384-4449-9ac4-d75ea702bff2",
-    "timestamp": "2026-06-25T21:41:55.353Z",
+    "action": "on_confirm",
+    "transaction_id": "397b2d4f-d9b9-42cd-adec-1293dbbeddf7",
+    "message_id": "5a5436d4-af12-4944-9d04-eb34eec58280",
+    "timestamp": "2026-06-25T21:56:35.593Z",
     "bap_id": "ondc.pay2.cash",
     "bap_uri": "https://ondc.pay2.cash/ondc",
     "bpp_id": "pramaan.ondc.org/beta/preprod/mock/seller",
-    "bpp_uri": "https://pramaan.ondc.org/beta/preprod/mock/seller",
-    "ttl": "PT30S"
+    "bpp_uri": "https://pramaan.ondc.org/beta/preprod/mock/seller"
   },
   "message": {
     "order": {
-      "id": "P2C1782423715353",
-      "state": "Created",
+      "id": "P2C1782424595074",
+      "state": "Accepted",
       "provider": {
         "id": "pramaan_provider_1",
         "locations": [
@@ -29,10 +28,10 @@
       "items": [
         {
           "id": "id_13owvn_0_0",
-          "fulfillment_id": "8a7dbfad-4f65-4ab6-95dc-a0e3e6598cbf",
           "quantity": {
             "count": 1
-          }
+          },
+          "fulfillment_id": "a6bbcdaa-1f0c-4968-8f53-66c6fbf933bf"
         }
       ],
       "billing": {
@@ -49,20 +48,48 @@
         "tax_number": "29ABCDE1234F1Z5",
         "email": "buyer@pay2.cash",
         "phone": "9876543210",
-        "created_at": "2026-06-25T21:41:53.056Z",
-        "updated_at": "2026-06-25T21:41:53.056Z"
+        "created_at": "2026-06-25T21:56:33.095Z",
+        "updated_at": "2026-06-25T21:56:33.095Z"
       },
       "fulfillments": [
         {
-          "id": "8a7dbfad-4f65-4ab6-95dc-a0e3e6598cbf",
-          "type": "Delivery",
+          "id": "a6bbcdaa-1f0c-4968-8f53-66c6fbf933bf",
           "@ondc/org/provider_name": "Pramaan Store 1",
-          "tracking": true,
           "@ondc/org/category": "Standard Delivery",
           "@ondc/org/TAT": "PT10M",
           "state": {
             "descriptor": {
-              "code": "Serviceable"
+              "code": "Pending"
+            }
+          },
+          "type": "Delivery",
+          "tracking": true,
+          "start": {
+            "location": {
+              "id": "SSL1",
+              "gps": "28.527300,77.182100",
+              "descriptor": {
+                "name": "Pramaan Store 1",
+                "images": [
+                  "https://ondc.org/assets/theme/images/ondc_registered_logo.svg?v=399788fda7"
+                ]
+              },
+              "address": {
+                "locality": "N. Caldwell",
+                "city": "New Delhi",
+                "area_code": "110030",
+                "state": "New Delhi"
+              }
+            },
+            "time": {
+              "range": {
+                "start": "2026-06-25T21:56:35.592Z",
+                "end": "2026-06-25T23:00:00.000Z"
+              }
+            },
+            "contact": {
+              "phone": "9876543210",
+              "email": "ss_seller_1@ss.com"
             }
           },
           "end": {
@@ -84,6 +111,89 @@
             },
             "person": {
               "name": "Nidhi Sharma"
+            },
+            "time": {
+              "range": {
+                "start": "2026-06-26T09:30:00.000Z",
+                "end": "2026-06-26T19:00:00.000Z"
+              }
+            }
+          }
+        }
+      ],
+      "cancellation_terms": [
+        {
+          "fulfillment_state": {
+            "descriptor": {
+              "code": "Pending",
+              "short_desc": "002"
+            }
+          },
+          "cancellation_fee": {
+            "percentage": "0.00",
+            "amount": {
+              "currency": "INR",
+              "value": "0.00"
+            }
+          }
+        },
+        {
+          "fulfillment_state": {
+            "descriptor": {
+              "code": "Packed",
+              "short_desc": "001,003"
+            }
+          },
+          "cancellation_fee": {
+            "percentage": "0.00",
+            "amount": {
+              "currency": "INR",
+              "value": "0.00"
+            }
+          }
+        },
+        {
+          "fulfillment_state": {
+            "descriptor": {
+              "code": "Order-picked-up",
+              "short_desc": "001,003"
+            }
+          },
+          "cancellation_fee": {
+            "percentage": "10.00",
+            "amount": {
+              "currency": "INR",
+              "value": "16.20"
+            }
+          }
+        },
+        {
+          "fulfillment_state": {
+            "descriptor": {
+              "code": "Out-for-delivery",
+              "short_desc": "009"
+            }
+          },
+          "cancellation_fee": {
+            "percentage": "30.00",
+            "amount": {
+              "currency": "INR",
+              "value": "48.60"
+            }
+          }
+        },
+        {
+          "fulfillment_state": {
+            "descriptor": {
+              "code": "Out-for-delivery",
+              "short_desc": "010,011,012,013,014,015"
+            }
+          },
+          "cancellation_fee": {
+            "percentage": "35.00",
+            "amount": {
+              "currency": "INR",
+              "value": "56.70"
             }
           }
         }
@@ -113,7 +223,7 @@
             }
           },
           {
-            "@ondc/org/item_id": "8a7dbfad-4f65-4ab6-95dc-a0e3e6598cbf",
+            "@ondc/org/item_id": "a6bbcdaa-1f0c-4968-8f53-66c6fbf933bf",
             "title": "Delivery charges",
             "@ondc/org/title_type": "delivery",
             "price": {
@@ -122,7 +232,7 @@
             }
           },
           {
-            "@ondc/org/item_id": "8a7dbfad-4f65-4ab6-95dc-a0e3e6598cbf",
+            "@ondc/org/item_id": "a6bbcdaa-1f0c-4968-8f53-66c6fbf933bf",
             "title": "Tax",
             "@ondc/org/title_type": "tax",
             "price": {
@@ -169,7 +279,7 @@
         "params": {
           "amount": "110.00",
           "currency": "INR",
-          "transaction_id": "p2cpay_1782423715353"
+          "transaction_id": "p2cpay_1782424595074"
         },
         "status": "PAID",
         "collected_by": "BAP",
@@ -216,8 +326,8 @@
           ]
         }
       ],
-      "created_at": "2026-06-25T21:41:55.353Z",
-      "updated_at": "2026-06-25T21:41:55.353Z"
+      "created_at": "2026-06-25T21:56:35.074Z",
+      "updated_at": "2026-06-25T21:56:35.593Z"
     }
   }
 }

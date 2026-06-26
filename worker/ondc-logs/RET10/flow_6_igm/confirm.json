@@ -5,9 +5,9 @@
     "city": "std:0124",
     "core_version": "1.2.5",
     "action": "confirm",
-    "transaction_id": "3529b2ed-6185-4412-ad84-46a619e363a4",
-    "message_id": "224ad8fd-a384-4449-9ac4-d75ea702bff2",
-    "timestamp": "2026-06-25T21:41:55.353Z",
+    "transaction_id": "f17bafde-e8e9-4ae8-8bed-b4df36c3ebc3",
+    "message_id": "02cd84ff-3b97-41b1-bf2e-dbe62d516409",
+    "timestamp": "2026-06-26T12:20:34.017Z",
     "bap_id": "ondc.pay2.cash",
     "bap_uri": "https://ondc.pay2.cash/ondc",
     "bpp_id": "pramaan.ondc.org/beta/preprod/mock/seller",
@@ -16,7 +16,7 @@
   },
   "message": {
     "order": {
-      "id": "P2C1782423715353",
+      "id": "P2C1782476434017",
       "state": "Created",
       "provider": {
         "id": "pramaan_provider_1",
@@ -29,7 +29,7 @@
       "items": [
         {
           "id": "id_13owvn_0_0",
-          "fulfillment_id": "8a7dbfad-4f65-4ab6-95dc-a0e3e6598cbf",
+          "fulfillment_id": "f3ec5631-d952-461c-a019-276bc651f25f",
           "quantity": {
             "count": 1
           }
@@ -49,12 +49,12 @@
         "tax_number": "29ABCDE1234F1Z5",
         "email": "buyer@pay2.cash",
         "phone": "9876543210",
-        "created_at": "2026-06-25T21:41:53.056Z",
-        "updated_at": "2026-06-25T21:41:53.056Z"
+        "created_at": "2026-06-26T12:20:31.632Z",
+        "updated_at": "2026-06-26T12:20:31.633Z"
       },
       "fulfillments": [
         {
-          "id": "8a7dbfad-4f65-4ab6-95dc-a0e3e6598cbf",
+          "id": "f3ec5631-d952-461c-a019-276bc651f25f",
           "type": "Delivery",
           "@ondc/org/provider_name": "Pramaan Store 1",
           "tracking": true,
@@ -113,7 +113,7 @@
             }
           },
           {
-            "@ondc/org/item_id": "8a7dbfad-4f65-4ab6-95dc-a0e3e6598cbf",
+            "@ondc/org/item_id": "f3ec5631-d952-461c-a019-276bc651f25f",
             "title": "Delivery charges",
             "@ondc/org/title_type": "delivery",
             "price": {
@@ -122,7 +122,7 @@
             }
           },
           {
-            "@ondc/org/item_id": "8a7dbfad-4f65-4ab6-95dc-a0e3e6598cbf",
+            "@ondc/org/item_id": "f3ec5631-d952-461c-a019-276bc651f25f",
             "title": "Tax",
             "@ondc/org/title_type": "tax",
             "price": {
@@ -169,7 +169,7 @@
         "params": {
           "amount": "110.00",
           "currency": "INR",
-          "transaction_id": "p2cpay_1782423715353"
+          "transaction_id": "p2cpay_1782476434017"
         },
         "status": "PAID",
         "collected_by": "BAP",
@@ -216,8 +216,8 @@
           ]
         }
       ],
-      "created_at": "2026-06-25T21:41:55.353Z",
-      "updated_at": "2026-06-25T21:41:55.353Z"
+      "created_at": "2026-06-26T12:20:34.017Z",
+      "updated_at": "2026-06-26T12:20:34.017Z"
     }
   }
 }

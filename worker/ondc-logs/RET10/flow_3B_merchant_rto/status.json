@@ -5,9 +5,9 @@
     "city": "std:0124",
     "core_version": "1.2.5",
     "action": "status",
-    "transaction_id": "3529b2ed-6185-4412-ad84-46a619e363a4",
-    "message_id": "3ec1aebe-5e9c-439c-85e8-c00349cc7d61",
-    "timestamp": "2026-06-25T21:41:57.506Z",
+    "transaction_id": "397b2d4f-d9b9-42cd-adec-1293dbbeddf7",
+    "message_id": "8dc51a59-1b91-45a3-8965-9810e602f470",
+    "timestamp": "2026-06-25T21:56:37.143Z",
     "bap_id": "ondc.pay2.cash",
     "bap_uri": "https://ondc.pay2.cash/ondc",
     "bpp_id": "pramaan.ondc.org/beta/preprod/mock/seller",
@@ -15,6 +15,6 @@
     "ttl": "PT30S"
   },
   "message": {
-    "order_id": "P2C1782423715353"
+    "order_id": "P2C1782424595074"
   }
 }

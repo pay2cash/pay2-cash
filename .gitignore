@@ -49,3 +49,7 @@ next-env.d.ts
 !.dev.vars.example
 
 !.env.example
+
+# Playwright Pramaan capture — session cookies & HAR, never commit
+worker/.pramaan-profile/
+worker/pramaan-capture/

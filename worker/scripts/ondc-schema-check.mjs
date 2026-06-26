@@ -33,6 +33,14 @@ const SCHEMA_MAP = {
   cancel: ["Cancel/cancel.mjs", "cancelSchema"],
   update: ["Update/update.mjs", "updateSchema"],
   catalog_rejection: ["CatalogRejection/catalogRejection.mjs", "catalogRejectionSchema"],
+  // IGM (domain nic2004:60232) — requests the buyer authors
+  issue: ["Igm/issue.mjs", "issueSchema"],
+  issue_escalate: ["Igm/issue.mjs", "issueSchema"], // ESCALATE reuses the full issue schema
+  issue_status: ["Igm/issueStatus.mjs", "issueStatusSchema"],
+  issue_close: ["Igm/issueClose.mjs", "issueCloseSchema"],
+  // RSF v2 (10A/10B) — settlement requests
+  settle: ["RSF/settle.mjs", "settleSchema"],
+  recon: ["RSF/recon.mjs", "reconSchema"],
 };
 
 async function loadSchema(action) {
