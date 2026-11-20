@@ -1,0 +1,35 @@
+{
+  "context": {
+    "domain": "ONDC:RET10",
+    "action": "on_search",
+    "timestamp": "2026-11-18T11:46:05.025Z",
+    "transaction_id": "b9a1ab6b-3f7d-496d-a8cb-2d15d1c3d0a2",
+    "message_id": "11b35e25-9583-4438-b0b5-e9214e717e35",
+    "bap_id": "ondc.pay2.cash",
+    "bap_uri": "https://ondc.pay2.cash/ondc",
+    "ttl": "PT30S",
+    "bpp_id": "workbench.ondc.tech",
+    "bpp_uri": "https://workbench.ondc.tech/api-service/ONDC:RET10/1.2.5/seller",
+    "country": "IND",
+    "city": "*",
+    "core_version": "1.2.5"
+  },
+  "message": {
+    "catalog": {
+      "bpp/providers": [
+        {
+          "id": "P1",
+          "locations": [
+            {
+              "id": "L1",
+              "time": {
+                "label": "open",
+                "timestamp": "2026-11-18T11:46:05.027Z"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

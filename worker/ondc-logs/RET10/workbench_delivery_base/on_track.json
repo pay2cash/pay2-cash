@@ -1,0 +1,24 @@
+{
+  "context": {
+    "domain": "ONDC:RET10",
+    "action": "on_track",
+    "timestamp": "2026-11-18T11:18:45.514Z",
+    "transaction_id": "dd54d003-a75b-41eb-b071-0d270085a773",
+    "message_id": "554ccd87-27bb-4e42-8edd-154360ca97a5",
+    "bap_id": "ondc.pay2.cash",
+    "bap_uri": "https://ondc.pay2.cash/ondc",
+    "ttl": "PT30S",
+    "bpp_id": "sample-bpp-id",
+    "bpp_uri": "https://bpp.example.com",
+    "country": "IND",
+    "city": "std:011",
+    "core_version": "1.2.5"
+  },
+  "message": {
+    "tracking": {
+      "id": "F1",
+      "url": "https://MockNP.com/ondc/tracking_url",
+      "status": "active"
+    }
+  }
+}

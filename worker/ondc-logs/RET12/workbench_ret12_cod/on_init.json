@@ -1,0 +1,166 @@
+{
+  "context": {
+    "domain": "ONDC:RET12",
+    "action": "on_init",
+    "timestamp": "2026-11-19T00:54:44.847Z",
+    "transaction_id": "df8bcde3-8af8-44be-a69d-9372573d5a05",
+    "message_id": "cbebdf76-a05b-47b6-96a6-1df4afac9a45",
+    "bap_id": "ondc.agentbuy.online",
+    "bap_uri": "https://ondc.agentbuy.online/ondc",
+    "ttl": "PT30S",
+    "bpp_id": "sample-bpp-id",
+    "bpp_uri": "https://bpp.example.com",
+    "country": "IND",
+    "city": "std:011",
+    "core_version": "1.2.5"
+  },
+  "message": {
+    "order": {
+      "provider": {
+        "id": "P1",
+        "locations": [
+          {
+            "id": "L1"
+          }
+        ]
+      },
+      "items": [
+        {
+          "id": "I1",
+          "fulfillment_id": "F1",
+          "quantity": {
+            "count": 1
+          }
+        }
+      ],
+      "billing": {
+        "name": "Nidhi Sharma",
+        "address": {
+          "name": "221 B Baker Street",
+          "building": "P2C Building",
+          "locality": "Baker Street",
+          "city": "Mumbai",
+          "state": "Maharashtra",
+          "country": "IND",
+          "area_code": "400053"
+        },
+        "phone": "9876543210",
+        "email": "buyer@agentbuy.online",
+        "created_at": "2026-11-19T00:54:42.689Z",
+        "updated_at": "2026-11-19T00:54:42.689Z"
+      },
+      "fulfillments": [
+        {
+          "id": "F1",
+          "type": "Delivery",
+          "end": {
+            "contact": {
+              "email": "nobody@nomail.com",
+              "phone": "9898989898"
+            },
+            "location": {
+              "gps": "12.966545,77.592074",
+              "address": {
+                "building": "my building name or house",
+                "city": "Bengaluru",
+                "state": "Karnataka",
+                "country": "IND",
+                "area_code": "560027",
+                "locality": "my street name",
+                "name": "my house or door or floor"
+              }
+            }
+          },
+          "tracking": true
+        }
+      ],
+      "quote": {
+        "breakup": [
+          {
+            "@ondc/org/item_id": "I1",
+            "@ondc/org/item_quantity": {
+              "count": 1
+            },
+            "title": "Plain Atta",
+            "@ondc/org/title_type": "item",
+            "price": {
+              "currency": "INR",
+              "value": "200.00"
+            },
+            "item": {
+              "price": {
+                "currency": "INR",
+                "value": "200.00"
+              }
+            }
+          },
+          {
+            "@ondc/org/item_id": "F1",
+            "title": "Delivery charges",
+            "@ondc/org/title_type": "delivery",
+            "price": {
+              "currency": "INR",
+              "value": "493.75"
+            }
+          },
+          {
+            "@ondc/org/item_id": "F1",
+            "title": "Convenience Fee",
+            "@ondc/org/title_type": "misc",
+            "price": {
+              "currency": "INR",
+              "value": "3.00"
+            }
+          }
+        ],
+        "price": {
+          "currency": "INR",
+          "value": "696.75"
+        },
+        "ttl": "P1D"
+      },
+      "payment": {
+        "type": "ON-FULFILLMENT",
+        "status": "NOT-PAID",
+        "collected_by": "BPP",
+        "@ondc/org/buyer_app_finder_fee_type": "percent",
+        "@ondc/org/buyer_app_finder_fee_amount": "3",
+        "@ondc/org/settlement_basis": "delivery",
+        "@ondc/org/settlement_window": "P1D",
+        "@ondc/org/withholding_amount": "10.00",
+        "@ondc/org/settlement_details": [
+          {
+            "settlement_counterparty": "seller-app",
+            "settlement_phase": "sale-amount",
+            "settlement_type": "upi",
+            "beneficiary_name": "Xyz",
+            "upi_address": "abc@upi",
+            "settlement_bank_account_no": "12345588548",
+            "settlement_ifsc_code": "sdsd0005685",
+            "bank_name": "ABC",
+            "branch_name": "XYZ"
+          }
+        ]
+      },
+      "tags": [
+        {
+          "code": "bpp_terms",
+          "list": [
+            {
+              "code": "np_type",
+              "value": "MSN"
+            },
+            {
+              "code": "tax_number",
+              "value": "37ABACA6712B1Z6"
+            },
+            {
+              "code": "provider_tax_number",
+              "value": "USYDS6482D"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

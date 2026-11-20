@@ -1,0 +1,136 @@
+{
+  "context": {
+    "domain": "ONDC:RET12",
+    "country": "IND",
+    "city": "std:011",
+    "core_version": "1.2.5",
+    "action": "issue",
+    "transaction_id": "4d5a19f0-4357-448b-a8b2-13658998b0c6",
+    "message_id": "62423438-714c-4920-a103-5c041b6e7826",
+    "timestamp": "2026-11-19T01:04:36.112Z",
+    "bap_id": "ondc.agentbuy.online",
+    "bap_uri": "https://ondc.agentbuy.online/ondc",
+    "bpp_id": "sample-bpp-id",
+    "bpp_uri": "https://bpp.example.com",
+    "ttl": "PT30S"
+  },
+  "message": {
+    "issue": {
+      "id": "3a244a25-08ed-4dda-83ea-c1608c970fdf",
+      "status": "OPEN",
+      "level": "ISSUE",
+      "created_at": "2026-11-19T01:04:36.112Z",
+      "updated_at": "2026-11-19T01:04:36.112Z",
+      "expected_response_time": {
+        "duration": "PT2H"
+      },
+      "expected_resolution_time": {
+        "duration": "P1D"
+      },
+      "refs": [
+        {
+          "ref_id": "P2CWB1795050233058",
+          "ref_type": "ORDER"
+        },
+        {
+          "ref_id": "P1",
+          "ref_type": "PROVIDER"
+        },
+        {
+          "ref_id": "F1",
+          "ref_type": "FULFILLMENT"
+        },
+        {
+          "ref_id": "I1",
+          "ref_type": "ITEM",
+          "tags": [
+            {
+              "descriptor": {
+                "code": "message.order.items"
+              },
+              "list": [
+                {
+                  "descriptor": {
+                    "code": "quantity.selected.count"
+                  },
+                  "value": "1"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "actors": [
+        {
+          "id": "CUST1",
+          "type": "CONSUMER",
+          "info": {
+            "org": {
+              "name": "ondc.agentbuy.online::ONDC:RET12"
+            },
+            "person": {
+              "name": "Nidhi Sharma"
+            },
+            "contact": {
+              "phone": "9876543210",
+              "email": "buyer@agentbuy.online"
+            }
+          }
+        },
+        {
+          "id": "NP1",
+          "type": "INTERFACING_NP",
+          "info": {
+            "org": {
+              "name": "ondc.agentbuy.online::ONDC:RET12"
+            },
+            "contact": {
+              "phone": "9876543210",
+              "email": "buyer@agentbuy.online"
+            },
+            "person": {
+              "name": "Nidhi Sharma"
+            }
+          }
+        }
+      ],
+      "source_id": "CUST1",
+      "complainant_id": "NP1",
+      "descriptor": {
+        "code": "FLM101",
+        "short_desc": "Generated ticket not working at the ticketing gate/validation error",
+        "long_desc": "Generated ticket not working at the ticketing gate/validation error",
+        "additional_desc": {
+          "url": "https://ondc.agentbuy.online/issue-details",
+          "content_type": "text/html"
+        },
+        "images": [
+          {
+            "url": "https://ondc.agentbuy.online/issue/img1.png",
+            "size_type": "xs"
+          }
+        ],
+        "media": [
+          {
+            "url": "https://ondc.agentbuy.online/issue/img1.png"
+          }
+        ]
+      },
+      "last_action_id": "41b00624-2e0f-4c0c-bc44-b6d500a917d5",
+      "actions": [
+        {
+          "id": "41b00624-2e0f-4c0c-bc44-b6d500a917d5",
+          "descriptor": {
+            "code": "OPEN",
+            "short_desc": "Complaint created"
+          },
+          "updated_at": "2026-11-19T01:04:36.112Z",
+          "action_by": "NP1",
+          "actor_details": {
+            "name": "mock-person"
+          }
+        }
+      ]
+    }
+  }
+}

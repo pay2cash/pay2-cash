@@ -1,0 +1,68 @@
+{
+  "context": {
+    "domain": "ONDC:RET12",
+    "action": "search",
+    "timestamp": "2026-11-19T01:39:01.059Z",
+    "transaction_id": "562f848a-4d95-418d-aef7-d1dd314ebf3d",
+    "message_id": "b897a279-f0db-45b9-b5d4-73124a12d2c4",
+    "bap_id": "ondc.agentbuy.online",
+    "bap_uri": "https://ondc.agentbuy.online/ondc",
+    "ttl": "PT30S",
+    "country": "IND",
+    "city": "std:080",
+    "core_version": "1.2.5"
+  },
+  "message": {
+    "intent": {
+      "payment": {
+        "@ondc/org/buyer_app_finder_fee_type": "percent",
+        "@ondc/org/buyer_app_finder_fee_amount": "3"
+      },
+      "tags": [
+        {
+          "code": "bap_terms",
+          "list": [
+            {
+              "code": "static_terms",
+              "value": "https://ondc.agentbuy.online/terms"
+            },
+            {
+              "code": "static_terms_new",
+              "value": "https://github.com/ONDC-Official/NP-Static-Terms/buyerNP_BNP/1.0/tc.pdf"
+            },
+            {
+              "code": "effective_date",
+              "value": "2026-11-19T01:39:01.059Z"
+            }
+          ]
+        },
+        {
+          "code": "bap_features",
+          "list": [
+            {
+              "code": "001",
+              "value": "yes"
+            },
+            {
+              "code": "001",
+              "value": "yes"
+            }
+          ]
+        },
+        {
+          "code": "catalog_inc",
+          "list": [
+            {
+              "code": "start_time",
+              "value": "2026-11-19T01:29:01.058Z"
+            },
+            {
+              "code": "end_time",
+              "value": "2026-11-19T01:39:01.059Z"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

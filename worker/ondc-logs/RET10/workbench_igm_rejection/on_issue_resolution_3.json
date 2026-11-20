@@ -1,0 +1,380 @@
+{
+  "context": {
+    "domain": "ONDC:RET10",
+    "action": "on_issue",
+    "timestamp": "2026-11-18T11:43:40.764Z",
+    "transaction_id": "d5a0d6ab-d8a3-4e17-b4d0-508634d1600f",
+    "message_id": "b5439092-b754-4bf6-8940-bd36163d6246",
+    "bap_id": "ondc.pay2.cash",
+    "bap_uri": "https://ondc.pay2.cash/ondc",
+    "ttl": "PT30S",
+    "bpp_id": "sample-bpp-id",
+    "bpp_uri": "https://bpp.example.com",
+    "country": "IND",
+    "city": "std:011",
+    "core_version": "1.2.5"
+  },
+  "message": {
+    "update_target": [
+      {
+        "path": "issue.actions",
+        "action": "APPENDED"
+      }
+    ],
+    "issue": {
+      "id": "b129a8a9-86c9-4d0a-8425-25d950355ac7",
+      "status": "PROCESSING",
+      "level": "ISSUE",
+      "created_at": "2026-11-18T11:43:32.798Z",
+      "updated_at": "2026-11-18T11:43:40.764Z",
+      "expected_response_time": {
+        "duration": "PT2H"
+      },
+      "expected_resolution_time": {
+        "duration": "P1D"
+      },
+      "refs": [
+        {
+          "ref_id": "P2CWB1795002187732",
+          "ref_type": "ORDER"
+        },
+        {
+          "ref_id": "P1",
+          "ref_type": "PROVIDER"
+        },
+        {
+          "ref_id": "F1",
+          "ref_type": "FULFILLMENT"
+        },
+        {
+          "ref_id": "I1",
+          "ref_type": "ITEM",
+          "tags": [
+            {
+              "descriptor": {
+                "code": "message.order.items"
+              },
+              "list": [
+                {
+                  "descriptor": {
+                    "code": "quantity.selected.count"
+                  },
+                  "value": "1"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "actors": [
+        {
+          "id": "CUST1",
+          "type": "CONSUMER",
+          "info": {
+            "org": {
+              "name": "ondc.pay2.cash::ONDC:RET10"
+            },
+            "person": {
+              "name": "Nidhi Sharma"
+            },
+            "contact": {
+              "phone": "9876543210",
+              "email": "buyer@pay2.cash"
+            }
+          }
+        },
+        {
+          "id": "NP1",
+          "type": "INTERFACING_NP",
+          "info": {
+            "org": {
+              "name": "ondc.pay2.cash::ONDC:RET10"
+            },
+            "contact": {
+              "phone": "9876543210",
+              "email": "buyer@pay2.cash"
+            },
+            "person": {
+              "name": "Nidhi Sharma"
+            }
+          }
+        },
+        {
+          "id": "NP2",
+          "type": "COUNTERPARTY_NP",
+          "info": {
+            "org": {
+              "name": "sample-bpp-id::ONDC:RET10"
+            },
+            "contact": {
+              "phone": "9999994039",
+              "email": "sellerapp@interface.com"
+            },
+            "person": {
+              "name": "mock-seller"
+            }
+          }
+        },
+        {
+          "id": "NP2-GRO",
+          "type": "COUNTERPARTY_NP_GRO",
+          "info": {
+            "org": {
+              "name": "sample-bpp-id::ONDC:RET10"
+            },
+            "contact": {
+              "phone": "8888884045",
+              "email": "gro@interface.com"
+            },
+            "person": {
+              "name": "Grievance Officer BNP"
+            }
+          }
+        }
+      ],
+      "source_id": "CUST1",
+      "complainant_id": "NP1",
+      "respondent_ids": [
+        "NP2"
+      ],
+      "resolver_ids": [
+        "NP2"
+      ],
+      "descriptor": {
+        "code": "ORD02",
+        "short_desc": "Item quantity mismatch in the delivered order",
+        "long_desc": "The delivered order has fewer items than ordered",
+        "additional_desc": {
+          "url": "https://example.com/issue-details",
+          "content_type": "text/html"
+        },
+        "images": [
+          {
+            "url": "https://ondc.pay2.cash/issue/img1.png",
+            "size_type": "xs"
+          }
+        ]
+      },
+      "last_action_id": "e3456f10-ac7b-4e57-89ae-cbee0030df28",
+      "actions": [
+        {
+          "id": "475847e2-19de-4274-8272-49fdcd7d373d",
+          "descriptor": {
+            "code": "OPEN",
+            "short_desc": "Complaint created"
+          },
+          "updated_at": "2026-11-18T11:43:32.798Z",
+          "action_by": "NP1",
+          "actor_details": {
+            "name": "ONDC buyer"
+          }
+        },
+        {
+          "id": "20ceca55-f322-43e1-a21b-bfe6ab797dd9",
+          "descriptor": {
+            "code": "PROCESSING",
+            "short_desc": "Complaint created"
+          },
+          "updated_at": "2026-11-18T11:43:33.400Z",
+          "action_by": "NP2",
+          "actor_details": {
+            "name": "mock-seller"
+          }
+        },
+        {
+          "id": "46380347-b8f0-4f0f-8a9a-864c4e56a766",
+          "ref_id": "R_PARENT",
+          "ref_type": "RESOLUTIONS",
+          "descriptor": {
+            "code": "RESOLUTION_PROPOSED",
+            "short_desc": "Resolution is proposed"
+          },
+          "updated_at": "2026-11-18T11:43:34.524Z",
+          "action_by": "NP2",
+          "actor_details": {
+            "name": "mock-seller"
+          }
+        },
+        {
+          "id": "fe10de61-58f1-4589-9bf7-27181d45557c",
+          "descriptor": {
+            "code": "RESOLUTION_REJECTED",
+            "short_desc": "Resolution is rejected"
+          },
+          "updated_at": "2026-11-18T11:43:35.397Z",
+          "action_by": "NP1",
+          "actor_details": {
+            "name": "ONDC buyer"
+          },
+          "ref_id": "RESOLUTION123",
+          "ref_type": "RESOLUTIONS"
+        },
+        {
+          "id": "d1e5e25b-7414-4ee1-a936-b5881577483e",
+          "descriptor": {
+            "code": "PROCESSING",
+            "short_desc": "Complaint created"
+          },
+          "updated_at": "2026-11-18T11:43:35.878Z",
+          "action_by": "NP2",
+          "actor_details": {
+            "name": "mock-seller"
+          }
+        },
+        {
+          "id": "978e3aed-b9ff-40d9-b572-4fff44593412",
+          "ref_id": "R_PARENT",
+          "ref_type": "RESOLUTIONS",
+          "descriptor": {
+            "code": "RESOLUTION_PROPOSED",
+            "short_desc": "Resolution is proposed"
+          },
+          "updated_at": "2026-11-18T11:43:37.521Z",
+          "action_by": "NP2",
+          "actor_details": {
+            "name": "mock-seller"
+          }
+        },
+        {
+          "id": "adadaff0-55e3-4f87-ab14-7bdf06c08aa3",
+          "descriptor": {
+            "code": "ESCALATED",
+            "short_desc": "Complaint Escalated"
+          },
+          "updated_at": "2026-11-18T11:43:38.009Z",
+          "action_by": "NP1",
+          "actor_details": {
+            "name": "ONDC buyer"
+          }
+        },
+        {
+          "id": "ad42a200-a535-4475-a1d0-323096b44b18",
+          "descriptor": {
+            "code": "PROCESSING",
+            "short_desc": "Complaint created"
+          },
+          "updated_at": "2026-11-18T11:43:38.562Z",
+          "action_by": "NP2",
+          "actor_details": {
+            "name": "mock-seller"
+          }
+        },
+        {
+          "id": "e3456f10-ac7b-4e57-89ae-cbee0030df28",
+          "ref_id": "R_PARENT",
+          "ref_type": "RESOLUTIONS",
+          "descriptor": {
+            "code": "RESOLUTION_PROPOSED",
+            "short_desc": "Resolution is proposed"
+          },
+          "updated_at": "2026-11-18T11:43:40.764Z",
+          "action_by": "NP2",
+          "actor_details": {
+            "name": "mock-seller"
+          }
+        }
+      ],
+      "resolutions": [
+        {
+          "id": "R_PARENT",
+          "descriptor": {
+            "code": "PARENT",
+            "short_desc": "PROVIDING RESOLUTION OPTIONS. PLEASE SELECT ONE"
+          },
+          "updated_at": "2026-11-18T11:43:34.524Z",
+          "proposed_by": "NP2"
+        },
+        {
+          "id": "R1",
+          "ref_id": "R_PARENT",
+          "ref_type": "PARENT",
+          "descriptor": {
+            "code": "REPLACEMENT",
+            "short_desc": "Providing replacement of the item"
+          },
+          "updated_at": "2026-11-18T11:43:34.524Z",
+          "proposed_by": "NP2",
+          "tags": [
+            {
+              "descriptor": {
+                "code": "RESOLUTION_DETAILS"
+              },
+              "list": [
+                {
+                  "descriptor": {
+                    "code": "ITEM"
+                  },
+                  "value": "I1"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R2",
+          "ref_id": "R_PARENT",
+          "ref_type": "PARENT",
+          "descriptor": {
+            "code": "REFUND",
+            "short_desc": "Providing refund of the item"
+          },
+          "updated_at": "2026-11-18T11:43:37.521Z",
+          "proposed_by": "NP2",
+          "tags": [
+            {
+              "descriptor": {
+                "code": "RESOLUTION_DETAILS"
+              },
+              "list": [
+                {
+                  "descriptor": {
+                    "code": "ITEM"
+                  },
+                  "value": "I1"
+                },
+                {
+                  "descriptor": {
+                    "code": "REFUND_AMOUNT"
+                  },
+                  "value": "180.00"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R3",
+          "ref_id": "R_PARENT",
+          "ref_type": "PARENT",
+          "descriptor": {
+            "code": "REFUND",
+            "short_desc": "Providing refund of the item"
+          },
+          "updated_at": "2026-11-18T11:43:40.764Z",
+          "proposed_by": "NP2",
+          "tags": [
+            {
+              "descriptor": {
+                "code": "RESOLUTION_DETAILS"
+              },
+              "list": [
+                {
+                  "descriptor": {
+                    "code": "ITEM"
+                  },
+                  "value": "I1"
+                },
+                {
+                  "descriptor": {
+                    "code": "REFUND_AMOUNT"
+                  },
+                  "value": "200.00"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

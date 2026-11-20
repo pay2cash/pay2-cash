@@ -1,0 +1,65 @@
+{
+  "context": {
+    "domain": "ONDC:NTS10",
+    "location": {
+      "country": {
+        "code": "IND"
+      },
+      "city": {
+        "code": "std:0124"
+      }
+    },
+    "version": "2.0.0",
+    "action": "on_recon",
+    "bap_id": "ondc.pay2.cash",
+    "bap_uri": "https://ondc.pay2.cash/ondc",
+    "bpp_id": "pramaan.ondc.org/beta/preprod/mock/seller",
+    "bpp_uri": "https://pramaan.ondc.org/beta/preprod/mock/seller",
+    "transaction_id": "882401af-cab2-426e-8f04-640f8e2f907a",
+    "message_id": "c7c1ac30-4423-45df-a819-4aebb8e7e8a4",
+    "timestamp": "2026-06-26T20:41:36.084Z",
+    "ttl": "PT30S"
+  },
+  "message": {
+    "orders": [
+      {
+        "id": "P2C1782506495027",
+        "amount": {
+          "currency": "INR",
+          "value": "110.00"
+        },
+        "settlements": [
+          {
+            "id": "d71c3ee4-ff02-4a60-8df0-0d5264c3e72d",
+            "payment_id": "P2C1782506495027",
+            "status": "PENDING",
+            "amount": {
+              "currency": "INR",
+              "value": "110.00"
+            },
+            "commission": {
+              "currency": "INR",
+              "value": "0.00"
+            },
+            "withholding_amount": {
+              "currency": "INR",
+              "value": "0.00"
+            },
+            "tcs": {
+              "currency": "INR",
+              "value": "0.00"
+            },
+            "tds": {
+              "currency": "INR",
+              "value": "0.00"
+            },
+            "settlement_ref_no": "RSF-P2C17825",
+            "updated_at": "2026-06-26T20:41:35.882Z",
+            "due_date": "2026-06-28"
+          }
+        ],
+        "recon_accord": true
+      }
+    ]
+  }
+}

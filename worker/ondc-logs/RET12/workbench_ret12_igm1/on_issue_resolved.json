@@ -1,0 +1,106 @@
+{
+  "context": {
+    "domain": "ONDC:RET12",
+    "action": "on_issue_status",
+    "timestamp": "2026-11-19T01:12:54.461Z",
+    "transaction_id": "1e812db7-bfc5-4324-b340-696b3def1598",
+    "message_id": "920c494c-f13b-454a-81ac-3c44a0b651d1",
+    "bap_id": "ondc.agentbuy.online",
+    "bap_uri": "https://ondc.agentbuy.online/ondc",
+    "ttl": "PT30S",
+    "bpp_id": "sample-bpp-id",
+    "bpp_uri": "https://bpp.example.com",
+    "country": "IND",
+    "city": "std:011",
+    "core_version": "1.2.5"
+  },
+  "message": {
+    "issue": {
+      "created_at": "2026-03-20T12:01:49.382Z",
+      "id": "ISSUE-1",
+      "issue_actions": {
+        "respondent_actions": [
+          {
+            "cascaded_level": 1,
+            "respondent_action": "PROCESSING",
+            "short_desc": "Complaint is being processed",
+            "updated_at": "2026-03-20T12:01:49.528Z",
+            "updated_by": {
+              "contact": {
+                "email": "respondentapp@respond.com",
+                "phone": "9450394140"
+              },
+              "org": {
+                "name": "dev-automation.ondc.org::ONDC:RET12"
+              },
+              "person": {
+                "name": "Jane Doe"
+              }
+            }
+          },
+          {
+            "cascaded_level": 1,
+            "respondent_action": "RESOLVED",
+            "short_desc": "Complaint resolved",
+            "updated_at": "2026-03-20T12:01:51.220Z",
+            "updated_by": {
+              "contact": {
+                "email": "respondentapp@respond.com",
+                "phone": "9450394140"
+              },
+              "org": {
+                "name": "dev-automation.ondc.org::ONDC:RET12"
+              },
+              "person": {
+                "name": "Jane Doe"
+              }
+            }
+          }
+        ]
+      },
+      "resolution": {
+        "action_triggered": "REFUND",
+        "long_desc": "For this complaint, refund is to be initiated",
+        "refund_amount": "100",
+        "short_desc": "Refund to be initiated"
+      },
+      "resolution_provider": {
+        "respondent_info": {
+          "organization": {
+            "contact": {
+              "email": "email@resolutionproviderorg.com",
+              "phone": "9059304940"
+            },
+            "org": {
+              "name": "dev-automation.ondc.org::ONDC:RET12"
+            },
+            "person": {
+              "name": "resolution provider org contact person name"
+            }
+          },
+          "resolution_support": {
+            "chat_link": "http://chat-link/respondent",
+            "contact": {
+              "email": "respondantemail@resolutionprovider.com",
+              "phone": "9949595059"
+            },
+            "gros": [
+              {
+                "contact": {
+                  "email": "email@gro.com",
+                  "phone": "9605960796"
+                },
+                "gro_type": "TRANSACTION-COUNTERPARTY-NP-GRO",
+                "person": {
+                  "name": "Sam D"
+                }
+              }
+            ]
+          },
+          "type": "TRANSACTION-COUNTERPARTY-NP"
+        }
+      },
+      "updated_at": "2026-03-20T12:01:51.220Z"
+    }
+  }
+}

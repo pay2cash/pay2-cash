@@ -5,9 +5,9 @@
     "city": "std:0124",
     "core_version": "1.2.5",
     "action": "on_init",
-    "transaction_id": "c9bdbea8-7a69-4d4d-b8bf-487f2b20ca6a",
-    "message_id": "a221a83a-3e00-491f-8818-ea56e761cbf6",
-    "timestamp": "2026-06-25T15:54:59.648Z",
+    "transaction_id": "f9ac53f1-87b5-4422-b75b-27a75c04fd93",
+    "message_id": "501d3dd7-65f4-4b48-9f8d-775e12780c78",
+    "timestamp": "2026-11-18T08:41:09.404Z",
     "bap_id": "ondc.pay2.cash",
     "bap_uri": "https://ondc.pay2.cash/ondc",
     "bpp_id": "pramaan.ondc.org/beta/preprod/mock/seller",
@@ -30,7 +30,7 @@
           "quantity": {
             "count": 1
           },
-          "fulfillment_id": "1f1d816c-979e-4525-856c-0d6eb4bee156"
+          "fulfillment_id": "29d9ca4b-15d8-4fc6-98b5-fe7065e53a4a"
         }
       ],
       "quote": {
@@ -58,7 +58,7 @@
             }
           },
           {
-            "@ondc/org/item_id": "1f1d816c-979e-4525-856c-0d6eb4bee156",
+            "@ondc/org/item_id": "29d9ca4b-15d8-4fc6-98b5-fe7065e53a4a",
             "title": "Delivery charges",
             "@ondc/org/title_type": "delivery",
             "price": {
@@ -67,7 +67,7 @@
             }
           },
           {
-            "@ondc/org/item_id": "1f1d816c-979e-4525-856c-0d6eb4bee156",
+            "@ondc/org/item_id": "29d9ca4b-15d8-4fc6-98b5-fe7065e53a4a",
             "title": "Tax",
             "@ondc/org/title_type": "tax",
             "price": {
@@ -182,12 +182,12 @@
         "tax_number": "29ABCDE1234F1Z5",
         "email": "buyer@pay2.cash",
         "phone": "9876543210",
-        "created_at": "2026-06-25T15:54:59.396Z",
-        "updated_at": "2026-06-25T15:54:59.396Z"
+        "created_at": "2026-11-18T08:41:09.017Z",
+        "updated_at": "2026-11-18T08:41:09.017Z"
       },
       "fulfillments": [
         {
-          "id": "1f1d816c-979e-4525-856c-0d6eb4bee156",
+          "id": "29d9ca4b-15d8-4fc6-98b5-fe7065e53a4a",
           "type": "Delivery",
           "@ondc/org/provider_name": "Pramaan Store 1",
           "tracking": true,

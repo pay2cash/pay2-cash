@@ -1,0 +1,96 @@
+{
+  "context": {
+    "domain": "ONDC:RET12",
+    "country": "IND",
+    "city": "std:011",
+    "core_version": "1.2.5",
+    "action": "issue",
+    "transaction_id": "1e812db7-bfc5-4324-b340-696b3def1598",
+    "message_id": "83e03bd7-5de1-4b68-a73d-9215c12097fd",
+    "timestamp": "2026-11-19T01:12:52.187Z",
+    "bap_id": "ondc.agentbuy.online",
+    "bap_uri": "https://ondc.agentbuy.online/ondc",
+    "bpp_id": "sample-bpp-id",
+    "bpp_uri": "https://bpp.example.com",
+    "ttl": "PT30S"
+  },
+  "message": {
+    "issue": {
+      "id": "3aed6fb4-0535-4d93-ab5b-639dcb6532d5",
+      "category": "ITEM",
+      "sub_category": "ITM04",
+      "complainant_info": {
+        "person": {
+          "name": "Nidhi Sharma"
+        },
+        "contact": {
+          "phone": "+91-9876543210",
+          "email": "buyer@agentbuy.online"
+        }
+      },
+      "order_details": {
+        "id": "P2CWB1795050669539",
+        "state": "COMPLETED",
+        "items": [
+          {
+            "id": "I1",
+            "quantity": 1
+          }
+        ],
+        "fulfillments": [
+          {
+            "id": "F1",
+            "state": "CLAIMED"
+          }
+        ],
+        "provider_id": "P1"
+      },
+      "description": {
+        "short_desc": "Item delivered in damaged condition",
+        "long_desc": "The delivered atta package was torn and the contents were spoiled",
+        "additional_desc": {
+          "url": "https://ondc.agentbuy.online/issue/desc.txt",
+          "content_type": "text/plain"
+        },
+        "images": [
+          "https://ondc.agentbuy.online/issue/img1.png"
+        ]
+      },
+      "source": {
+        "network_participant_id": "ondc.agentbuy.online",
+        "type": "CONSUMER"
+      },
+      "expected_response_time": {
+        "duration": "PT2H"
+      },
+      "expected_resolution_time": {
+        "duration": "P1D"
+      },
+      "status": "OPEN",
+      "issue_type": "ISSUE",
+      "issue_actions": {
+        "complainant_actions": [
+          {
+            "complainant_action": "OPEN",
+            "short_desc": "Complaint created",
+            "updated_at": "2026-11-19T01:12:52.187Z",
+            "updated_by": {
+              "org": {
+                "name": "ondc.agentbuy.online::ONDC:RET12"
+              },
+              "contact": {
+                "phone": "+91-9876543210",
+                "email": "buyer@agentbuy.online"
+              },
+              "person": {
+                "name": "Nidhi Sharma"
+              }
+            }
+          }
+        ]
+      },
+      "created_at": "2026-11-19T01:12:52.187Z",
+      "updated_at": "2026-11-19T01:12:52.187Z"
+    }
+  }
+}

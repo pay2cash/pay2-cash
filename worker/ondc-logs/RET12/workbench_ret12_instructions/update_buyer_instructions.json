@@ -1,0 +1,37 @@
+{
+  "context": {
+    "domain": "ONDC:RET12",
+    "country": "IND",
+    "city": "std:011",
+    "core_version": "1.2.5",
+    "action": "update",
+    "transaction_id": "19171f03-77a2-4a9e-a3be-139e0f9ba9ed",
+    "message_id": "5b32230e-206e-4210-bd6d-19923be036d0",
+    "timestamp": "2026-11-19T00:45:07.435Z",
+    "bap_id": "ondc.agentbuy.online",
+    "bap_uri": "https://ondc.agentbuy.online/ondc",
+    "bpp_id": "sample-bpp-id",
+    "bpp_uri": "https://bpp.example.com",
+    "ttl": "PT30S"
+  },
+  "message": {
+    "update_target": "fulfillment",
+    "order": {
+      "id": "P2CWB1795049106407",
+      "fulfillments": [
+        {
+          "id": "F1",
+          "end": {
+            "instructions": {
+              "long_desc": "Leave package outside the door and do not ring the bell.",
+              "additional_desc": {
+                "content_type": "text/html",
+                "url": "https://ondc.agentbuy.online/instructions"
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

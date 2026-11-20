@@ -5,9 +5,9 @@
     "city": "std:0124",
     "core_version": "1.2.5",
     "action": "on_select",
-    "transaction_id": "c9bdbea8-7a69-4d4d-b8bf-487f2b20ca6a",
-    "message_id": "6d7a91e8-dcee-49b1-a438-c7a6717b0ceb",
-    "timestamp": "2026-06-25T15:54:57.529Z",
+    "transaction_id": "f9ac53f1-87b5-4422-b75b-27a75c04fd93",
+    "message_id": "a633bf9b-5cb4-4eec-86c6-214c9acd7b9f",
+    "timestamp": "2026-11-18T08:41:08.140Z",
     "bap_id": "ondc.pay2.cash",
     "bap_uri": "https://ondc.pay2.cash/ondc",
     "bpp_id": "pramaan.ondc.org/beta/preprod/mock/seller",
@@ -17,7 +17,7 @@
     "order": {
       "fulfillments": [
         {
-          "id": "1f1d816c-979e-4525-856c-0d6eb4bee156",
+          "id": "29d9ca4b-15d8-4fc6-98b5-fe7065e53a4a",
           "type": "Delivery",
           "@ondc/org/provider_name": "Pramaan Store 1",
           "tracking": true,
@@ -31,14 +31,14 @@
           "end": {
             "time": {
               "range": {
-                "start": "2026-06-25T16:54:57.521Z",
-                "end": "2026-06-25T17:54:57.521Z"
+                "start": "2026-11-18T09:41:08.054Z",
+                "end": "2026-11-18T10:41:08.055Z"
               }
             }
           }
         },
         {
-          "id": "00783b49-0dcf-425a-b046-5a98bbe182df",
+          "id": "fc862986-7fe7-4c94-9475-b5a96d8ed3df",
           "type": "Delivery",
           "@ondc/org/provider_name": "Pramaan Store 1",
           "tracking": true,
@@ -52,14 +52,14 @@
           "end": {
             "time": {
               "range": {
-                "start": "2026-06-25T17:54:57.522Z",
-                "end": "2026-06-25T18:54:57.522Z"
+                "start": "2026-11-18T10:41:08.056Z",
+                "end": "2026-11-18T11:41:08.056Z"
               }
             }
           }
         },
         {
-          "id": "bca64b8e-6675-426f-b4fd-39139f2b6f50",
+          "id": "b9190ad9-66c6-4b66-948d-d65eaa8663ca",
           "type": "Self-Pickup",
           "@ondc/org/provider_name": "Pramaan Store 1",
           "tracking": false,
@@ -72,7 +72,7 @@
           }
         },
         {
-          "id": "80bf1fe7-f2d4-4c99-af76-7f192a1bc9da",
+          "id": "e70cac11-ac9d-4be9-835e-4513b70b1a0d",
           "type": "Buyer-Delivery",
           "@ondc/org/provider_name": "Pramaan Store 1",
           "tracking": false,
@@ -122,7 +122,7 @@
           "quantity": {
             "count": 1
           },
-          "fulfillment_id": "1f1d816c-979e-4525-856c-0d6eb4bee156"
+          "fulfillment_id": "29d9ca4b-15d8-4fc6-98b5-fe7065e53a4a"
         }
       ],
       "quote": {
@@ -158,7 +158,7 @@
             }
           },
           {
-            "@ondc/org/item_id": "1f1d816c-979e-4525-856c-0d6eb4bee156",
+            "@ondc/org/item_id": "29d9ca4b-15d8-4fc6-98b5-fe7065e53a4a",
             "title": "Delivery charges",
             "@ondc/org/title_type": "delivery",
             "price": {
@@ -167,7 +167,7 @@
             }
           },
           {
-            "@ondc/org/item_id": "1f1d816c-979e-4525-856c-0d6eb4bee156",
+            "@ondc/org/item_id": "29d9ca4b-15d8-4fc6-98b5-fe7065e53a4a",
             "title": "Tax",
             "@ondc/org/title_type": "tax",
             "price": {
@@ -189,7 +189,7 @@
             }
           },
           {
-            "@ondc/org/item_id": "bca64b8e-6675-426f-b4fd-39139f2b6f50",
+            "@ondc/org/item_id": "b9190ad9-66c6-4b66-948d-d65eaa8663ca",
             "title": "Delivery charges",
             "@ondc/org/title_type": "delivery",
             "price": {
@@ -198,7 +198,7 @@
             }
           },
           {
-            "@ondc/org/item_id": "bca64b8e-6675-426f-b4fd-39139f2b6f50",
+            "@ondc/org/item_id": "b9190ad9-66c6-4b66-948d-d65eaa8663ca",
             "title": "Packing charges",
             "@ondc/org/title_type": "packing",
             "price": {
@@ -207,7 +207,7 @@
             }
           },
           {
-            "@ondc/org/item_id": "bca64b8e-6675-426f-b4fd-39139f2b6f50",
+            "@ondc/org/item_id": "b9190ad9-66c6-4b66-948d-d65eaa8663ca",
             "title": "Tax",
             "@ondc/org/title_type": "tax",
             "price": {
@@ -229,7 +229,7 @@
             }
           },
           {
-            "@ondc/org/item_id": "80bf1fe7-f2d4-4c99-af76-7f192a1bc9da",
+            "@ondc/org/item_id": "e70cac11-ac9d-4be9-835e-4513b70b1a0d",
             "title": "Delivery charges",
             "@ondc/org/title_type": "delivery",
             "price": {
@@ -238,7 +238,7 @@
             }
           },
           {
-            "@ondc/org/item_id": "80bf1fe7-f2d4-4c99-af76-7f192a1bc9da",
+            "@ondc/org/item_id": "e70cac11-ac9d-4be9-835e-4513b70b1a0d",
             "title": "Packing charges",
             "@ondc/org/title_type": "packing",
             "price": {

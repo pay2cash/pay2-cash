@@ -1,0 +1,184 @@
+{
+  "context": {
+    "domain": "ONDC:RET12",
+    "action": "on_issue",
+    "timestamp": "2026-11-19T01:15:02.362Z",
+    "transaction_id": "a78cc286-57eb-47e4-aba1-e5056885db37",
+    "message_id": "c37be8d5-4156-43cd-9ed4-0efaf0045713",
+    "bap_id": "ondc.agentbuy.online",
+    "bap_uri": "https://ondc.agentbuy.online/ondc",
+    "ttl": "PT30S",
+    "bpp_id": "sample-bpp-id",
+    "bpp_uri": "https://bpp.example.com",
+    "country": "IND",
+    "city": "std:011",
+    "core_version": "1.2.5"
+  },
+  "message": {
+    "update_target": [
+      {
+        "path": "issue.actions",
+        "action": "APPENDED"
+      }
+    ],
+    "issue": {
+      "id": "de8782c0-f9c7-4451-b0e5-ada645b59ed5",
+      "status": "PROCESSING",
+      "level": "ISSUE",
+      "created_at": "2026-11-19T01:14:59.644Z",
+      "updated_at": "2026-11-19T01:15:02.362Z",
+      "expected_response_time": {
+        "duration": "PT2H"
+      },
+      "expected_resolution_time": {
+        "duration": "P1D"
+      },
+      "refs": [
+        {
+          "ref_id": "P2CWB1795050866141",
+          "ref_type": "ORDER"
+        },
+        {
+          "ref_id": "P1",
+          "ref_type": "PROVIDER"
+        },
+        {
+          "ref_id": "F1",
+          "ref_type": "FULFILLMENT"
+        },
+        {
+          "ref_id": "I1",
+          "ref_type": "ITEM",
+          "tags": [
+            {
+              "descriptor": {
+                "code": "message.order.items"
+              },
+              "list": [
+                {
+                  "descriptor": {
+                    "code": "quantity.selected.count"
+                  },
+                  "value": "1"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "actors": [
+        {
+          "id": "CUST1",
+          "type": "CONSUMER",
+          "info": {
+            "org": {
+              "name": "ondc.agentbuy.online::ONDC:RET12"
+            },
+            "person": {
+              "name": "Nidhi Sharma"
+            },
+            "contact": {
+              "phone": "9876543210",
+              "email": "buyer@agentbuy.online"
+            }
+          }
+        },
+        {
+          "id": "NP1",
+          "type": "INTERFACING_NP",
+          "info": {
+            "org": {
+              "name": "ondc.agentbuy.online::ONDC:RET12"
+            },
+            "contact": {
+              "phone": "9876543210",
+              "email": "buyer@agentbuy.online"
+            },
+            "person": {
+              "name": "Nidhi Sharma"
+            }
+          }
+        },
+        {
+          "id": "NP2",
+          "type": "COUNTERPARTY_NP",
+          "info": {
+            "org": {
+              "name": "sample-bpp-id::ONDC:RET12"
+            },
+            "contact": {
+              "phone": "9999994039",
+              "email": "sellerapp@interface.com"
+            },
+            "person": {
+              "name": "mock-seller"
+            }
+          }
+        }
+      ],
+      "source_id": "CUST1",
+      "complainant_id": "NP1",
+      "respondent_ids": [
+        "NP2"
+      ],
+      "descriptor": {
+        "code": "ITM004",
+        "short_desc": "Issue with product quality",
+        "long_desc": "Product quality is not correct. Facing issues while using the product",
+        "additional_desc": {
+          "url": "https://example.com/issue-details",
+          "content_type": "text/html"
+        },
+        "images": [
+          {
+            "url": "https://ondc.agentbuy.online/issue/img1.png",
+            "size_type": "xs"
+          }
+        ]
+      },
+      "last_action_id": "26b43dad-7e09-478b-9df2-f9afcccd0967",
+      "actions": [
+        {
+          "id": "05ab449d-500b-4c58-9cf6-2e7b0b740596",
+          "descriptor": {
+            "code": "OPEN",
+            "short_desc": "Complaint created"
+          },
+          "updated_at": "2026-11-19T01:14:59.644Z",
+          "action_by": "NP1",
+          "actor_details": {
+            "name": "mock-person"
+          }
+        },
+        {
+          "id": "f09726e5-f831-4e5e-9aa6-fa12472b2f0f",
+          "descriptor": {
+            "code": "PROCESSING",
+            "short_desc": "Complaint created"
+          },
+          "updated_at": "2026-11-19T01:15:00.440Z",
+          "action_by": "NP2",
+          "actor_details": {
+            "name": "mock-seller"
+          }
+        },
+        {
+          "id": "26b43dad-7e09-478b-9df2-f9afcccd0967",
+          "descriptor": {
+            "code": "INFO_REQUESTED",
+            "name": "INFO001",
+            "short_desc": "Please provide product image"
+          },
+          "updated_at": "2026-11-19T01:15:02.362Z",
+          "action_by": "NP2",
+          "actor_details": {
+            "name": "mock-seller"
+          }
+        }
+      ],
+      "resolver_ids": [
+        "NP2"
+      ]
+    }
+  }
+}

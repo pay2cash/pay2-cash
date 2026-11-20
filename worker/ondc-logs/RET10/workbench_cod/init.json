@@ -1,0 +1,81 @@
+{
+  "context": {
+    "domain": "ONDC:RET10",
+    "country": "IND",
+    "city": "std:011",
+    "core_version": "1.2.5",
+    "action": "init",
+    "transaction_id": "a04994b4-2c6b-4133-92bc-77ded8d29069",
+    "message_id": "3104d39d-4a41-4b62-abef-6ca4e7112059",
+    "timestamp": "2026-11-18T11:10:39.428Z",
+    "bap_id": "ondc.pay2.cash",
+    "bap_uri": "https://ondc.pay2.cash/ondc",
+    "bpp_id": "sample-bpp-id",
+    "bpp_uri": "https://bpp.example.com",
+    "ttl": "PT30S"
+  },
+  "message": {
+    "order": {
+      "provider": {
+        "id": "P1",
+        "locations": [
+          {
+            "id": "L1"
+          }
+        ]
+      },
+      "items": [
+        {
+          "id": "I1",
+          "fulfillment_id": "F1",
+          "quantity": {
+            "count": 1
+          }
+        }
+      ],
+      "billing": {
+        "name": "Nidhi Sharma",
+        "address": {
+          "name": "221 B Baker Street",
+          "building": "P2C Building",
+          "locality": "Baker Street",
+          "city": "Mumbai",
+          "state": "Maharashtra",
+          "country": "IND",
+          "area_code": "400053"
+        },
+        "phone": "9876543210",
+        "email": "buyer@pay2.cash",
+        "created_at": "2026-11-18T11:10:37.945Z",
+        "updated_at": "2026-11-18T11:10:37.946Z"
+      },
+      "fulfillments": [
+        {
+          "id": "F1",
+          "type": "Delivery",
+          "end": {
+            "contact": {
+              "email": "buyer@pay2.cash",
+              "phone": "9876543210"
+            },
+            "location": {
+              "gps": "19.129076,72.825803",
+              "address": {
+                "building": "P2C Building",
+                "city": "Mumbai",
+                "state": "Maharashtra",
+                "country": "IND",
+                "area_code": "400053",
+                "locality": "Baker Street",
+                "name": "221 B Baker Street"
+              }
+            }
+          }
+        }
+      ],
+      "payment": {
+        "type": "ON-FULFILLMENT"
+      }
+    }
+  }
+}

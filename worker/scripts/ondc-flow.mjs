@@ -13,7 +13,14 @@ import { writeFileSync, mkdirSync, readFileSync, rmSync } from "node:fs";
 import crypto from "node:crypto";
 import { createAuthorizationHeader } from "./ondc-sign.mjs";
 
-const MOCK = process.env.PRAMAAN_MOCK || "https://pramaan.ondc.org/beta/preprod/mock/seller";
+const MOCK =
+  process.env.PRAMAAN_MOCK ||
+  "https://workbench.ondc.tech/api-service/ONDC:RET10/1.2.5/seller";
+// ^ ONIX Workbench (the new testing platform). Expectation-based: a test session
+//   with a started flow must exist on workbench.ondc.tech for our subscriber URL
+//   (https://ondc.pay2.cash/ondc) or the receiver answers 412 NO_EXPECTATION.
+//   Legacy Pramaan mock (accepts any signed request): set
+//   PRAMAAN_MOCK=https://pramaan.ondc.org/beta/preprod/mock/seller
 const BAP_ID = "ondc.pay2.cash";
 const BAP_URI = "https://ondc.pay2.cash/ondc";
 const DOMAIN = "ONDC:RET10";

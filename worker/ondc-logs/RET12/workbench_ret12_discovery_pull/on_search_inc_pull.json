@@ -1,0 +1,242 @@
+{
+  "context": {
+    "domain": "ONDC:RET12",
+    "action": "on_search",
+    "timestamp": "2026-11-19T01:39:01.736Z",
+    "transaction_id": "562f848a-4d95-418d-aef7-d1dd314ebf3d",
+    "message_id": "b897a279-f0db-45b9-b5d4-73124a12d2c4",
+    "bap_id": "ondc.agentbuy.online",
+    "bap_uri": "https://ondc.agentbuy.online/ondc",
+    "ttl": "PT30S",
+    "bpp_id": "workbench.ondc.tech",
+    "bpp_uri": "https://workbench.ondc.tech/api-service/ONDC:RET12/1.2.5/seller",
+    "country": "IND",
+    "city": "*",
+    "core_version": "1.2.5"
+  },
+  "message": {
+    "catalog": {
+      "bpp/descriptor": {
+        "images": [
+          "https://api.rvjgarments.in/static/images/rvj-tshirt.jpg"
+        ],
+        "long_desc": "RVJ Premium Garments offers high-quality unisex T‑shirts with superior comfort and style.",
+        "name": "RVJ Premium Garments",
+        "short_desc": "Premium unisex T‑shirts",
+        "symbol": "RVJ"
+      },
+      "bpp/providers": [
+        {
+          "categories": [
+            {
+              "descriptor": {
+                "name": "T‑Shirts"
+              },
+              "id": "cat-ts-1",
+              "tags": [
+                {
+                  "code": "type",
+                  "list": [
+                    {
+                      "code": "type",
+                      "value": "variant_group"
+                    }
+                  ]
+                },
+                {
+                  "code": "attr",
+                  "list": [
+                    {
+                      "code": "name",
+                      "value": "rvj_attr"
+                    },
+                    {
+                      "code": "seq",
+                      "value": "1"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "descriptor": {
+            "images": [
+              "https://api.rvjgarments.in/static/images/rvj-store.jpg"
+            ],
+            "long_desc": "RVJ Premium Garments store offering a curated range of unisex T‑shirts.",
+            "name": "RVJ Premium Garments Store",
+            "short_desc": "Unisex T‑shirts and apparel",
+            "symbol": "RVJ"
+          },
+          "fulfillments": [
+            {
+              "contact": {
+                "email": "support@rvjgarments.in",
+                "phone": "9999999999"
+              },
+              "id": "f1",
+              "type": "Delivery"
+            }
+          ],
+          "id": "rvj-provider-1",
+          "items": [
+            {
+              "@ondc/org/available_on_cod": true,
+              "@ondc/org/cancellable": true,
+              "@ondc/org/contact_details_consumer_care": "RVJ Premium Garments, Thrissur, Kerala, support@rvjgarments.in, 9999999999",
+              "@ondc/org/return_window": "P7D",
+              "@ondc/org/returnable": true,
+              "@ondc/org/seller_pickup_return": true,
+              "@ondc/org/statutory_reqs_packaged_commodities": {
+                "common_or_generic_name_of_commodity": "T‑shirt",
+                "manufacturer_or_packer_address": "Thrissur, Kerala, India",
+                "manufacturer_or_packer_name": "RVJ Premium Garments",
+                "month_year_of_manufacture_packing_import": "03/2024"
+              },
+              "@ondc/org/time_to_ship": "P1D",
+              "category_id": "cat-ts-1",
+              "descriptor": {
+                "images": [
+                  "https://api.rvjgarments.in/static/images/rvj-tshirt-white.jpg"
+                ],
+                "long_desc": "Comfortable, breathable white unisex premium T‑shirt from RVJ Premium Garments.",
+                "name": "RVJ Premium Unisex T‑Shirt - White",
+                "short_desc": "White unisex premium T‑shirt"
+              },
+              "fulfillment_id": "f1",
+              "id": "item-ts-1",
+              "location_id": "loc-1",
+              "price": {
+                "currency": "INR",
+                "maximum_value": "599.00",
+                "value": "499"
+              },
+              "quantity": {
+                "available": {
+                  "count": "10"
+                },
+                "maximum": {
+                  "count": "5"
+                }
+              },
+              "tags": [
+                {
+                  "code": "origin",
+                  "list": [
+                    {
+                      "code": "country",
+                      "value": "IND"
+                    }
+                  ]
+                },
+                {
+                  "code": "attribute",
+                  "list": [
+                    {
+                      "code": "gender",
+                      "value": "unisex"
+                    },
+                    {
+                      "code": "colour",
+                      "value": "White"
+                    },
+                    {
+                      "code": "size",
+                      "value": "L"
+                    },
+                    {
+                      "code": "brand",
+                      "value": "RVJ Premium Garments"
+                    }
+                  ]
+                }
+              ],
+              "time": {
+                "label": "enable",
+                "timestamp": "2026-11-19T01:33:59.679Z"
+              }
+            }
+          ],
+          "locations": [
+            {
+              "address": {
+                "area_code": "680001",
+                "city": "Thrissur",
+                "locality": "Thrissur",
+                "state": "Kerala",
+                "street": "Main Road"
+              },
+              "gps": "10.5276,76.2144",
+              "id": "loc-1",
+              "time": {
+                "label": "open",
+                "timestamp": "2024-03-22T09:15:00.000Z"
+              }
+            }
+          ],
+          "tags": [
+            {
+              "code": "serviceability",
+              "list": [
+                {
+                  "code": "location",
+                  "value": "loc-1"
+                },
+                {
+                  "code": "category",
+                  "value": "cat-ts-1"
+                },
+                {
+                  "code": "type",
+                  "value": "10"
+                },
+                {
+                  "code": "val",
+                  "value": "10"
+                },
+                {
+                  "code": "unit",
+                  "value": "km"
+                }
+              ]
+            },
+            {
+              "code": "timing",
+              "list": [
+                {
+                  "code": "type",
+                  "value": "regular"
+                },
+                {
+                  "code": "location",
+                  "value": "loc-1"
+                },
+                {
+                  "code": "day_from",
+                  "value": "1"
+                },
+                {
+                  "code": "day_to",
+                  "value": "7"
+                },
+                {
+                  "code": "time_from",
+                  "value": "0900"
+                },
+                {
+                  "code": "time_to",
+                  "value": "2100"
+                }
+              ]
+            }
+          ],
+          "time": {
+            "label": "enable",
+            "timestamp": "2024-03-22T09:15:00.000Z"
+          },
+          "ttl": "P1D"
+        }
+      ]
+    }
+  }
+}

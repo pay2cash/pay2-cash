@@ -1,0 +1,136 @@
+{
+  "context": {
+    "domain": "ONDC:RET10",
+    "country": "IND",
+    "city": "std:011",
+    "core_version": "1.2.5",
+    "action": "issue",
+    "transaction_id": "b3aefea1-ef5e-4004-b587-30d924553d8d",
+    "message_id": "7781e550-087f-4238-b6fe-29ffc2dcf09e",
+    "timestamp": "2026-11-18T11:41:13.658Z",
+    "bap_id": "ondc.pay2.cash",
+    "bap_uri": "https://ondc.pay2.cash/ondc",
+    "bpp_id": "sample-bpp-id",
+    "bpp_uri": "https://bpp.example.com",
+    "ttl": "PT30S"
+  },
+  "message": {
+    "issue": {
+      "id": "1f3312e5-02c4-4156-8837-5f084991f411",
+      "status": "OPEN",
+      "level": "ISSUE",
+      "created_at": "2026-11-18T11:41:13.658Z",
+      "updated_at": "2026-11-18T11:41:13.658Z",
+      "expected_response_time": {
+        "duration": "PT2H"
+      },
+      "expected_resolution_time": {
+        "duration": "P1D"
+      },
+      "refs": [
+        {
+          "ref_id": "P2CWB1795002051073",
+          "ref_type": "ORDER"
+        },
+        {
+          "ref_id": "P1",
+          "ref_type": "PROVIDER"
+        },
+        {
+          "ref_id": "F1",
+          "ref_type": "FULFILLMENT"
+        },
+        {
+          "ref_id": "I1",
+          "ref_type": "ITEM",
+          "tags": [
+            {
+              "descriptor": {
+                "code": "message.order.items"
+              },
+              "list": [
+                {
+                  "descriptor": {
+                    "code": "quantity.selected.count"
+                  },
+                  "value": "1"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "actors": [
+        {
+          "id": "CUST1",
+          "type": "CONSUMER",
+          "info": {
+            "org": {
+              "name": "ondc.pay2.cash::ONDC:RET10"
+            },
+            "person": {
+              "name": "Nidhi Sharma"
+            },
+            "contact": {
+              "phone": "9876543210",
+              "email": "buyer@pay2.cash"
+            }
+          }
+        },
+        {
+          "id": "NP1",
+          "type": "INTERFACING_NP",
+          "info": {
+            "org": {
+              "name": "ondc.pay2.cash::ONDC:RET10"
+            },
+            "contact": {
+              "phone": "9876543210",
+              "email": "buyer@pay2.cash"
+            },
+            "person": {
+              "name": "Nidhi Sharma"
+            }
+          }
+        }
+      ],
+      "source_id": "CUST1",
+      "complainant_id": "NP1",
+      "descriptor": {
+        "code": "FLM101",
+        "short_desc": "Generated ticket not working at the ticketing gate/validation error",
+        "long_desc": "Generated ticket not working at the ticketing gate/validation error",
+        "additional_desc": {
+          "url": "https://ondc.pay2.cash/issue-details",
+          "content_type": "text/html"
+        },
+        "images": [
+          {
+            "url": "https://ondc.pay2.cash/issue/img1.png",
+            "size_type": "xs"
+          }
+        ],
+        "media": [
+          {
+            "url": "https://ondc.pay2.cash/issue/img1.png"
+          }
+        ]
+      },
+      "last_action_id": "33bfa67e-b2fd-466e-b654-73e5036d383c",
+      "actions": [
+        {
+          "id": "33bfa67e-b2fd-466e-b654-73e5036d383c",
+          "descriptor": {
+            "code": "OPEN",
+            "short_desc": "Complaint created"
+          },
+          "updated_at": "2026-11-18T11:41:13.658Z",
+          "action_by": "NP1",
+          "actor_details": {
+            "name": "mock-person"
+          }
+        }
+      ]
+    }
+  }
+}

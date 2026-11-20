@@ -1,0 +1,67 @@
+{
+  "context": {
+    "domain": "ONDC:RET12",
+    "country": "IND",
+    "city": "std:011",
+    "core_version": "1.2.5",
+    "action": "update",
+    "transaction_id": "fd57a96a-1f35-4b73-90af-81195b91caca",
+    "message_id": "ead794b4-efba-422c-bae9-c3bc7dbe224a",
+    "timestamp": "2026-11-19T00:53:08.462Z",
+    "bap_id": "ondc.agentbuy.online",
+    "bap_uri": "https://ondc.agentbuy.online/ondc",
+    "bpp_id": "sample-bpp-id",
+    "bpp_uri": "https://bpp.example.com",
+    "ttl": "PT30S"
+  },
+  "message": {
+    "update_target": "item",
+    "order": {
+      "id": "P2CWB1795049570130",
+      "fulfillments": [
+        {
+          "type": "Return",
+          "tags": [
+            {
+              "code": "return_request",
+              "list": [
+                {
+                  "code": "id",
+                  "value": "R1"
+                },
+                {
+                  "code": "item_id",
+                  "value": "I1"
+                },
+                {
+                  "code": "item_quantity",
+                  "value": "1"
+                },
+                {
+                  "code": "reason_id",
+                  "value": "001"
+                },
+                {
+                  "code": "reason_desc",
+                  "value": "Item received in damaged condition, requesting return"
+                },
+                {
+                  "code": "images",
+                  "value": "https://ondc.agentbuy.online/issue/img1.png"
+                },
+                {
+                  "code": "ttl_approval",
+                  "value": "PT24H"
+                },
+                {
+                  "code": "ttl_reverseqc",
+                  "value": "P3D"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "context": {
+    "domain": "ONDC:RET10",
+    "country": "IND",
+    "city": "std:011",
+    "core_version": "1.2.5",
+    "action": "update",
+    "transaction_id": "fa30c42b-1585-4470-a8d0-1fb4c259065b",
+    "message_id": "d1ed1866-aa63-4764-80ac-53a807bfc309",
+    "timestamp": "2026-11-18T11:04:06.942Z",
+    "bap_id": "ondc.pay2.cash",
+    "bap_uri": "https://ondc.pay2.cash/ondc",
+    "bpp_id": "sample-bpp-id",
+    "bpp_uri": "https://bpp.example.com",
+    "ttl": "PT30S"
+  },
+  "message": {
+    "update_target": "fulfillment",
+    "order": {
+      "id": "P2CWB1794999798100",
+      "fulfillments": [
+        {
+          "id": "F1",
+          "end": {
+            "location": {
+              "gps": "12.4535,77.9283",
+              "address": {
+                "name": "My new House",
+                "building": "Bldg 7 new",
+                "locality": "MG Road",
+                "city": "Bengaluru",
+                "state": "Karnataka",
+                "country": "IND",
+                "area_code": "560037"
+              }
+            },
+            "person": {
+              "name": "Nidhi Sharma"
+            },
+            "contact": {
+              "phone": "9876543210"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

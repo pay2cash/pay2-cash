@@ -1,0 +1,168 @@
+{
+  "context": {
+    "domain": "ONDC:RET12",
+    "action": "on_issue",
+    "timestamp": "2026-11-19T01:04:39.236Z",
+    "transaction_id": "4d5a19f0-4357-448b-a8b2-13658998b0c6",
+    "message_id": "62423438-714c-4920-a103-5c041b6e7826",
+    "bap_id": "ondc.agentbuy.online",
+    "bap_uri": "https://ondc.agentbuy.online/ondc",
+    "ttl": "PT30S",
+    "bpp_id": "sample-bpp-id",
+    "bpp_uri": "https://bpp.example.com",
+    "country": "IND",
+    "city": "std:011",
+    "core_version": "1.2.5"
+  },
+  "message": {
+    "update_target": [
+      {
+        "path": "issue.actions",
+        "action": "APPENDED"
+      }
+    ],
+    "issue": {
+      "id": "3a244a25-08ed-4dda-83ea-c1608c970fdf",
+      "status": "PROCESSING",
+      "level": "ISSUE",
+      "created_at": "2026-11-19T01:04:36.112Z",
+      "updated_at": "2026-11-19T01:04:39.236Z",
+      "expected_response_time": {
+        "duration": "PT2H"
+      },
+      "expected_resolution_time": {
+        "duration": "P1D"
+      },
+      "refs": [
+        {
+          "ref_id": "P2CWB1795050233058",
+          "ref_type": "ORDER"
+        },
+        {
+          "ref_id": "P1",
+          "ref_type": "PROVIDER"
+        },
+        {
+          "ref_id": "F1",
+          "ref_type": "FULFILLMENT"
+        },
+        {
+          "ref_id": "I1",
+          "ref_type": "ITEM",
+          "tags": [
+            {
+              "descriptor": {
+                "code": "message.order.items"
+              },
+              "list": [
+                {
+                  "descriptor": {
+                    "code": "quantity.selected.count"
+                  },
+                  "value": "1"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "actors": [
+        {
+          "id": "CUST1",
+          "type": "CONSUMER",
+          "info": {
+            "org": {
+              "name": "ondc.agentbuy.online::ONDC:RET12"
+            },
+            "person": {
+              "name": "Nidhi Sharma"
+            },
+            "contact": {
+              "phone": "9876543210",
+              "email": "buyer@agentbuy.online"
+            }
+          }
+        },
+        {
+          "id": "NP1",
+          "type": "INTERFACING_NP",
+          "info": {
+            "org": {
+              "name": "ondc.agentbuy.online::ONDC:RET12"
+            },
+            "contact": {
+              "phone": "9876543210",
+              "email": "buyer@agentbuy.online"
+            },
+            "person": {
+              "name": "Nidhi Sharma"
+            }
+          }
+        },
+        {
+          "id": "NP2",
+          "type": "COUNTERPARTY_NP",
+          "info": {
+            "org": {
+              "name": "sample-bpp-id::ONDC:RET12"
+            },
+            "contact": {
+              "phone": "9999994039",
+              "email": "sellerapp@interface.com"
+            },
+            "person": {
+              "name": "mock-seller"
+            }
+          }
+        }
+      ],
+      "source_id": "CUST1",
+      "complainant_id": "NP1",
+      "respondent_ids": [
+        "NP2"
+      ],
+      "descriptor": {
+        "code": "FLM101",
+        "short_desc": "Generated ticket not working at the ticketing gate/validation error",
+        "long_desc": "Generated ticket not working at the ticketing gate/validation error",
+        "additional_desc": {
+          "url": "https://example.com/issue-details",
+          "content_type": "text/html"
+        },
+        "images": [
+          {
+            "url": "https://ondc.agentbuy.online/issue/img1.png",
+            "size_type": "xs"
+          }
+        ]
+      },
+      "last_action_id": "a845b419-d67f-4598-86da-85be15aed073",
+      "actions": [
+        {
+          "id": "41b00624-2e0f-4c0c-bc44-b6d500a917d5",
+          "descriptor": {
+            "code": "OPEN",
+            "short_desc": "Complaint created"
+          },
+          "updated_at": "2026-11-19T01:04:36.112Z",
+          "action_by": "NP1",
+          "actor_details": {
+            "name": "mock-person"
+          }
+        },
+        {
+          "id": "a845b419-d67f-4598-86da-85be15aed073",
+          "descriptor": {
+            "code": "PROCESSING",
+            "short_desc": "Complaint created"
+          },
+          "updated_at": "2026-11-19T01:04:39.236Z",
+          "action_by": "NP2",
+          "actor_details": {
+            "name": "mock-seller"
+          }
+        }
+      ]
+    }
+  }
+}

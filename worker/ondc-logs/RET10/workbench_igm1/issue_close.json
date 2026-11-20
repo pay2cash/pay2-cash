@@ -1,0 +1,64 @@
+{
+  "context": {
+    "domain": "ONDC:RET10",
+    "country": "IND",
+    "city": "std:011",
+    "core_version": "1.2.5",
+    "action": "issue",
+    "transaction_id": "0c9dfd03-da6e-4384-a8f8-f59996212cfa",
+    "message_id": "f5b8aacc-2027-4867-9130-00d9277a0181",
+    "timestamp": "2026-11-18T11:20:50.910Z",
+    "bap_id": "ondc.pay2.cash",
+    "bap_uri": "https://ondc.pay2.cash/ondc",
+    "bpp_id": "sample-bpp-id",
+    "bpp_uri": "https://bpp.example.com",
+    "ttl": "PT30S"
+  },
+  "message": {
+    "issue": {
+      "id": "2c296f2f-62f9-4380-a891-d0977667b9ea",
+      "status": "CLOSED",
+      "created_at": "2026-11-18T11:20:50.910Z",
+      "updated_at": "2026-11-18T11:20:50.910Z",
+      "rating": "THUMBS_UP",
+      "issue_actions": {
+        "complainant_actions": [
+          {
+            "complainant_action": "OPEN",
+            "short_desc": "Complaint created",
+            "updated_at": "2026-11-18T11:20:43.535Z",
+            "updated_by": {
+              "org": {
+                "name": "ondc.pay2.cash::ONDC:RET10"
+              },
+              "contact": {
+                "phone": "+91-9876543210",
+                "email": "buyer@pay2.cash"
+              },
+              "person": {
+                "name": "Nidhi Sharma"
+              }
+            }
+          },
+          {
+            "complainant_action": "CLOSE",
+            "short_desc": "Complaint closed",
+            "updated_at": "2026-11-18T11:20:50.910Z",
+            "updated_by": {
+              "org": {
+                "name": "ondc.pay2.cash::ONDC:RET10"
+              },
+              "contact": {
+                "phone": "+91-9876543210",
+                "email": "buyer@pay2.cash"
+              },
+              "person": {
+                "name": "Nidhi Sharma"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

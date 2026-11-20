@@ -1,0 +1,106 @@
+{
+  "context": {
+    "domain": "ONDC:RET10",
+    "action": "on_issue_status",
+    "timestamp": "2026-11-18T11:20:48.403Z",
+    "transaction_id": "0c9dfd03-da6e-4384-a8f8-f59996212cfa",
+    "message_id": "608d4b0d-17f0-42dd-bec9-75bc6f0e9f58",
+    "bap_id": "ondc.pay2.cash",
+    "bap_uri": "https://ondc.pay2.cash/ondc",
+    "ttl": "PT30S",
+    "bpp_id": "sample-bpp-id",
+    "bpp_uri": "https://bpp.example.com",
+    "country": "IND",
+    "city": "std:011",
+    "core_version": "1.2.5"
+  },
+  "message": {
+    "issue": {
+      "id": "2c296f2f-62f9-4380-a891-d0977667b9ea",
+      "issue_actions": {
+        "respondent_actions": [
+          {
+            "respondent_action": "PROCESSING",
+            "short_desc": "Complaint is being processed",
+            "updated_at": "2026-11-18T11:20:44.010Z",
+            "updated_by": {
+              "org": {
+                "name": "sample-bpp-id::ONDC:RET10"
+              },
+              "contact": {
+                "phone": "9450394140",
+                "email": "respondentapp@respond.com"
+              },
+              "person": {
+                "name": "mock-seller-name"
+              }
+            },
+            "cascaded_level": 1
+          },
+          {
+            "respondent_action": "RESOLVED",
+            "short_desc": "Complaint resolved",
+            "updated_at": "2026-11-18T11:20:48.403Z",
+            "updated_by": {
+              "org": {
+                "name": "sample-bpp-id::ONDC:RET10"
+              },
+              "contact": {
+                "phone": "9450394140",
+                "email": "respondentapp@respond.com"
+              },
+              "person": {
+                "name": "mock-seller-name"
+              }
+            },
+            "cascaded_level": 1
+          }
+        ]
+      },
+      "created_at": "2026-11-18T11:20:43.536Z",
+      "updated_at": "2026-11-18T11:20:48.403Z",
+      "resolution_provider": {
+        "respondent_info": {
+          "type": "TRANSACTION-COUNTERPARTY-NP",
+          "organization": {
+            "org": {
+              "name": "sample-bpp-id::ONDC:RET10"
+            },
+            "contact": {
+              "phone": "9059304940",
+              "email": "email@resolutionproviderorg.com"
+            },
+            "person": {
+              "name": "resolution provider org contact person name"
+            }
+          },
+          "resolution_support": {
+            "chat_link": "http://chat-link/respondent",
+            "contact": {
+              "phone": "9949595059",
+              "email": "respondantemail@resolutionprovider.com"
+            },
+            "gros": [
+              {
+                "person": {
+                  "name": "Sam D"
+                },
+                "contact": {
+                  "phone": "9605960796",
+                  "email": "email@gro.com"
+                },
+                "gro_type": "TRANSACTION-COUNTERPARTY-NP-GRO"
+              }
+            ]
+          }
+        }
+      },
+      "resolution": {
+        "short_desc": "Refund to be initiated",
+        "long_desc": "For this complaint, refund is to be initiated",
+        "action_triggered": "REFUND",
+        "refund_amount": "200.00"
+      }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "context": {
+    "domain": "ONDC:RET10",
+    "country": "IND",
+    "city": "std:011",
+    "core_version": "1.2.5",
+    "action": "track",
+    "transaction_id": "a04994b4-2c6b-4133-92bc-77ded8d29069",
+    "message_id": "8c36b359-4194-4afd-93ff-156d48866b73",
+    "timestamp": "2026-11-18T11:12:08.954Z",
+    "bap_id": "ondc.pay2.cash",
+    "bap_uri": "https://ondc.pay2.cash/ondc",
+    "bpp_id": "sample-bpp-id",
+    "bpp_uri": "https://bpp.example.com",
+    "ttl": "PT30S"
+  },
+  "message": {
+    "order_id": "P2CWB1795000239425"
+  }
+}

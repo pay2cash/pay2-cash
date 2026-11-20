@@ -1,0 +1,37 @@
+{
+  "context": {
+    "domain": "ONDC:RET10",
+    "country": "IND",
+    "city": "std:011",
+    "core_version": "1.2.5",
+    "action": "update",
+    "transaction_id": "fa30c42b-1585-4470-a8d0-1fb4c259065b",
+    "message_id": "f2f9615b-e581-4535-9c0b-cb4419a01aa2",
+    "timestamp": "2026-11-18T11:04:05.008Z",
+    "bap_id": "ondc.pay2.cash",
+    "bap_uri": "https://ondc.pay2.cash/ondc",
+    "bpp_id": "sample-bpp-id",
+    "bpp_uri": "https://bpp.example.com",
+    "ttl": "PT30S"
+  },
+  "message": {
+    "update_target": "fulfillment",
+    "order": {
+      "id": "P2CWB1794999798100",
+      "fulfillments": [
+        {
+          "id": "F1",
+          "end": {
+            "instructions": {
+              "long_desc": "Leave package outside the door and do not ring the bell.",
+              "additional_desc": {
+                "content_type": "text/html",
+                "url": "https://ondc.pay2.cash/instructions"
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

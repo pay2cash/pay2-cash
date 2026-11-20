@@ -1,0 +1,136 @@
+{
+  "context": {
+    "domain": "ONDC:RET10",
+    "country": "IND",
+    "city": "std:011",
+    "core_version": "1.2.5",
+    "action": "issue",
+    "transaction_id": "d5a0d6ab-d8a3-4e17-b4d0-508634d1600f",
+    "message_id": "e5e2966b-09d9-4cb2-9cb2-0d343ff35b65",
+    "timestamp": "2026-11-18T11:43:32.798Z",
+    "bap_id": "ondc.pay2.cash",
+    "bap_uri": "https://ondc.pay2.cash/ondc",
+    "bpp_id": "sample-bpp-id",
+    "bpp_uri": "https://bpp.example.com",
+    "ttl": "PT30S"
+  },
+  "message": {
+    "issue": {
+      "id": "b129a8a9-86c9-4d0a-8425-25d950355ac7",
+      "status": "OPEN",
+      "level": "ISSUE",
+      "created_at": "2026-11-18T11:43:32.798Z",
+      "updated_at": "2026-11-18T11:43:32.798Z",
+      "expected_response_time": {
+        "duration": "PT2H"
+      },
+      "expected_resolution_time": {
+        "duration": "P1D"
+      },
+      "refs": [
+        {
+          "ref_id": "P2CWB1795002187732",
+          "ref_type": "ORDER"
+        },
+        {
+          "ref_id": "P1",
+          "ref_type": "PROVIDER"
+        },
+        {
+          "ref_id": "F1",
+          "ref_type": "FULFILLMENT"
+        },
+        {
+          "ref_id": "I1",
+          "ref_type": "ITEM",
+          "tags": [
+            {
+              "descriptor": {
+                "code": "message.order.items"
+              },
+              "list": [
+                {
+                  "descriptor": {
+                    "code": "quantity.selected.count"
+                  },
+                  "value": "1"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "actors": [
+        {
+          "id": "CUST1",
+          "type": "CONSUMER",
+          "info": {
+            "org": {
+              "name": "ondc.pay2.cash::ONDC:RET10"
+            },
+            "person": {
+              "name": "Nidhi Sharma"
+            },
+            "contact": {
+              "phone": "9876543210",
+              "email": "buyer@pay2.cash"
+            }
+          }
+        },
+        {
+          "id": "NP1",
+          "type": "INTERFACING_NP",
+          "info": {
+            "org": {
+              "name": "ondc.pay2.cash::ONDC:RET10"
+            },
+            "contact": {
+              "phone": "9876543210",
+              "email": "buyer@pay2.cash"
+            },
+            "person": {
+              "name": "Nidhi Sharma"
+            }
+          }
+        }
+      ],
+      "source_id": "CUST1",
+      "complainant_id": "NP1",
+      "descriptor": {
+        "code": "ORD02",
+        "short_desc": "Item quantity mismatch in the delivered order",
+        "long_desc": "The delivered order has fewer items than ordered",
+        "additional_desc": {
+          "url": "https://ondc.pay2.cash/issue-details",
+          "content_type": "text/html"
+        },
+        "images": [
+          {
+            "url": "https://ondc.pay2.cash/issue/img1.png",
+            "size_type": "xs"
+          }
+        ],
+        "media": [
+          {
+            "url": "https://ondc.pay2.cash/issue/img1.png"
+          }
+        ]
+      },
+      "last_action_id": "475847e2-19de-4274-8272-49fdcd7d373d",
+      "actions": [
+        {
+          "id": "475847e2-19de-4274-8272-49fdcd7d373d",
+          "descriptor": {
+            "code": "OPEN",
+            "short_desc": "Complaint created"
+          },
+          "updated_at": "2026-11-18T11:43:32.798Z",
+          "action_by": "NP1",
+          "actor_details": {
+            "name": "ONDC buyer"
+          }
+        }
+      ]
+    }
+  }
+}

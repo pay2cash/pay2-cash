@@ -1,0 +1,78 @@
+{
+  "context": {
+    "domain": "ONDC:RET12",
+    "country": "IND",
+    "city": "std:011",
+    "core_version": "1.2.5",
+    "action": "init",
+    "transaction_id": "2dd80d53-1ac2-44b4-85c4-f46a65a0c86c",
+    "message_id": "b819697b-8f16-43d5-9c70-601d79306b9a",
+    "timestamp": "2026-11-19T01:54:58.188Z",
+    "bap_id": "ondc.agentbuy.online",
+    "bap_uri": "https://ondc.agentbuy.online/ondc",
+    "bpp_id": "sample-bpp-id",
+    "bpp_uri": "https://bpp.example.com",
+    "ttl": "PT30S"
+  },
+  "message": {
+    "order": {
+      "provider": {
+        "id": "P1",
+        "locations": [
+          {
+            "id": "L1"
+          }
+        ]
+      },
+      "items": [
+        {
+          "id": "I1",
+          "fulfillment_id": "F1",
+          "quantity": {
+            "count": 1
+          }
+        }
+      ],
+      "billing": {
+        "name": "Nidhi Sharma",
+        "address": {
+          "name": "221 B Baker Street",
+          "building": "P2C Building",
+          "locality": "Baker Street",
+          "city": "Mumbai",
+          "state": "Maharashtra",
+          "country": "IND",
+          "area_code": "400053"
+        },
+        "phone": "9876543210",
+        "email": "buyer@agentbuy.online",
+        "created_at": "2026-11-19T01:54:56.598Z",
+        "updated_at": "2026-11-19T01:54:56.598Z"
+      },
+      "fulfillments": [
+        {
+          "id": "F1",
+          "type": "Delivery",
+          "end": {
+            "contact": {
+              "email": "buyer@agentbuy.online",
+              "phone": "9876543210"
+            },
+            "location": {
+              "gps": "19.129076,72.825803",
+              "address": {
+                "building": "P2C Building",
+                "city": "Mumbai",
+                "state": "Maharashtra",
+                "country": "IND",
+                "area_code": "400053",
+                "locality": "Baker Street",
+                "name": "221 B Baker Street"
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

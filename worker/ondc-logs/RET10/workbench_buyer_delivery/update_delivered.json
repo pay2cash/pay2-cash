@@ -1,0 +1,52 @@
+{
+  "context": {
+    "domain": "ONDC:RET10",
+    "country": "IND",
+    "city": "std:011",
+    "core_version": "1.2.5",
+    "action": "update",
+    "transaction_id": "1e1b31bb-633f-48a6-ae3c-c39b2f9e77b7",
+    "message_id": "0a4a59b0-f188-46c6-bd93-9272acc53bc0",
+    "timestamp": "2026-11-18T09:09:15.318Z",
+    "bap_id": "ondc.pay2.cash",
+    "bap_uri": "https://ondc.pay2.cash/ondc",
+    "bpp_id": "sample-bpp-id",
+    "bpp_uri": "https://bpp.example.com",
+    "ttl": "PT30S"
+  },
+  "message": {
+    "update_target": "fulfillment",
+    "order": {
+      "id": "P2CWB1794992713440",
+      "fulfillments": [
+        {
+          "id": "F3",
+          "tags": [
+            {
+              "code": "update_state",
+              "list": [
+                {
+                  "code": "state",
+                  "value": "Order-delivered"
+                }
+              ]
+            },
+            {
+              "code": "update_fulfillment_time",
+              "list": [
+                {
+                  "code": "state",
+                  "value": "Order-delivered"
+                },
+                {
+                  "code": "timestamp",
+                  "value": "2026-11-18T09:09:15.318Z"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

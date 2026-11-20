@@ -1,0 +1,57 @@
+{
+  "context": {
+    "domain": "ONDC:RET10",
+    "country": "IND",
+    "city": "std:011",
+    "core_version": "1.2.5",
+    "action": "select",
+    "transaction_id": "56fc20d0-5ee2-43c8-bef0-6d958d3f47c7",
+    "message_id": "ace77593-32c1-4870-b268-e63b05333296",
+    "timestamp": "2026-11-18T11:52:50.549Z",
+    "bap_id": "ondc.pay2.cash",
+    "bap_uri": "https://ondc.pay2.cash/ondc",
+    "bpp_id": "sample-bpp-id",
+    "bpp_uri": "https://bpp.example.com",
+    "ttl": "PT30S"
+  },
+  "message": {
+    "order": {
+      "provider": {
+        "id": "P1",
+        "locations": [
+          {
+            "id": "L1"
+          }
+        ]
+      },
+      "items": [
+        {
+          "id": "I1",
+          "quantity": {
+            "count": 1
+          },
+          "location_id": "L1"
+        },
+        {
+          "id": "I2",
+          "quantity": {
+            "count": 1
+          },
+          "location_id": "L1"
+        }
+      ],
+      "fulfillments": [
+        {
+          "end": {
+            "location": {
+              "gps": "19.129076,72.825803",
+              "address": {
+                "area_code": "400053"
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

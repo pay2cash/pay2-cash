@@ -1,6 +1,6 @@
 {
-  "txn": "c9bdbea8-7a69-4d4d-b8bf-487f2b20ca6a",
-  "orderId": "P2C1782402901254",
+  "txn": "f9ac53f1-87b5-4422-b75b-27a75c04fd93",
+  "orderId": "P2C1794991270276",
   "bpp": {
     "bpp_id": "pramaan.ondc.org/beta/preprod/mock/seller",
     "bpp_uri": "https://pramaan.ondc.org/beta/preprod/mock/seller"
@@ -8,5 +8,5 @@
   "provId": "pramaan_provider_1",
   "itemId": "id_13owvn_0_0",
   "loc": "SSL1",
-  "fid": "1f1d816c-979e-4525-856c-0d6eb4bee156"
+  "fid": "29d9ca4b-15d8-4fc6-98b5-fe7065e53a4a"
 }

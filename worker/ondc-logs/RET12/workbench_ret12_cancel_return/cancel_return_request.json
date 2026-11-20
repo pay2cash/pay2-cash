@@ -1,0 +1,25 @@
+{
+  "context": {
+    "domain": "ONDC:RET12",
+    "country": "IND",
+    "city": "std:011",
+    "core_version": "1.2.5",
+    "action": "cancel",
+    "transaction_id": "fd57a96a-1f35-4b73-90af-81195b91caca",
+    "message_id": "ebe2debc-f0bd-46b2-bc9c-a6d3daed3a1d",
+    "timestamp": "2026-11-19T00:53:16.920Z",
+    "bap_id": "ondc.agentbuy.online",
+    "bap_uri": "https://ondc.agentbuy.online/ondc",
+    "bpp_id": "sample-bpp-id",
+    "bpp_uri": "https://bpp.example.com",
+    "ttl": "PT30S"
+  },
+  "message": {
+    "order_id": "P2CWB1795049570130",
+    "cancellation_reason_id": "001",
+    "descriptor": {
+      "name": "fulfillment",
+      "short_desc": "R1"
+    }
+  }
+}

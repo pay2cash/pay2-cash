@@ -1,0 +1,71 @@
+{
+  "context": {
+    "domain": "ONDC:RET10",
+    "country": "IND",
+    "city": "std:011",
+    "core_version": "1.2.5",
+    "action": "update",
+    "transaction_id": "1c006f93-f5ed-460c-aa3d-b1d589c513d2",
+    "message_id": "d2c6c581-86b0-46f4-a9f4-9b5ce8236b59",
+    "timestamp": "2026-11-18T12:01:49.442Z",
+    "bap_id": "ondc.pay2.cash",
+    "bap_uri": "https://ondc.pay2.cash/ondc",
+    "bpp_id": "sample-bpp-id",
+    "bpp_uri": "https://bpp.example.com",
+    "ttl": "PT30S"
+  },
+  "message": {
+    "update_target": "item",
+    "order": {
+      "id": "P2CWB1795003309440",
+      "fulfillments": [
+        {
+          "type": "Return",
+          "tags": [
+            {
+              "code": "return_request",
+              "list": [
+                {
+                  "code": "id",
+                  "value": "07157368-33ca-4d3f-8d4a-a81a6e730b04"
+                },
+                {
+                  "code": "item_id",
+                  "value": "I1"
+                },
+                {
+                  "code": "parent_item_id",
+                  "value": "1"
+                },
+                {
+                  "code": "item_quantity",
+                  "value": "1"
+                },
+                {
+                  "code": "reason_id",
+                  "value": "001"
+                },
+                {
+                  "code": "reason_desc",
+                  "value": "Item received in damaged condition, requesting replacement"
+                },
+                {
+                  "code": "images",
+                  "value": "https://ondc.pay2.cash/issue/img1.png"
+                },
+                {
+                  "code": "ttl_approval",
+                  "value": "PT24H"
+                },
+                {
+                  "code": "ttl_reverseqc",
+                  "value": "P3D"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

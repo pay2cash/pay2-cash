@@ -25,7 +25,7 @@ function loadEnv() {
 }
 const ENV = loadEnv();
 
-const SUBSCRIBER_ID = ENV.ONDC_SUBSCRIBER_ID || "ondc.pay2.cash";
+const SUBSCRIBER_ID = ENV.ONDC_SUBSCRIBER_ID || "ondc.agentbuy.online";
 const UNIQUE_KEY_ID = ENV.ONDC_UNIQUE_KEY_ID || "REPLACE_WITH_REGISTERED_unique_key_id";
 const SIGNING_PRIVATE_KEY = ENV.ONDC_SIGNING_PRIVATE_KEY; // base64 (32B seed or 64B)
 const SIGNING_PUBLIC_KEY = ENV.ONDC_SIGNING_PUBLIC_KEY; // base64 raw 32B

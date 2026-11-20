@@ -1,0 +1,226 @@
+{
+  "context": {
+    "domain": "ONDC:RET10",
+    "country": "IND",
+    "city": "std:011",
+    "core_version": "1.2.5",
+    "action": "issue",
+    "transaction_id": "b3aefea1-ef5e-4004-b587-30d924553d8d",
+    "message_id": "805b8603-79b4-48a7-b2ad-9d6caaaa5aba",
+    "timestamp": "2026-11-18T11:41:16.654Z",
+    "bap_id": "ondc.pay2.cash",
+    "bap_uri": "https://ondc.pay2.cash/ondc",
+    "bpp_id": "sample-bpp-id",
+    "bpp_uri": "https://bpp.example.com",
+    "ttl": "PT30S"
+  },
+  "message": {
+    "update_target": [
+      {
+        "path": "issue.actions",
+        "action": "APPENDED"
+      }
+    ],
+    "issue": {
+      "id": "1f3312e5-02c4-4156-8837-5f084991f411",
+      "status": "PROCESSING",
+      "level": "ISSUE",
+      "created_at": "2026-11-18T11:41:13.658Z",
+      "updated_at": "2026-11-18T11:41:16.654Z",
+      "expected_response_time": {
+        "duration": "PT2H"
+      },
+      "expected_resolution_time": {
+        "duration": "P1D"
+      },
+      "refs": [
+        {
+          "ref_id": "P2CWB1795002051073",
+          "ref_type": "ORDER"
+        },
+        {
+          "ref_id": "P1",
+          "ref_type": "PROVIDER"
+        },
+        {
+          "ref_id": "F1",
+          "ref_type": "FULFILLMENT"
+        },
+        {
+          "ref_id": "I1",
+          "ref_type": "ITEM",
+          "tags": [
+            {
+              "descriptor": {
+                "code": "message.order.items"
+              },
+              "list": [
+                {
+                  "descriptor": {
+                    "code": "quantity.selected.count"
+                  },
+                  "value": "1"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "actors": [
+        {
+          "id": "CUST1",
+          "type": "CONSUMER",
+          "info": {
+            "org": {
+              "name": "ondc.pay2.cash::ONDC:RET10"
+            },
+            "person": {
+              "name": "Nidhi Sharma"
+            },
+            "contact": {
+              "phone": "9876543210",
+              "email": "buyer@pay2.cash"
+            }
+          }
+        },
+        {
+          "id": "NP1",
+          "type": "INTERFACING_NP",
+          "info": {
+            "org": {
+              "name": "ondc.pay2.cash::ONDC:RET10"
+            },
+            "contact": {
+              "phone": "9876543210",
+              "email": "buyer@pay2.cash"
+            },
+            "person": {
+              "name": "Nidhi Sharma"
+            }
+          }
+        },
+        {
+          "id": "NP2",
+          "type": "COUNTERPARTY_NP",
+          "info": {
+            "org": {
+              "name": "sample-bpp-id::ONDC:RET10"
+            },
+            "contact": {
+              "phone": "9999994039",
+              "email": "sellerapp@interface.com"
+            },
+            "person": {
+              "name": "mock-seller"
+            }
+          }
+        },
+        {
+          "id": "NP2-GRO",
+          "type": "COUNTERPARTY_NP_GRO",
+          "info": {
+            "org": {
+              "name": "sample-bpp-id::ONDC:RET10"
+            },
+            "contact": {
+              "phone": "8888884045",
+              "email": "gro@interface.com"
+            },
+            "person": {
+              "name": "Grievance Officer BNP"
+            }
+          }
+        }
+      ],
+      "source_id": "CUST1",
+      "complainant_id": "NP1",
+      "respondent_ids": [
+        "NP2"
+      ],
+      "resolver_ids": [
+        "NP2"
+      ],
+      "descriptor": {
+        "code": "FLM101",
+        "short_desc": "Generated ticket not working at the ticketing gate/validation error",
+        "long_desc": "Generated ticket not working at the ticketing gate/validation error",
+        "additional_desc": {
+          "url": "https://example.com/issue-details",
+          "content_type": "text/html"
+        },
+        "images": [
+          {
+            "url": "https://ondc.pay2.cash/issue/img1.png",
+            "size_type": "xs"
+          }
+        ]
+      },
+      "last_action_id": "eb640f0d-7c31-41da-8ed9-14df4a84fb6f",
+      "actions": [
+        {
+          "id": "33bfa67e-b2fd-466e-b654-73e5036d383c",
+          "descriptor": {
+            "code": "OPEN",
+            "short_desc": "Complaint created"
+          },
+          "updated_at": "2026-11-18T11:41:13.658Z",
+          "action_by": "NP1",
+          "actor_details": {
+            "name": "mock-person"
+          }
+        },
+        {
+          "id": "e8ed9a4b-bdec-4edd-b3fe-9d36d17819b3",
+          "descriptor": {
+            "code": "PROCESSING",
+            "short_desc": "Complaint created"
+          },
+          "updated_at": "2026-11-18T11:41:14.187Z",
+          "action_by": "NP2",
+          "actor_details": {
+            "name": "mock-seller"
+          }
+        },
+        {
+          "id": "72ae4162-6859-445b-bbbd-f83ebcc904f1",
+          "ref_id": "R5",
+          "ref_type": "RESOLUTIONS",
+          "descriptor": {
+            "code": "RESOLUTION_PROPOSED",
+            "short_desc": "Resolution is proposed"
+          },
+          "updated_at": "2026-11-18T11:41:15.219Z",
+          "action_by": "NP2",
+          "actor_details": {
+            "name": "mock-seller"
+          }
+        },
+        {
+          "id": "eb640f0d-7c31-41da-8ed9-14df4a84fb6f",
+          "descriptor": {
+            "code": "RESOLUTION_ACCEPTED",
+            "short_desc": "Resolution is accepted"
+          },
+          "updated_at": "2026-11-18T11:41:16.653Z",
+          "action_by": "NP1",
+          "actor_details": {
+            "name": "mock-person"
+          },
+          "ref_id": "RESOLUTION123",
+          "ref_type": "RESOLUTIONS"
+        }
+      ],
+      "resolutions": [
+        {
+          "id": "R5",
+          "descriptor": {
+            "code": "NO_ACTION",
+            "short_desc": "No further action required for resolving this complaint."
+          },
+          "updated_at": "2026-11-18T11:41:15.219Z",
+          "proposed_by": "NP2"
+        }
+      ]
+    }
+  }
+}

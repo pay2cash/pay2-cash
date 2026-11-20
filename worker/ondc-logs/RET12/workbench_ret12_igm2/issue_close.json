@@ -1,0 +1,369 @@
+{
+  "context": {
+    "domain": "ONDC:RET12",
+    "country": "IND",
+    "city": "std:011",
+    "core_version": "1.2.5",
+    "action": "issue",
+    "transaction_id": "a78cc286-57eb-47e4-aba1-e5056885db37",
+    "message_id": "b3266cf2-264a-4bc1-8666-c338cfe1ba1c",
+    "timestamp": "2026-11-19T01:15:20.707Z",
+    "bap_id": "ondc.agentbuy.online",
+    "bap_uri": "https://ondc.agentbuy.online/ondc",
+    "bpp_id": "sample-bpp-id",
+    "bpp_uri": "https://bpp.example.com",
+    "ttl": "PT30S"
+  },
+  "message": {
+    "update_target": [
+      {
+        "path": "issue.actions",
+        "action": "APPENDED"
+      }
+    ],
+    "issue": {
+      "id": "de8782c0-f9c7-4451-b0e5-ada645b59ed5",
+      "status": "CLOSED",
+      "level": "ISSUE",
+      "created_at": "2026-11-19T01:14:59.644Z",
+      "updated_at": "2026-11-19T01:15:20.707Z",
+      "expected_response_time": {
+        "duration": "PT2H"
+      },
+      "expected_resolution_time": {
+        "duration": "P1D"
+      },
+      "refs": [
+        {
+          "ref_id": "P2CWB1795050866141",
+          "ref_type": "ORDER"
+        },
+        {
+          "ref_id": "P1",
+          "ref_type": "PROVIDER"
+        },
+        {
+          "ref_id": "F1",
+          "ref_type": "FULFILLMENT"
+        },
+        {
+          "ref_id": "I1",
+          "ref_type": "ITEM",
+          "tags": [
+            {
+              "descriptor": {
+                "code": "message.order.items"
+              },
+              "list": [
+                {
+                  "descriptor": {
+                    "code": "quantity.selected.count"
+                  },
+                  "value": "1"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "actors": [
+        {
+          "id": "CUST1",
+          "type": "CONSUMER",
+          "info": {
+            "org": {
+              "name": "ondc.agentbuy.online::ONDC:RET12"
+            },
+            "person": {
+              "name": "Nidhi Sharma"
+            },
+            "contact": {
+              "phone": "9876543210",
+              "email": "buyer@agentbuy.online"
+            }
+          }
+        },
+        {
+          "id": "NP1",
+          "type": "INTERFACING_NP",
+          "info": {
+            "org": {
+              "name": "ondc.agentbuy.online::ONDC:RET12"
+            },
+            "contact": {
+              "phone": "9876543210",
+              "email": "buyer@agentbuy.online"
+            },
+            "person": {
+              "name": "Nidhi Sharma"
+            }
+          }
+        },
+        {
+          "id": "NP2",
+          "type": "COUNTERPARTY_NP",
+          "info": {
+            "org": {
+              "name": "sample-bpp-id::ONDC:RET12"
+            },
+            "contact": {
+              "phone": "9999994039",
+              "email": "sellerapp@interface.com"
+            },
+            "person": {
+              "name": "mock-seller"
+            }
+          }
+        },
+        {
+          "id": "NP2-GRO",
+          "type": "COUNTERPARTY_NP_GRO",
+          "info": {
+            "org": {
+              "name": "sample-bpp-id::ONDC:RET12"
+            },
+            "contact": {
+              "phone": "8888884045",
+              "email": "gro@interface.com"
+            },
+            "person": {
+              "name": "Grievance Officer BNP"
+            }
+          }
+        }
+      ],
+      "source_id": "CUST1",
+      "complainant_id": "NP1",
+      "respondent_ids": [
+        "NP2"
+      ],
+      "resolver_ids": [
+        "NP2"
+      ],
+      "descriptor": {
+        "code": "ITM004",
+        "short_desc": "Issue with product quality",
+        "long_desc": "Product quality is not correct. Facing issues while using the product",
+        "additional_desc": {
+          "url": "https://example.com/issue-details",
+          "content_type": "text/html"
+        },
+        "images": [
+          {
+            "url": "https://ondc.agentbuy.online/issue/img1.png",
+            "size_type": "xs"
+          }
+        ]
+      },
+      "last_action_id": "6c158ac9-24c6-4477-8b0e-17fbe25ae772",
+      "actions": [
+        {
+          "id": "05ab449d-500b-4c58-9cf6-2e7b0b740596",
+          "descriptor": {
+            "code": "OPEN",
+            "short_desc": "Complaint created"
+          },
+          "updated_at": "2026-11-19T01:14:59.644Z",
+          "action_by": "NP1",
+          "actor_details": {
+            "name": "mock-person"
+          }
+        },
+        {
+          "id": "f09726e5-f831-4e5e-9aa6-fa12472b2f0f",
+          "descriptor": {
+            "code": "PROCESSING",
+            "short_desc": "Complaint created"
+          },
+          "updated_at": "2026-11-19T01:15:00.440Z",
+          "action_by": "NP2",
+          "actor_details": {
+            "name": "mock-seller"
+          }
+        },
+        {
+          "id": "26b43dad-7e09-478b-9df2-f9afcccd0967",
+          "descriptor": {
+            "code": "INFO_REQUESTED",
+            "name": "INFO001",
+            "short_desc": "Please provide product image"
+          },
+          "updated_at": "2026-11-19T01:15:02.362Z",
+          "action_by": "NP2",
+          "actor_details": {
+            "name": "mock-seller"
+          }
+        },
+        {
+          "id": "5727f34a-a292-4732-a083-de0ad943b4b9",
+          "descriptor": {
+            "code": "INFO_PROVIDED",
+            "short_desc": "Info provided from buyer app",
+            "images": [
+              {
+                "url": "https://ondc.agentbuy.online/issue/img1.png",
+                "size_type": "xs"
+              }
+            ]
+          },
+          "updated_at": "2026-11-19T01:15:05.471Z",
+          "action_by": "NP1",
+          "actor_details": {
+            "name": "mock-person"
+          },
+          "ref_id": "26b43dad-7e09-478b-9df2-f9afcccd0967"
+        },
+        {
+          "id": "aa304ba7-d968-4f6c-97a9-e3e9165b1b99",
+          "descriptor": {
+            "code": "PROCESSING",
+            "short_desc": "Complaint created"
+          },
+          "updated_at": "2026-11-19T01:15:09.863Z",
+          "action_by": "NP2",
+          "actor_details": {
+            "name": "mock-seller"
+          }
+        },
+        {
+          "id": "60cedab3-21a3-4fd1-bdfd-d5dbc0c698eb",
+          "ref_id": "R_PARENT",
+          "ref_type": "RESOLUTIONS",
+          "descriptor": {
+            "code": "RESOLUTION_PROPOSED",
+            "short_desc": "Resolution is proposed"
+          },
+          "updated_at": "2026-11-19T01:15:13.718Z",
+          "action_by": "NP2",
+          "actor_details": {
+            "name": "mock-seller"
+          }
+        },
+        {
+          "id": "1beceaaf-14a0-401f-bc2f-21955bb1c5b2",
+          "descriptor": {
+            "code": "RESOLUTION_ACCEPTED",
+            "short_desc": "Resolution is accepted"
+          },
+          "updated_at": "2026-11-19T01:15:19.065Z",
+          "action_by": "NP1",
+          "actor_details": {
+            "name": "mock-person"
+          },
+          "ref_id": "RESOLUTION123",
+          "ref_type": "RESOLUTIONS"
+        },
+        {
+          "id": "e611d393-6bec-44a7-bb20-b149e06b899d",
+          "ref_id": "RESOLUTION123",
+          "ref_type": "RESOLUTIONS",
+          "descriptor": {
+            "code": "RESOLVED",
+            "short_desc": "Complaint is Resolved"
+          },
+          "updated_at": "2026-11-19T01:15:19.786Z",
+          "action_by": "NP2",
+          "actor_details": {
+            "name": "mock-seller"
+          }
+        },
+        {
+          "id": "6c158ac9-24c6-4477-8b0e-17fbe25ae772",
+          "descriptor": {
+            "code": "CLOSED",
+            "short_desc": "Closing the complaint"
+          },
+          "updated_at": "2026-11-19T01:15:20.707Z",
+          "action_by": "NP1",
+          "actor_details": {
+            "name": "mock-person"
+          },
+          "tags": [
+            {
+              "descriptor": {
+                "code": "CLOSURE_DETAILS"
+              },
+              "list": [
+                {
+                  "descriptor": {
+                    "code": "RATING"
+                  },
+                  "value": "THUMBS_UP"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "resolutions": [
+        {
+          "id": "R_PARENT",
+          "descriptor": {
+            "code": "PARENT",
+            "short_desc": "PROVIDING RESOLUTION OPTIONS. PLEASE SELECT ONE"
+          },
+          "updated_at": "2026-11-19T01:15:13.718Z",
+          "proposed_by": "NP2"
+        },
+        {
+          "id": "R1",
+          "ref_id": "R_PARENT",
+          "ref_type": "PARENT",
+          "descriptor": {
+            "code": "REFUND",
+            "short_desc": "Providing refund for the item"
+          },
+          "updated_at": "2026-11-19T01:15:13.718Z",
+          "proposed_by": "NP2",
+          "tags": [
+            {
+              "descriptor": {
+                "code": "RESOLUTION_DETAILS"
+              },
+              "list": [
+                {
+                  "descriptor": {
+                    "code": "ITEM"
+                  },
+                  "value": "I1"
+                },
+                {
+                  "descriptor": {
+                    "code": "REFUND_AMOUNT"
+                  },
+                  "value": "696.75"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "R2",
+          "ref_id": "R_PARENT",
+          "ref_type": "PARENT",
+          "descriptor": {
+            "code": "REPLACEMENT",
+            "short_desc": "Providing replacement of the item"
+          },
+          "updated_at": "2026-11-19T01:15:13.718Z",
+          "proposed_by": "NP2",
+          "tags": [
+            {
+              "descriptor": {
+                "code": "RESOLUTION_DETAILS"
+              },
+              "list": [
+                {
+                  "descriptor": {
+                    "code": "ITEM"
+                  },
+                  "value": "I1"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

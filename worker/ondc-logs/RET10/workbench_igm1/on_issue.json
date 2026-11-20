@@ -1,0 +1,46 @@
+{
+  "context": {
+    "domain": "ONDC:RET10",
+    "action": "on_issue",
+    "timestamp": "2026-11-18T11:20:44.010Z",
+    "transaction_id": "0c9dfd03-da6e-4384-a8f8-f59996212cfa",
+    "message_id": "b2655cef-38e3-4c73-bebc-2f5a8238c511",
+    "bap_id": "ondc.pay2.cash",
+    "bap_uri": "https://ondc.pay2.cash/ondc",
+    "ttl": "PT30S",
+    "bpp_id": "sample-bpp-id",
+    "bpp_uri": "https://bpp.example.com",
+    "country": "IND",
+    "city": "std:011",
+    "core_version": "1.2.5"
+  },
+  "message": {
+    "issue": {
+      "id": "2c296f2f-62f9-4380-a891-d0977667b9ea",
+      "issue_actions": {
+        "respondent_actions": [
+          {
+            "respondent_action": "PROCESSING",
+            "short_desc": "Complaint is being processed",
+            "updated_at": "2026-11-18T11:20:44.010Z",
+            "updated_by": {
+              "org": {
+                "name": "sample-bpp-id::ONDC:RET10"
+              },
+              "contact": {
+                "phone": "9450394140",
+                "email": "respondentapp@respond.com"
+              },
+              "person": {
+                "name": "mock-seller-name"
+              }
+            },
+            "cascaded_level": 1
+          }
+        ]
+      },
+      "created_at": "2026-11-18T11:20:43.536Z",
+      "updated_at": "2026-11-18T11:20:44.010Z"
+    }
+  }
+}

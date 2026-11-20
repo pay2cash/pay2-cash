@@ -1,0 +1,30 @@
+{
+  "context": {
+    "domain": "ONDC:RET12",
+    "action": "on_search",
+    "timestamp": "2026-11-19T01:24:36.000Z",
+    "transaction_id": "dafddda6-6c1b-46d5-83f0-6e232e980e9d",
+    "message_id": "cf9ad361-48fb-4465-b5cc-223ee0ccb432",
+    "bap_id": "ondc.agentbuy.online",
+    "bap_uri": "https://ondc.agentbuy.online/ondc",
+    "ttl": "PT30S",
+    "bpp_id": "workbench.ondc.tech",
+    "bpp_uri": "https://workbench.ondc.tech/api-service/ONDC:RET12/1.2.5/seller",
+    "country": "IND",
+    "city": "*",
+    "core_version": "1.2.5"
+  },
+  "message": {
+    "catalog": {
+      "bpp/providers": [
+        {
+          "id": "P1",
+          "time": {
+            "label": "disable",
+            "timestamp": "2025-01-08T10:20:00.000Z"
+          }
+        }
+      ]
+    }
+  }
+}

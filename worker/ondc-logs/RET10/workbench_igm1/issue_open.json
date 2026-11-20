@@ -1,0 +1,96 @@
+{
+  "context": {
+    "domain": "ONDC:RET10",
+    "country": "IND",
+    "city": "std:011",
+    "core_version": "1.2.5",
+    "action": "issue",
+    "transaction_id": "0c9dfd03-da6e-4384-a8f8-f59996212cfa",
+    "message_id": "b2655cef-38e3-4c73-bebc-2f5a8238c511",
+    "timestamp": "2026-11-18T11:20:43.535Z",
+    "bap_id": "ondc.pay2.cash",
+    "bap_uri": "https://ondc.pay2.cash/ondc",
+    "bpp_id": "sample-bpp-id",
+    "bpp_uri": "https://bpp.example.com",
+    "ttl": "PT30S"
+  },
+  "message": {
+    "issue": {
+      "id": "2c296f2f-62f9-4380-a891-d0977667b9ea",
+      "category": "FULFILLMENT",
+      "sub_category": "FLM101",
+      "complainant_info": {
+        "person": {
+          "name": "Nidhi Sharma"
+        },
+        "contact": {
+          "phone": "+91-9876543210",
+          "email": "buyer@pay2.cash"
+        }
+      },
+      "order_details": {
+        "id": "P2CWB1795000809358",
+        "state": "COMPLETED",
+        "items": [
+          {
+            "id": "I1",
+            "quantity": 1
+          }
+        ],
+        "fulfillments": [
+          {
+            "id": "F1",
+            "state": "CLAIMED"
+          }
+        ],
+        "provider_id": "P1"
+      },
+      "description": {
+        "short_desc": "Item delivered in damaged condition",
+        "long_desc": "The delivered atta package was torn and the contents were spoiled",
+        "additional_desc": {
+          "url": "https://ondc.pay2.cash/issue/desc.txt",
+          "content_type": "text/plain"
+        },
+        "images": [
+          "https://ondc.pay2.cash/issue/img1.png"
+        ]
+      },
+      "source": {
+        "network_participant_id": "ondc.pay2.cash",
+        "type": "CONSUMER"
+      },
+      "expected_response_time": {
+        "duration": "PT2H"
+      },
+      "expected_resolution_time": {
+        "duration": "P1D"
+      },
+      "status": "OPEN",
+      "issue_type": "ISSUE",
+      "issue_actions": {
+        "complainant_actions": [
+          {
+            "complainant_action": "OPEN",
+            "short_desc": "Complaint created",
+            "updated_at": "2026-11-18T11:20:43.535Z",
+            "updated_by": {
+              "org": {
+                "name": "ondc.pay2.cash::ONDC:RET10"
+              },
+              "contact": {
+                "phone": "+91-9876543210",
+                "email": "buyer@pay2.cash"
+              },
+              "person": {
+                "name": "Nidhi Sharma"
+              }
+            }
+          }
+        ]
+      },
+      "created_at": "2026-11-18T11:20:43.536Z",
+      "updated_at": "2026-11-18T11:20:43.536Z"
+    }
+  }
+}

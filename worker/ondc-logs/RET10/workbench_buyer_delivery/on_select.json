@@ -1,0 +1,157 @@
+{
+  "context": {
+    "domain": "ONDC:RET10",
+    "action": "on_select",
+    "timestamp": "2026-11-18T09:05:11.832Z",
+    "transaction_id": "1e1b31bb-633f-48a6-ae3c-c39b2f9e77b7",
+    "message_id": "23b4959d-af31-4d1b-b71d-7524bb6c6aee",
+    "bap_id": "ondc.pay2.cash",
+    "bap_uri": "https://ondc.pay2.cash/ondc",
+    "ttl": "PT30S",
+    "bpp_id": "sample-bpp-id",
+    "bpp_uri": "https://bpp.example.com",
+    "country": "IND",
+    "city": "std:011",
+    "core_version": "1.2.5"
+  },
+  "message": {
+    "order": {
+      "provider": {
+        "id": "P1",
+        "locations": [
+          {
+            "id": "L1"
+          }
+        ]
+      },
+      "fulfillments": [
+        {
+          "id": "F3",
+          "type": "Buyer-Delivery",
+          "@ondc/org/provider_name": "",
+          "tracking": false,
+          "@ondc/org/category": "",
+          "@ondc/org/TAT": "P2D",
+          "state": {
+            "descriptor": {
+              "code": "Serviceable"
+            }
+          },
+          "tags": [
+            {
+              "code": "weight",
+              "list": [
+                {
+                  "code": "unit",
+                  "value": "kilogram"
+                },
+                {
+                  "code": "value",
+                  "value": "1"
+                }
+              ]
+            },
+            {
+              "code": "length",
+              "list": [
+                {
+                  "code": "unit",
+                  "value": "centimeter"
+                },
+                {
+                  "code": "value",
+                  "value": "1"
+                }
+              ]
+            },
+            {
+              "code": "breadth",
+              "list": [
+                {
+                  "code": "unit",
+                  "value": "centimeter"
+                },
+                {
+                  "code": "value",
+                  "value": "1"
+                }
+              ]
+            },
+            {
+              "code": "height",
+              "list": [
+                {
+                  "code": "unit",
+                  "value": "centimeter"
+                },
+                {
+                  "code": "value",
+                  "value": "1"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "quote": {
+        "breakup": [
+          {
+            "@ondc/org/item_id": "I1",
+            "@ondc/org/item_quantity": {
+              "count": 1
+            },
+            "title": "Plain Atta",
+            "@ondc/org/title_type": "item",
+            "price": {
+              "currency": "INR",
+              "value": "200.00"
+            },
+            "item": {
+              "quantity": {
+                "available": {
+                  "count": "99"
+                },
+                "maximum": {
+                  "count": "99"
+                }
+              },
+              "price": {
+                "currency": "INR",
+                "value": "200.00"
+              }
+            }
+          },
+          {
+            "@ondc/org/item_id": "F3",
+            "title": "Delivery charges",
+            "@ondc/org/title_type": "delivery",
+            "price": {
+              "currency": "INR",
+              "value": "00.00"
+            }
+          },
+          {
+            "@ondc/org/item_id": "F3",
+            "title": "Convenience Fee",
+            "@ondc/org/title_type": "misc",
+            "price": {
+              "currency": "INR",
+              "value": "00.00"
+            }
+          }
+        ],
+        "price": {
+          "currency": "INR",
+          "value": "200.00"
+        },
+        "ttl": "P1D"
+      },
+      "items": [
+        {
+          "id": "I1",
+          "fulfillment_id": "F3"
+        }
+      ]
+    }
+  }
+}

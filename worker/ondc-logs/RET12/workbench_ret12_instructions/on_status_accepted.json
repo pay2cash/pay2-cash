@@ -1,0 +1,185 @@
+{
+  "context": {
+    "domain": "ONDC:RET12",
+    "action": "on_status",
+    "timestamp": "2026-11-19T00:41:42.960Z",
+    "transaction_id": "19171f03-77a2-4a9e-a3be-139e0f9ba9ed",
+    "message_id": "a270980f-caf7-47c9-a8e7-373ef08780f1",
+    "bap_id": "ondc.agentbuy.online",
+    "bap_uri": "https://ondc.agentbuy.online/ondc",
+    "ttl": "PT30S",
+    "bpp_id": "sample-bpp-id",
+    "bpp_uri": "https://bpp.example.com",
+    "country": "IND",
+    "city": "std:011",
+    "core_version": "1.2.5"
+  },
+  "message": {
+    "order": {
+      "id": "P2CWB1795048554979",
+      "state": "Accepted",
+      "provider": {
+        "id": "P1",
+        "locations": [
+          {
+            "id": "L1"
+          }
+        ]
+      },
+      "items": [
+        {
+          "id": "I1",
+          "fulfillment_id": "F1",
+          "quantity": {
+            "count": 1
+          }
+        }
+      ],
+      "billing": {
+        "name": "Nidhi Sharma",
+        "address": {
+          "name": "221 B Baker Street",
+          "building": "P2C Building",
+          "locality": "Baker Street",
+          "city": "Mumbai",
+          "state": "Maharashtra",
+          "country": "IND",
+          "area_code": "400053"
+        },
+        "phone": "9876543210",
+        "email": "buyer@agentbuy.online",
+        "created_at": "2026-11-19T00:35:53.572Z",
+        "updated_at": "2026-11-19T00:35:53.572Z"
+      },
+      "fulfillments": [
+        {
+          "id": "F1",
+          "type": "Buyer-Delivery",
+          "tracking": true,
+          "state": {
+            "descriptor": {
+              "code": "Pending"
+            }
+          },
+          "@ondc/org/TAT": "P3D",
+          "@ondc/org/provider_name": "Store 1",
+          "start": {
+            "location": {
+              "id": "L1",
+              "descriptor": {
+                "name": "Store 1"
+              },
+              "gps": "19.129076,72.825803",
+              "address": {
+                "street": "1 & 2,AMAR JYOTI CHS.BLDG.,OPP.NAND KRIPA HALL",
+                "locality": "ANDHERI FOUR BUNGLOW AMAR JYOTI CHS",
+                "city": "mock-seller-city",
+                "state": "mock-state",
+                "area_code": "400053"
+              }
+            },
+            "contact": {
+              "phone": "9594663710",
+              "email": "nobody@nomail.com"
+            }
+          },
+          "end": {
+            "contact": {
+              "email": "buyer@agentbuy.online",
+              "phone": "9876543210"
+            },
+            "person": {
+              "name": "Nidhi Sharma"
+            },
+            "location": {
+              "gps": "19.129076,72.825803",
+              "address": {
+                "building": "P2C Building",
+                "city": "Mumbai",
+                "state": "Maharashtra",
+                "country": "IND",
+                "area_code": "400053",
+                "locality": "Baker Street",
+                "name": "221 B Baker Street"
+              }
+            }
+          }
+        }
+      ],
+      "quote": {
+        "breakup": [
+          {
+            "@ondc/org/item_id": "I1",
+            "@ondc/org/item_quantity": {
+              "count": 1
+            },
+            "title": "Plain Atta",
+            "@ondc/org/title_type": "item",
+            "price": {
+              "currency": "INR",
+              "value": "200.00"
+            },
+            "item": {
+              "price": {
+                "currency": "INR",
+                "value": "200.00"
+              }
+            }
+          },
+          {
+            "@ondc/org/item_id": "F1",
+            "title": "Delivery charges",
+            "@ondc/org/title_type": "delivery",
+            "price": {
+              "currency": "INR",
+              "value": "493.75"
+            }
+          },
+          {
+            "@ondc/org/item_id": "F1",
+            "title": "Convenience Fee",
+            "@ondc/org/title_type": "misc",
+            "price": {
+              "currency": "INR",
+              "value": "3.00"
+            }
+          }
+        ],
+        "price": {
+          "currency": "INR",
+          "value": "696.75"
+        },
+        "ttl": "P1D"
+      },
+      "payment": {
+        "params": {
+          "amount": "696.75",
+          "currency": "INR",
+          "transaction_id": "mock_payment_id_123"
+        },
+        "status": "PAID",
+        "type": "ON-ORDER",
+        "collected_by": "BAP",
+        "@ondc/org/buyer_app_finder_fee_type": "percent",
+        "@ondc/org/buyer_app_finder_fee_amount": "3.0",
+        "@ondc/org/settlement_basis": "delivery",
+        "@ondc/org/settlement_window": "P1D",
+        "@ondc/org/withholding_amount": "00.00",
+        "@ondc/org/settlement_details": [
+          {
+            "settlement_counterparty": "seller-app",
+            "settlement_phase": "sale-amount",
+            "settlement_type": "neft",
+            "beneficiary_name": "xxxx",
+            "settlement_bank_account_no": "xxxx",
+            "settlement_ifsc_code": "xxxx",
+            "bank_name": "xxxx",
+            "branch_name": "xxxx"
+          }
+        ]
+      },
+      "created_at": "2026-11-19T00:35:53.572Z",
+      "updated_at": "2026-11-19T00:35:57.425Z"
+    }
+  }
+}
