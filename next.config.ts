@@ -1,7 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: "export", // static export -> ./out, deployable as static assets on Cloudflare
+  // OpenNext Cloudflare worker deployment (see wrangler.jsonc) — no output
+  // override; OpenNext builds the standalone server bundle itself.
   images: { unoptimized: true },
 };
 

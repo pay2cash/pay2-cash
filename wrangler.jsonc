@@ -25,6 +25,10 @@
   "images": {
     "binding": "IMAGES"
   },
+  "routes": [
+    { "pattern": "agentbuy.online", "custom_domain": true },
+    { "pattern": "www.agentbuy.online", "custom_domain": true }
+  ],
   "observability": {
     "enabled": true
   }
