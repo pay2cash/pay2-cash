@@ -53,3 +53,7 @@ next-env.d.ts
 # Playwright Pramaan capture — session cookies & HAR, never commit
 worker/.pramaan-profile/
 worker/pramaan-capture/
+
+# build artifacts / local-only
+packages/cli/dist/
+pay2cash_pitch.pdf

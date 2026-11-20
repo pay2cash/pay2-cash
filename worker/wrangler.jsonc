@@ -4,8 +4,8 @@
   "compatibility_date": "2026-06-01",
   "workers_dev": true,
   "routes": [
-    { "pattern": "mcp.pay2.cash", "custom_domain": true },
-    { "pattern": "ondc.pay2.cash", "custom_domain": true } // ONDC BAP subscriber_id
+    { "pattern": "mcp.agentbuy.online", "custom_domain": true },
+    { "pattern": "ondc.agentbuy.online", "custom_domain": true } // ONDC BAP subscriber_id
   ],
   "d1_databases": [
     {
@@ -21,7 +21,7 @@
     "DUFFEL_PAYMENT_TYPE": "balance", // "balance" = pay from Duffel sandbox; flip to "card" in prod
     // ONDC Buyer App (Pre-Prod). Subscriber URL callbacks live under /ondc; site
     // verification is served at /ondc-site-verification.html on the subscriber_id host.
-    "ONDC_SUBSCRIBER_ID": "ondc.pay2.cash",
+    "ONDC_SUBSCRIBER_ID": "ondc.agentbuy.online",
     "ONDC_SIGNED_REQ_ID": "IT9Ol7ybLICvZkO6DiTdqqFW1QlfZXQ2SdWu3mUxmaXUvXuST1fE4DTkZ9blUsS8mOX6FJRhbEEbdiqb67VlAw==",
     "ONDC_ENV": "preprod"
   }
