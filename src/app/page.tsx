@@ -1,7 +1,6 @@
-import Link from "next/link";
+import { CreditCard, ArrowRight, Check, X, Smartphone, Bot } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { CreditCard, ArrowRight, Check, X, Smartphone, Bot, Plane } from "lucide-react";
 import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
 
@@ -31,13 +30,13 @@ function Hero() {
             variant="outline"
             className="rounded-full border-white/[6%] bg-white/[2%] text-white/50 px-4 py-1 text-xs font-medium tracking-wide"
           >
-            Powered by pay2 Cash
+            Powered by AgentBuy
           </Badge>
         </div>
 
         <div className="text-center animate-fade-in-up animate-delay-100">
           <p className="text-[clamp(3rem,15vw,8rem)] font-bold leading-none tracking-[-0.03em] text-white select-none">
-            pay2 Cash
+            AgentBuy
           </p>
         </div>
 
@@ -100,7 +99,7 @@ function VirtualCard() {
                 Virtual Card
               </span>
               <span className="text-white/60 text-sm font-medium">
-                pay2 Cash
+                AgentBuy
               </span>
             </div>
             <div className="size-9 rounded-full bg-white/[4%] backdrop-blur-sm flex items-center justify-center ring-1 ring-white/[6%]">
@@ -304,7 +303,7 @@ function AuthorisationMockup() {
               <Smartphone className="size-4 text-white/60" />
             </div>
             <div>
-              <p className="text-xs text-white/50 font-medium">pay2 Cash</p>
+              <p className="text-xs text-white/50 font-medium">AgentBuy</p>
               <p className="text-[10px] text-white/30 font-mono">Approval Required</p>
             </div>
           </div>
@@ -429,14 +428,12 @@ function IntegrationsSection() {
           </h2>
           <p className="mt-4 text-lg text-white/40 max-w-xl mx-auto leading-relaxed">
             One integration for every payment method. Your agent can order from these
-            services using pay2 Cash.
+            services using AgentBuy.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          <IntegrationCardActive />
           <IntegrationCardCiCi />
-          <IntegrationCardFlights />
           <IntegrationCardONDC />
           <IntegrationCardComingSoon
             name="Uber Eats"
@@ -492,58 +489,6 @@ function IntegrationsSection() {
   );
 }
 
-function IntegrationCardActive() {
-  return (
-    <div className="relative group md:col-span-2 lg:col-span-1">
-      <div className="rounded-2xl border border-white/[6%] bg-gradient-to-br from-white/[2%] via-white/[1%] to-transparent p-6 backdrop-blur-sm transition-all duration-500 hover:border-white/[10%] hover:bg-white/[3%] h-full">
-        <div className="flex items-start justify-between mb-4">
-          <div className="flex items-center gap-3">
-            <div className="size-10 rounded-xl bg-white/[4%] flex items-center justify-center ring-1 ring-white/[6%]">
-              <svg className="size-5 text-white/70" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-              </svg>
-            </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="text-white font-semibold text-lg">Swiggy</span>
-                <span className="px-2 py-0.5 rounded-full bg-white/[6%] text-[10px] text-white/70 font-medium uppercase tracking-[0.06em]">
-                  Available
-                </span>
-              </div>
-              <p className="text-xs text-white/30">Powered by Swiggy Builders Club</p>
-            </div>
-          </div>
-          <div className="size-2 rounded-full bg-white/30 animate-pulse" />
-        </div>
-
-        <p className="text-sm text-white/50 leading-relaxed mb-5">
-          Discover restaurants, explore menus, order food delivery, get groceries from
-          Instamart, and book tables via Dineout — all through your AI agent.
-        </p>
-
-        <div className="flex flex-wrap gap-2 mb-5">
-          {["Food Delivery", "Instamart", "Dineout"].map((tag) => (
-            <span
-              key={tag}
-              className="px-2.5 py-1 rounded-lg bg-white/[3%] ring-1 ring-white/[4%] text-[11px] text-white/40 font-medium"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-
-        <div className="flex items-center gap-2 text-xs text-white/30">
-          <svg className="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
-            <polyline points="22 4 12 14.01 9 11.01" />
-          </svg>
-          35+ API tools
-        </div>
-      </div>
-    </div>
-  );
-}
-
 function IntegrationCardCiCi() {
   return (
     <div className="relative group">
@@ -570,7 +515,7 @@ function IntegrationCardCiCi() {
 
         <p className="text-sm text-white/50 leading-relaxed mb-5">
           Browse the fashion label, build a look, and check out — your agent pays with
-          pay2 Cash and the payment settles straight to the brand.
+          AgentBuy and the payment settles straight to the brand.
         </p>
 
         <div className="flex flex-wrap gap-2 mb-5">
@@ -593,53 +538,6 @@ function IntegrationCardCiCi() {
         </div>
       </div>
     </div>
-  );
-}
-
-function IntegrationCardFlights() {
-  return (
-    <Link href="/fly" className="relative group block">
-      <div className="rounded-2xl border border-white/[6%] bg-gradient-to-br from-white/[2%] via-white/[1%] to-transparent p-6 backdrop-blur-sm transition-all duration-500 hover:border-white/[10%] hover:bg-white/[3%] h-full">
-        <div className="flex items-start justify-between mb-4">
-          <div className="flex items-center gap-3">
-            <div className="size-10 rounded-xl bg-white/[4%] flex items-center justify-center ring-1 ring-white/[6%]">
-              <Plane className="size-5 text-white/70" />
-            </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="text-white font-semibold text-lg">Flights</span>
-                <span className="px-2 py-0.5 rounded-full bg-white/[6%] text-[10px] text-white/70 font-medium uppercase tracking-[0.06em]">
-                  Available
-                </span>
-              </div>
-              <p className="text-xs text-white/30">Book flights across Europe</p>
-            </div>
-          </div>
-          <div className="size-2 rounded-full bg-white/30 animate-pulse" />
-        </div>
-
-        <p className="text-sm text-white/50 leading-relaxed mb-5">
-          Tell your agent where and when. It finds a fare, pays with a single-use virtual
-          card capped at the ticket price, and the card self-destructs after booking.
-        </p>
-
-        <div className="flex flex-wrap gap-2 mb-5">
-          {["Flights", "Single-use card", "EUR"].map((tag) => (
-            <span
-              key={tag}
-              className="px-2.5 py-1 rounded-lg bg-white/[3%] ring-1 ring-white/[4%] text-[11px] text-white/40 font-medium"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-
-        <div className="flex items-center gap-2 text-xs text-white/30 group-hover:text-white/50 transition-colors">
-          See how it works
-          <ArrowRight className="size-3.5" />
-        </div>
-      </div>
-    </Link>
   );
 }
 

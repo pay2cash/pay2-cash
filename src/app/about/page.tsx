@@ -43,7 +43,7 @@ export default function Page() {
               Payment rails for AI agents.
             </h1>
             <p className="mt-6 text-lg text-white/40 leading-relaxed">
-              pay2 Cash is the payment layer for agentic commerce — so AI agents
+              AgentBuy is the payment layer for agentic commerce — so AI agents
               can buy, and merchants can sell, safely.
             </p>
           </div>

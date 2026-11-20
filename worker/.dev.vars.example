@@ -8,3 +8,5 @@ DUFFEL_PAYMENT_TYPE=balance
 # ONDC RSF 2.0 (Flow 10B) — used to sign the on_recon callback we return.
 ONDC_UNIQUE_KEY_ID=your_registered_unique_key_id
 ONDC_SIGNING_PRIVATE_KEY=base64_ed25519_signing_key
+# External MCP integrations (v3.jaalyantra.com)
+V3_JAALYANTRA_BASE_URL=https://v3.jaalyantra.com

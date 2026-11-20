@@ -1,0 +1,21 @@
+{
+  "name": "@pay2cash/cli",
+  "version": "0.1.0",
+  "description": "CLI for pay2 Cash — configure external MCP integrations (e-commerce, store, etc.)",
+  "type": "module",
+  "main": "./dist/index.js",
+  "bin": {
+    "pay2cash": "./dist/index.js"
+  },
+  "files": ["dist", "README.md"],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": ["pay2cash", "mcp", "cli", "ecommerce"],
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.7.2"
+  }
+}

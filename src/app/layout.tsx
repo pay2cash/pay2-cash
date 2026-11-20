@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "pay2 Cash — Payment rails for your AI Agent",
+  title: "AgentBuy — Payment rails for your AI Agent",
   description:
     "Give payment rails to your AI Agent, including debit card and UPI payments.",
 };

@@ -5,7 +5,6 @@ const NAV = [
   { label: "Personal", href: "/personal" },
   { label: "Companies", href: "/companies" },
   { label: "Merchant", href: "/merchant" },
-  { label: "Fly", href: "/fly" },
   { label: "Updates", href: "/updates" },
   { label: "About", href: "/about" },
 ];
@@ -16,9 +15,9 @@ export function SiteNav({ current }: { current?: string }) {
       <div className="flex items-center gap-8">
         <Link href="/" className="flex items-center gap-2.5 group">
           <div className="size-8 rounded-xl bg-white flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
-            <span className="text-black font-bold text-sm tracking-tight">P2</span>
+            <span className="text-black font-bold text-sm tracking-tight">AB</span>
           </div>
-          <span className="text-white font-semibold text-lg tracking-tight">pay2 Cash</span>
+          <span className="text-white font-semibold text-lg tracking-tight">AgentBuy</span>
         </Link>
         <nav className="hidden md:flex items-center gap-8">
           {NAV.map((item) => (

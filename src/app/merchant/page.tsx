@@ -49,7 +49,7 @@ function Hero() {
         <p className="mt-6 text-lg text-white/40 leading-relaxed max-w-2xl mx-auto">
           If you haven&apos;t heard — soon we&apos;ll all be shopping just by
           chatting to our computers. When that happens, be where the agents buy.
-          pay2 Cash puts your store in front of every AI.
+          AgentBuy puts your store in front of every AI.
         </p>
 
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -79,13 +79,13 @@ const STEPS = [
     icon: Network,
     title: "Get listed in the MCP",
     description:
-      "Your store becomes reachable by any AI agent through the pay2 Cash MCP (mcp.pay2.cash).",
+      "Your store becomes reachable by any AI agent through the AgentBuy MCP (mcp.agentbuy.online).",
   },
   {
     icon: Bot,
     title: "Agents buy on behalf of users",
     description:
-      "Shoppers tell their AI what they want; the agent checks out with pay2 Cash.",
+      "Shoppers tell their AI what they want; the agent checks out with AgentBuy.",
   },
   {
     icon: Wallet,
@@ -238,7 +238,7 @@ function WhoWeOnboard() {
                 <Check className="size-4 text-emerald-400 shrink-0" />
                 <p className="text-sm text-white/50 leading-relaxed">
                   <span className="text-white/80 font-medium">CiCi Label</span>{" "}
-                  is our first fashion partner — already live on pay2 Cash.
+                  is our first fashion partner — already live on AgentBuy.
                 </p>
               </div>
               <a

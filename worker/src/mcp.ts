@@ -4,6 +4,7 @@ import type { DB } from "./db";
 import type { PayuClient } from "./payu";
 import type { CardIssuer } from "./cards";
 import type { DuffelClient } from "./duffel";
+import type { ExternalMcpClient } from "./external-mcp";
 import * as svc from "./service";
 
 const PROTOCOL_VERSION = "2025-06-18";
@@ -13,9 +14,17 @@ export interface McpCtx {
   payu: PayuClient;
   cards: CardIssuer;
   duffel: DuffelClient;
+  v3Mcp?: ExternalMcpClient;
+  storeMcp?: ExternalMcpClient;
 }
 
-const TOOLS = [
+interface ToolDef {
+  name: string;
+  description: string;
+  inputSchema: Record<string, unknown>;
+}
+
+const TOOLS: ToolDef[] = [
   // ---- demand side ----
   {
     name: "onboard_user",
@@ -133,65 +142,37 @@ const TOOLS = [
       required: ["merchantId"],
     },
   },
-  // ---- flights (EU use case) ----
-  {
-    name: "search_flights",
-    description:
-      "Search flights (Duffel). Returns priced offers (offerId, amount in minor units, currency, airline, segments). Show these to the user; book the chosen offerId with book_flight. Amounts are in the fare currency's minor units (e.g. EUR cents).",
-    inputSchema: {
-      type: "object",
-      properties: {
-        userId: { type: "string" },
-        origin: { type: "string", description: "Origin IATA code, e.g. CDG" },
-        destination: { type: "string", description: "Destination IATA code, e.g. BER" },
-        departureDate: { type: "string", description: "YYYY-MM-DD" },
-        returnDate: { type: "string", description: "Optional YYYY-MM-DD for a round trip" },
-        cabinClass: {
-          type: "string",
-          enum: ["economy", "premium_economy", "business", "first"],
-        },
-        adults: { type: "integer", description: "Adult passengers, default 1" },
-        maxPriceMinor: { type: "integer", description: "Optional budget ceiling in minor units" },
-        maxResults: { type: "integer", description: "Max offers to return, default 5" },
-      },
-      required: ["userId", "origin", "destination", "departureDate"],
-    },
-  },
-  {
-    name: "book_flight",
-    description:
-      "Book a chosen flight offer. Issues a single-use virtual card scoped to the fare, places the Duffel order, then cancels the card. Re-prices the offer and refuses to book above maxPriceMinor. Returns the airline PNR (bookingReference).",
-    inputSchema: {
-      type: "object",
-      properties: {
-        userId: { type: "string" },
-        offerId: { type: "string", description: "offerId from search_flights" },
-        maxPriceMinor: {
-          type: "integer",
-          description: "Hard ceiling in minor units; booking fails if the fresh fare exceeds it",
-        },
-        passengers: {
-          type: "array",
-          description: "One entry per passenger in the offer",
-          items: {
-            type: "object",
-            properties: {
-              givenName: { type: "string" },
-              familyName: { type: "string" },
-              bornOn: { type: "string", description: "YYYY-MM-DD" },
-              gender: { type: "string", enum: ["m", "f"] },
-              title: { type: "string", enum: ["mr", "ms", "mrs", "miss", "dr"] },
-              email: { type: "string" },
-              phoneNumber: { type: "string", description: "E.164, e.g. +491701234567" },
-            },
-            required: ["givenName", "familyName", "bornOn", "gender", "title", "email", "phoneNumber"],
-          },
-        },
-      },
-      required: ["userId", "offerId", "passengers"],
-    },
-  },
 ];
+
+// External store MCP tools — proxy calls to v3.jaalyantra.com.
+// Only advertised via tools/list when the matching client is configured.
+const STORE_TOOL: ToolDef = {
+  name: "query_store",
+  description:
+    "Proxy a tool call to the external store MCP (v3.jaalyantra.com/store/mcp). Use this to fetch products, list inventory, or query the store catalog.",
+  inputSchema: {
+    type: "object",
+    properties: {
+      tool: { type: "string", description: "Name of the store MCP tool to call" },
+      args: { type: "object", description: "Arguments for the store tool", default: {} },
+    },
+    required: ["tool"],
+  },
+};
+
+const V3_TOOL: ToolDef = {
+  name: "query_v3",
+  description:
+    "Proxy a tool call to the v3 external MCP (v3.jaalyantra.com/mcp).",
+  inputSchema: {
+    type: "object",
+    properties: {
+      tool: { type: "string", description: "Name of the v3 MCP tool to call" },
+      args: { type: "object", description: "Arguments for the tool", default: {} },
+    },
+    required: ["tool"],
+  },
+};
 
 async function callTool(name: string, args: any, ctx: McpCtx): Promise<unknown> {
   switch (name) {
@@ -213,10 +194,12 @@ async function callTool(name: string, args: any, ctx: McpCtx): Promise<unknown> 
       return svc.createPaymentIntent(ctx.db, ctx.payu, ctx.cards, args);
     case "confirm_payment_intent":
       return svc.confirmPaymentIntent(ctx.db, ctx.payu, ctx.cards, args);
-    case "search_flights":
-      return svc.searchFlights(ctx.db, ctx.duffel, args);
-    case "book_flight":
-      return svc.bookFlight(ctx.db, ctx.duffel, ctx.cards, args);
+    case "query_store":
+      if (!ctx.storeMcp) throw new Error("store MCP not configured");
+      return ctx.storeMcp.callTool(args.tool, args.args ?? {});
+    case "query_v3":
+      if (!ctx.v3Mcp) throw new Error("v3 MCP not configured");
+      return ctx.v3Mcp.callTool(args.tool, args.args ?? {});
     default:
       throw new Error(`unknown tool: ${name}`);
   }
@@ -250,8 +233,12 @@ export async function handleMcpRequest(req: Request, ctx: McpCtx): Promise<Respo
         return new Response(null, { status: 202 });
       case "ping":
         return reply({});
-      case "tools/list":
-        return reply({ tools: TOOLS });
+      case "tools/list": {
+        const tools = [...TOOLS];
+        if (ctx.storeMcp) tools.push(STORE_TOOL);
+        if (ctx.v3Mcp) tools.push(V3_TOOL);
+        return reply({ tools });
+      }
       case "tools/call": {
         const result = await callTool(params?.name, params?.arguments ?? {}, ctx);
         return reply({ content: [{ type: "text", text: JSON.stringify(result) }] });

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Check, Link2, Mail } from "lucide-react";
 
-const ONBOARD_EMAIL = "hello@pay2.cash";
+const ONBOARD_EMAIL = "hello@agentbuy.online";
 
 export function OnboardingForm() {
   const [brand, setBrand] = useState("");
@@ -19,7 +19,7 @@ export function OnboardingForm() {
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!valid) return;
-    const subject = `pay2 Cash onboarding — ${brand.trim()}`;
+    const subject = `AgentBuy onboarding — ${brand.trim()}`;
     const body = [
       `Brand / store: ${brand.trim()}`,
       `Contact: ${name.trim() || "—"}`,
@@ -47,7 +47,7 @@ export function OnboardingForm() {
           <div>
             <p className="text-sm font-medium text-white">Application received</p>
             <p className="text-xs text-white/30">
-              from pay2 Cash · to {email.trim() || "you"}
+              from AgentBuy · to {email.trim() || "you"}
             </p>
           </div>
         </div>

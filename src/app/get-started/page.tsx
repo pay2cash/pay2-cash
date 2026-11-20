@@ -54,34 +54,34 @@ const APPS: {
   },
 ];
 
-const MCP_URL = "https://mcp.pay2.cash";
+const MCP_URL = "https://mcp.agentbuy.online";
 
 const SKILL_SNIPPET = `---
-name: pay2-cash
-description: Pay payments via UPI or card with pay2 Cash.
-mcp: mcp.pay2.cash
+name: agentbuy
+description: Pay payments via UPI or card with AgentBuy.
+mcp: mcp.agentbuy.online
 ---
 
-# pay2-cash
+# agentbuy
 
-Use the pay2 Cash MCP server at mcp.pay2.cash to
+Use the AgentBuy MCP server at mcp.agentbuy.online to
 send payments over UPI (INR) or card (EUR).`;
 
 const CLAUDE_JSON = `{
   "mcpServers": {
-    "pay2cash": { "url": "https://mcp.pay2.cash" }
+    "agentbuy": { "url": "https://mcp.agentbuy.online" }
   }
 }`;
 
 const CURSOR_JSON = `{
   "mcpServers": {
-    "pay2cash": { "url": "https://mcp.pay2.cash" }
+    "agentbuy": { "url": "https://mcp.agentbuy.online" }
   }
 }`;
 
-const OSS_SHELL = `# Point any MCP client at the pay2 Cash server
-mcp-client connect --url https://mcp.pay2.cash \\
-  --name pay2cash`;
+const OSS_SHELL = `# Point any MCP client at the AgentBuy server
+mcp-client connect --url https://mcp.agentbuy.online \\
+  --name agentbuy`;
 
 function WindowDots() {
   return (
@@ -141,10 +141,10 @@ export default function Page() {
               Get Started
             </Badge>
             <h1 className="text-[clamp(2.2rem,5vw,3.5rem)] font-semibold leading-[1.1] tracking-[-0.02em] text-white">
-              Download pay2 Cash
+              Download AgentBuy
             </h1>
             <p className="mt-5 max-w-2xl text-lg text-white/40 leading-relaxed">
-              Connect your AI agent to pay2 Cash in three steps.
+              Connect your AI agent to AgentBuy in three steps.
             </p>
 
             <div className="mt-12 grid grid-cols-1 lg:grid-cols-3 gap-5">
@@ -223,11 +223,11 @@ export default function Page() {
                 {active && !isSkill && (
                   <div>
                     <h3 className="text-base font-medium text-white mb-3">
-                      Add the pay2 Cash MCP server
+                      Add the AgentBuy MCP server
                     </h3>
                     <div className="rounded-xl border border-white/[8%] bg-white/[3%] p-4 font-mono text-sm text-white/70 flex items-center justify-between gap-3">
                       <span className="text-white text-base tracking-tight">
-                        mcp.pay2.cash
+                        mcp.agentbuy.online
                       </span>
                       <Button
                         variant="outline"
@@ -306,7 +306,7 @@ export default function Page() {
                       </li>
                       <li>
                         <span className="text-white/40">3.</span> URL:{" "}
-                        <span className="text-white">https://mcp.pay2.cash</span>
+                        <span className="text-white">https://mcp.agentbuy.online</span>
                       </li>
                     </ol>
                   </TerminalCard>
@@ -336,7 +336,7 @@ export default function Page() {
                     <div className="leading-relaxed">
                       <div className="text-white/60">project/</div>
                       <div className="text-white/60 pl-4">skills/</div>
-                      <div className="text-white/60 pl-8">pay2-cash/</div>
+                      <div className="text-white/60 pl-8">agentbuy/</div>
                       <div className="text-white pl-12">skill.md</div>
                     </div>
                   </TerminalCard>

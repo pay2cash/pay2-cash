@@ -23,9 +23,9 @@ const PERSONAL_EXAMPLES: AgentExample[] = [
     agent: "Found a kirana 0.8km away on ONDC — ₹318 total. Pay by UPI?",
   },
   {
-    tag: "Flights",
-    user: "Book the cheapest flight Delhi → Goa this Friday",
-    agent: "IndiGo 6E-204, ₹4,210 incl. taxes. Approve to book?",
+    tag: "Electronics",
+    user: "Order a USB-C cable and a 20000mAh power bank",
+    agent: "Electronics store on ONDC — ₹1,890 total. Pay by UPI?",
   },
   {
     tag: "Food",
@@ -118,7 +118,7 @@ function HowYouPay() {
       icon: Store,
       title: "Not integrated with us?",
       description:
-        "For merchants we don't directly support yet, they collect the payment directly from you — pay2 Cash just hands off securely.",
+        "For merchants we don't directly support yet, they collect the payment directly from you — AgentBuy just hands off securely.",
       tags: ["Secure hand-off"],
     },
   ];
@@ -309,7 +309,7 @@ function CheckoutPanel() {
 
       <div className="mt-6 pt-4 border-t border-white/[6%] flex items-center justify-center gap-2 text-xs text-white/30">
         <Check className="size-4 text-emerald-400" />
-        Routed via pay2 Cash
+        Routed via AgentBuy
       </div>
     </div>
   );

@@ -22,9 +22,9 @@ const COMPANY_EXAMPLES: AgentExample[] = [
     agent: "Bulk supplier on ONDC — 50 × ₹620 = ₹31,000. Within budget. Pay now?",
   },
   {
-    tag: "Corporate Travel",
-    user: "Book 3 flights Bengaluru → Mumbai for the sales team next Tuesday",
-    agent: "3 × IndiGo, ₹14,730 total. Within travel policy. Approve?",
+    tag: "IT Hardware",
+    user: "Get 5 noise-cancelling headsets for the support team",
+    agent: "Listed by a seller on ONDC — 5 × ₹4,200 = ₹21,000. Approve?",
   },
   {
     tag: "Office Supplies",
@@ -228,7 +228,7 @@ export default function Page() {
                 <div className="flex items-center justify-center gap-2 mt-6 pt-5 border-t border-white/[6%]">
                   <Check className="size-4 text-emerald-400" />
                   <span className="text-xs text-white/40">
-                    Split &amp; settled via pay2 Cash
+                    Split &amp; settled via AgentBuy
                   </span>
                 </div>
               </div>
@@ -269,7 +269,7 @@ export default function Page() {
                 Give your agents a budget, not a blank cheque.
               </h2>
               <p className="text-lg text-white/40 leading-relaxed mt-4 max-w-xl mx-auto">
-                Talk to us about rolling out pay2 Cash across your company&apos;s
+                Talk to us about rolling out AgentBuy across your company&apos;s
                 agents.
               </p>
               <div className="flex flex-wrap items-center justify-center gap-3 mt-8">

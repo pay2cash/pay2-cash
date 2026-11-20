@@ -29,7 +29,7 @@ const CHANGELOG = [
   {
     date: "April 2026",
     title: "MCP server launches",
-    description: "Connect any AI agent at mcp.pay2.cash.",
+    description: "Connect any AI agent at mcp.agentbuy.online.",
   },
 ];
 
@@ -50,7 +50,7 @@ export default function Page() {
               What&apos;s new
             </h1>
             <p className="mt-6 text-lg text-white/40 leading-relaxed">
-              Product updates from pay2 Cash.
+              Product updates from AgentBuy.
             </p>
           </div>
         </section>

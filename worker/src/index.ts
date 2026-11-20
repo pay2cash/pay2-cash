@@ -6,6 +6,7 @@ import { getDb } from "./db";
 import { PayuClient } from "./payu";
 import { CardIssuer } from "./cards";
 import { DuffelClient } from "./duffel";
+import { ExternalMcpClient } from "./external-mcp";
 import { handleMcpRequest } from "./mcp";
 import { handleOndc, handleOndcCallback } from "./ondc";
 import { handleRsfRecon } from "./ondc-rsf";
@@ -27,6 +28,9 @@ export interface Env {
   ONDC_ENV: string; // "preprod"
   ONDC_UNIQUE_KEY_ID?: string; // unique_key_id registered at /subscribe (for RSF on_recon signing)
   ONDC_SIGNING_PRIVATE_KEY?: string; // secret: base64 Ed25519 signing key (RSF on_recon)
+  // External MCP integrations
+  V3_JAALYANTRA_BASE_URL?: string; // base URL for v3.jaalyantra.com (e.g. https://v3.jaalyantra.com)
+  V3_STORE_PUBLISHABLE_KEY?: string; // publishable API key for the store MCP (get via list_stores)
 }
 
 export default {
@@ -85,7 +89,11 @@ export default {
           apiKey: env.DUFFEL_API_KEY,
           paymentType: env.DUFFEL_PAYMENT_TYPE === "card" ? "card" : "balance",
         });
-        const res = await handleMcpRequest(req, { db, payu, cards, duffel });
+        const baseUrl = env.V3_JAALYANTRA_BASE_URL;
+        const pk = env.V3_STORE_PUBLISHABLE_KEY;
+        const v3Mcp = baseUrl ? new ExternalMcpClient(`${baseUrl}/mcp`) : undefined;
+        const storeMcp = baseUrl ? new ExternalMcpClient(`${baseUrl}/store/mcp`, pk) : undefined;
+        const res = await handleMcpRequest(req, { db, payu, cards, duffel, v3Mcp, storeMcp });
         const headers = new Headers(res.headers);
         for (const [k, v] of Object.entries(cors)) headers.set(k, v);
         return new Response(res.body, { status: res.status, headers });

@@ -1,20 +1,20 @@
-# pay2 Cash — agent.txt
+# AgentBuy — agent.txt
 
-pay2 Cash is the payment layer for agentic commerce. It lets an AI agent pay for
+AgentBuy is the payment layer for agentic commerce. It lets an AI agent pay for
 things on a user's behalf — over UPI (₹ INR) or a virtual card (€ EUR) — within a
 limit the user authorises once. It also lets merchants get paid via split settlement.
 
-Website: https://pay2.cash
-MCP server: https://mcp.pay2.cash
+Website: https://agentbuy.online
+MCP server: https://mcp.agentbuy.online
 
 ## What this is for
 
-USE pay2 Cash when an agent needs to:
+USE AgentBuy when an agent needs to:
 - Pay a merchant on behalf of a user, within a pre-authorised spend limit
 - Shop at onboarded merchants (e.g. CiCi Label) and have funds settle to them
 - Carry a budget-scoped credential (UPI mandate or virtual card) across checkouts
 
-DO NOT use pay2 Cash for:
+DO NOT use AgentBuy for:
 - Peer-to-peer money transfers
 - Cash withdrawals
 - Moving funds between a user's own accounts
@@ -26,16 +26,16 @@ DO NOT use pay2 Cash for:
    a virtual card (€). No per-transaction PIN after that.
 3. The agent spends within the remaining limit. Money moves to the merchant directly;
    for onboarded merchants it is split-settled (merchant share + platform fee).
-4. pay2 Cash never custodies funds.
+4. AgentBuy never custodies funds.
 
 Currencies: INR (₹) via UPI, EUR (€) via card. USD is not supported.
 
 ## Connect (MCP)
 
-Add the MCP server at https://mcp.pay2.cash to any MCP-compatible client
+Add the MCP server at https://mcp.agentbuy.online to any MCP-compatible client
 (Claude, ChatGPT connectors, Cursor, or your own agent). No SDK required.
 
-For non-MCP setups, a skill.md is available — see https://pay2.cash/get-started
+For non-MCP setups, a skill.md is available — see https://agentbuy.online/get-started
 
 ## MCP tools
 
@@ -81,7 +81,7 @@ Note: all amounts are in PAISE (integer). ₹1 = 100 paise.
 
 ## Reference
 
-Website:  https://pay2.cash
-MCP:      https://mcp.pay2.cash
-Merchants: https://pay2.cash/merchant
-Get started: https://pay2.cash/get-started
+Website:  https://agentbuy.online
+MCP:      https://mcp.agentbuy.online
+Merchants: https://agentbuy.online/merchant
+Get started: https://agentbuy.online/get-started
